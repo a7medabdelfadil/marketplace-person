@@ -7,28 +7,20 @@ import Input from "~/_components/Input";
 import { Text } from "~/_components/Text";
 import { TbPhotoPlus } from "react-icons/tb";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
-import translations from "./translations";
 import Spinner from "~/_components/Spinner";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
+import translations from "./translations";
 
 function Signup() {
   const [isChecked, setIsChecked] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
-  const [fileName2, setFileName2] = useState<string | null>(null);
-  const language = useLanguageStore((state) => state.language); // Get the current language
-  const t = translations[language] || translations.en; // Fallback to English if language is not found
+  const language = useLanguageStore((state) => state.language);
+  const t = translations[language] || translations.en;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setFileName(file.name);
-    }
-  };
-
-  const handleFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file2 = event.target.files?.[0];
-    if (file2) {
-      setFileName2(file2.name);
     }
   };
 
@@ -54,9 +46,7 @@ function Signup() {
       >
         <LanguageSwitcher />
       </div>
-      <div 
-      dir={`${language === "ar" ? "rtl" : "ltr"}`}
-      className="flex h-screen">
+      <div dir={language === "ar" ? "rtl" : "ltr"} className="flex h-screen">
         {/* Left Section */}
         <div className="flex max-h-screen w-full justify-center overflow-auto bg-bgPrimary py-16 scrollbar-hide md:w-1/2 xl:w-3/5">
           <div className="w-4/5 lg:w-2/3 xl:w-1/2">
@@ -75,12 +65,14 @@ function Signup() {
                   {t.fullName}
                 </label>
                 <div className="mt-1 flex gap-4">
-                  <Input theme="gray" border="none" placeholder={t.firstName} />
-                  <Input theme="gray" border="none" placeholder={t.lastName} />
+                  <Input className="bg-bgInput" border="none" placeholder={t.firstName} />
+                  <Input className="bg-bgInput" border="none" placeholder={t.lastName} />
                 </div>
               </div>
               <div className="flex flex-col">
-                <label className="font-semibold">{t.role}</label>
+                <label className="font-semibold" htmlFor="role">
+                  {t.role}
+                </label>
                 <select
                   name="role"
                   id="role"
@@ -92,19 +84,21 @@ function Signup() {
                 </select>
               </div>
               <div className="flex flex-col">
-                <label className="font-semibold">{t.roleOrganization}</label>
+                <label className="font-semibold" htmlFor="rolePerson">
+                  {t.rolePerson}
+                </label>
                 <select
-                  name="roleOrganization"
-                  id="roleOrganization"
+                  name="rolePerson"
+                  id="rolePerson"
                   className="mt-1 block w-full rounded-lg border-2 border-bgInput bg-bgInput p-4 text-sm text-textPrimary focus:outline-none"
                 >
-                  <option value="unselected">{t.selectRoleOrganization}</option>
+                  <option value="unselected">{t.selectRolePerson}</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                 </select>
               </div>
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="email"
                 label={t.email}
@@ -112,20 +106,22 @@ function Signup() {
               />
               <Input
                 label={t.password}
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 placeholder={t.passwordPlaceholder}
                 type="password"
               />
               <Input
                 label={t.phone}
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 placeholder={t.phonePlaceholder}
                 type="number"
               />
               <div className="flex flex-col">
-                <label className="font-semibold">{t.gender}</label>
+                <label className="font-semibold" htmlFor="gender">
+                  {t.gender}
+                </label>
                 <select
                   name="gender"
                   id="gender"
@@ -138,15 +134,15 @@ function Signup() {
               </div>
               <Input
                 label={t.nationality}
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 placeholder={t.nationalityPlaceholder}
               />
               <div>
                 <Input
-                  label={t.academicAccreditation}
-                  id="academic-accreditation"
-                  name="academic-accreditation"
+                  label={t.idPicture}
+                  id="product-image"
+                  name="product-image"
                   type="file"
                   accept="image/*"
                   className="hidden"
@@ -154,7 +150,7 @@ function Signup() {
                 />
                 <div
                   onClick={() =>
-                    document.getElementById("academic-accreditation")?.click()
+                    document.getElementById("product-image")?.click()
                   }
                   className="flex h-32 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-borderPrimary text-textSecondary"
                 >
@@ -162,34 +158,6 @@ function Signup() {
                     <TbPhotoPlus size={50} />
                     {fileName ? (
                       <p className="mt-2 text-textPrimary">{fileName}</p>
-                    ) : (
-                      <p className="mt-2 text-textSecondary">
-                        {t.browseOrDrop}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Input
-                  label={t.establishmentDecision}
-                  id="Establishment decision"
-                  name="Establishment decision"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleFileChange2}
-                />
-                <div
-                  onClick={() =>
-                    document.getElementById("Establishment decision")?.click()
-                  }
-                  className="flex h-32 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-borderPrimary text-textSecondary"
-                >
-                  <div className="flex flex-col items-center">
-                    <TbPhotoPlus size={50} />
-                    {fileName2 ? (
-                      <p className="mt-2 text-textPrimary">{fileName2}</p>
                     ) : (
                       <p className="mt-2 text-textSecondary">
                         {t.browseOrDrop}
@@ -242,7 +210,7 @@ function Signup() {
         <div className="hidden bg-primary2 md:block md:w-1/2 xl:w-2/5">
           <img
             src="/images/signupPerson.png"
-            alt="Signup Illustration"
+            alt="Right Side"
             className="h-full w-full object-cover"
           />
         </div>

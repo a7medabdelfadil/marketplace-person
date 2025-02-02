@@ -63,7 +63,7 @@ function Signin() {
             </div>
             <div className="space-y-8 py-8">
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="email"
                 label={t.emailLabel}
@@ -71,7 +71,7 @@ function Signin() {
               />
               <Input
                 label={t.passwordLabel}
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 placeholder={t.passwordPlaceholder}
                 type="password"

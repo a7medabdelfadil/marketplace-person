@@ -52,7 +52,7 @@ function ForgetPassword() {
             <Text className="text-textSecondary">{t.description}</Text>
             <div className="space-y-16 py-8">
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="email"
                 label={t.emailLabel}

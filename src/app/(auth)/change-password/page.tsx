@@ -54,21 +54,21 @@ function ChangePassword() {
             <Text className="text-textSecondary">{t.description}</Text>
             <div className="space-y-8 py-8">
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="password"
                 label={t.createPassword}
                 placeholder={t.createPassword}
               />
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="password"
                 label={t.newPassword}
                 placeholder={t.newPassword}
               />
               <Input
-                theme="gray"
+                className="bg-bgInput"
                 border="none"
                 type="password"
                 label={t.reenterPassword}
