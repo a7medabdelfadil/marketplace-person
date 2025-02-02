@@ -3,7 +3,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import Spinner from "./Spinner";
 import { Switch } from "~/components/ui/switch";
@@ -160,7 +160,7 @@ const localizedLabels: LocalizedLabels = {
 const NavBar = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
-
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const { theme, setTheme } = useTheme();
   const url = usePathname();
@@ -177,6 +177,10 @@ const NavBar = () => {
   const getLocalizedLabel = (key: string) => {
     return localizedLabels[language]?.[key] || key;
   };
+
+  const clickProfile = () => {
+    router.push("/edit-profile")
+  }
 
   useInitializeLanguage(); // Ensure language state is initialized
   const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading
@@ -304,8 +308,8 @@ const NavBar = () => {
                           <div className="space-y-2">
                             <DropdownMenu.Item asChild>
                               <button
-                                className="flex w-full items-center gap-x-3 rounded-md px-3 py-2 text-sm text-textPrimary hover:bg-bgSecondary hover:text-primary"
-                                onClick={() => setModalOpen(true)}
+                                className="flex w-full items-center gap-x-3 rounded-md px-3 py-2 text-sm text-textPrimary outline-none ring-0 hover:bg-bgSecondary hover:text-primary"
+                                onClick={() => clickProfile()}
                               >
                                 <svg
                                   className="h-4 w-4 flex-shrink-0"
@@ -324,14 +328,14 @@ const NavBar = () => {
                                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                 </svg>
-                                profile
+                                {t.profile}
                               </button>
                             </DropdownMenu.Item>
                             <DropdownMenu.Item asChild>
                               <a
                                 // onClick={() => DeleteCookie()}
-                                href="/login"
-                                className="flex items-center gap-x-3 rounded-md px-3 py-2 text-sm text-error hover:bg-error hover:text-white"
+                                href="/sign-in"
+                                className="flex items-center gap-x-3 rounded-md px-3 py-2 text-sm text-error outline-none hover:bg-error hover:text-white"
                               >
                                 {t.signOut}
                               </a>
