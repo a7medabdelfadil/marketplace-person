@@ -290,7 +290,7 @@ function CalendarPage() {
         <>
           {isCalendarInMobile ? (
             <>
-              <MdOutlineKeyboardBackspace size={30} className="text-textPrimary cursor-pointer ml-4" />
+              <MdOutlineKeyboardBackspace size={30} onClick={() => setIsCalendarInMobile(false)} className="text-textPrimary cursor-pointer ml-4" />
               <div className="h-fit w-full overflow-x-auto rounded-xl bg-bgPrimary px-4 pt-4 pb-28 md:block">
                   <div className="min-w-[800px] rounded-lg bg-bgPrimary p-4">
                     <div className="flex items-center justify-between pb-4">
