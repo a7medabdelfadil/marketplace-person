@@ -6,14 +6,17 @@ import { Switch } from "~/components/ui/switch";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { BsCameraVideo } from "react-icons/bs";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { IoCalendarNumberOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
+import { FaCalendarAlt } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const NavBarMobileTop = () => {
   const { theme, setTheme } = useTheme();
   const handleThemeChange = (value: boolean) => {
     setTheme(value ? "dark" : "light");
   };
+
+  const url = usePathname();
 
   return (
     <>
@@ -37,9 +40,9 @@ const NavBarMobileTop = () => {
                 </div>
                 <Link
                   href="/calendar"
-                  className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-textPrimary hover:bg-bgSecondary disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold hover:bg-bgSecondary disabled:pointer-events-none disabled:opacity-50"
                 >
-                  <IoCalendarNumberOutline size={25} />
+                  <FaCalendarAlt size={20} className={`${url === "/calendar" ? "text-primary" : ""}`} />
                 </Link>
               </div>
               <div className="me-5 lg:me-0 lg:hidden">
