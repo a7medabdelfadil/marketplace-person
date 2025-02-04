@@ -8,7 +8,7 @@ import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
 import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
-import { useMutation } from "@tanstack/react-query";
+// import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import translations from "./translations";
 // import { login } from "~/APIs/features/auth";
@@ -154,7 +154,7 @@ function Signin() {
               )} */}
 
               <Button
-                type="submit"j
+                type="submit"
                 className="mb-10 py-6"
                 color="primary"
                 // disabled={loginMutation.isPending}
