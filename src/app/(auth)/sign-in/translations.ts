@@ -10,6 +10,8 @@ const translations = {
     rememberMe: "Remember me",
     forgotPassword: "Forgot Password?",
     loginButton: "Log in",
+    loggingIn: "Logging in...",
+    loginError: "Invalid email or password. Please try again.",
   },
   ar: {
     welcomeBack: "مرحبًا بعودتك",
@@ -22,6 +24,8 @@ const translations = {
     rememberMe: "تذكرني",
     forgotPassword: "نسيت كلمة المرور؟",
     loginButton: "تسجيل الدخول",
+    loggingIn: "جارٍ تسجيل الدخول...",
+    loginError: "البريد الإلكتروني أو كلمة المرور غير صحيحة. حاول مرة أخرى.",
   },
   fr: {
     welcomeBack: "Bon retour",
@@ -34,6 +38,8 @@ const translations = {
     rememberMe: "Souviens-toi de moi",
     forgotPassword: "Mot de passe oublié ?",
     loginButton: "Se connecter",
+    loggingIn: "Connexion en cours...",
+    loginError: "E-mail ou mot de passe incorrect. Veuillez réessayer.",
   },
   ru: {
     welcomeBack: "С возвращением",
@@ -46,6 +52,8 @@ const translations = {
     rememberMe: "Запомнить меня",
     forgotPassword: "Забыли пароль?",
     loginButton: "Войти",
+    loggingIn: "Вход в систему...",
+    loginError: "Неверный адрес электронной почты или пароль. Попробуйте еще раз.",
   },
 };
 

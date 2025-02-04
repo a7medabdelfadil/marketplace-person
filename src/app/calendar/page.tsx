@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FaCalendar, FaVideo } from "react-icons/fa6";
+import { FaVideo } from "react-icons/fa6";
 import Button from "~/_components/Button";
 import Container from "~/_components/Container";
 import { Calendar } from "~/components/ui/Calendar";
@@ -27,58 +27,8 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FiList } from "react-icons/fi";
 import { CiVideoOn } from "react-icons/ci";
 import { IoCalendarNumberOutline } from "react-icons/io5";
-
-const calendars = [
-  { name: "Meetings", color: "text-white", bg: "bg-primary" },
-  { name: "Tasks", color: "text-white", bg: "bg-pink" },
-  { name: "Routine", color: "text-white", bg: "bg-lavender" },
-  { name: "Events", color: "text-white", bg: "bg-warning" },
-];
-
-const events = [
-  {
-    title: "Daily Meeting",
-    subtitle: "Opream Dev",
-    time: "All day",
-    bgColor: "bg-primary/10",
-    textColor: "text-primary",
-  },
-  {
-    title: "Task",
-    subtitle: "Ux and Ui",
-    time: "07:20 AM",
-    bgColor: "bg-pink/10",
-    textColor: "text-pink",
-  },
-  {
-    title: "Events",
-    subtitle: "Festivals",
-    time: "07:20 AM",
-    bgColor: "bg-warning/10",
-    textColor: "text-warning",
-  },
-];
-
-const reminders = [
-  {
-    id: 1,
-    title: "Your Subscription",
-    action: "Review Now",
-    time: "6:38 PM",
-  },
-  {
-    id: 2,
-    title: "Your Subscription",
-    action: "Review Now",
-    time: "6:38 PM",
-  },
-  {
-    id: 3,
-    title: "Your Subscription",
-    action: "Review Now",
-    time: "6:38 PM",
-  },
-];
+import { useLanguageStore } from "~/APIs/store";
+import translations from "./translations";
 
 const daysOfWeek = ["Time", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const timeSlots = [
@@ -115,6 +65,9 @@ const colorClasses: Record<string, string> = {
 };
 
 function CalendarPage() {
+  const language = useLanguageStore((state) => state.language);
+  const t = translations[language] || translations.en;
+
   const [schedule, setSchedule] = useState(initialSchedule);
   const [isMeetModalOpen, setIsMeetModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -122,6 +75,59 @@ function CalendarPage() {
   const [selectedTab, setSelectedTab] = useState("Create Meeting");
   const [isOpen, setIsOpen] = useState(true);
   const [isCalendarInMobile, setIsCalendarInMobile] = useState(false);
+
+  const calendars = [
+    { name: t.meetings, color: "text-white", bg: "bg-primary" },
+    { name: t.tasks, color: "text-white", bg: "bg-pink" },
+    { name: t.routine, color: "text-white", bg: "bg-lavender" },
+    { name: t.events, color: "text-white", bg: "bg-warning" },
+  ];
+
+  const reminders = [
+    {
+      id: 1,
+      title: t.yourSubscription,
+      action: t.reviewNow,
+      time: "6:38 PM",
+    },
+    {
+      id: 2,
+      title: t.yourSubscription,
+      action: t.reviewNow,
+      time: "6:38 PM",
+    },
+    {
+      id: 3,
+      title: t.yourSubscription,
+      action: t.reviewNow,
+      time: "6:38 PM",
+    },
+  ];
+
+
+const events = [
+  {
+    title: "Daily Meeting",
+    subtitle: "Opream Dev",
+    time: t.allDay,
+    bgColor: "bg-primary/10",
+    textColor: "text-primary",
+  },
+  {
+    title: "Task",
+    subtitle: "Ux and Ui",
+    time: "07:20 AM",
+    bgColor: "bg-pink/10",
+    textColor: "text-pink",
+  },
+  {
+    title: "Events",
+    subtitle: "Festivals",
+    time: "07:20 AM",
+    bgColor: "bg-warning/10",
+    textColor: "text-warning",
+  },
+];
 
   const [screenWidth, setScreenWidth] = useState<number>(768); // Set a default value
 
@@ -190,7 +196,7 @@ function CalendarPage() {
                     border="gray"
                     theme="gray"
                     type="text"
-                    placeholder="Add a title"
+                    placeholder={t.addTitle}
                     className="w-full rounded-md bg-bgSecondary"
                   />
                 </div>
@@ -201,7 +207,7 @@ function CalendarPage() {
                     border="gray"
                     theme="gray"
                     type="text"
-                    placeholder="Add required attendees"
+                    placeholder={t.addAttendees}
                     className="w-full rounded-md bg-bgSecondary"
                   />
                 </div>
@@ -239,9 +245,9 @@ function CalendarPage() {
                         className="rounded-md bg-bgSecondary p-2"
                       />
                     </div>
-                    <span>1hr</span>
+                    <span>1{t.hour}</span>
                     <Switch />
-                    <span>All day</span>
+                    <span>{t.allDay}</span>
                   </div>
                 </div>
 
@@ -255,18 +261,18 @@ function CalendarPage() {
                       border="gray"
                       theme="gray"
                       type="text"
-                      placeholder="Add location"
+                      placeholder={t.addLocation}
                       className="w-full rounded-md bg-bgSecondary p-2"
                     />
                   </div>
-                  <span className="text-textPrimary">Online meeting</span>
+                  <span className="text-textPrimary">{t.onlineMeeting}</span>
                   <Switch />
                 </div>
 
                 <div className="flex items-start gap-2">
                   <FiList size={25} className="text-textSecondary" />
                   <textarea
-                    placeholder="Add a note (optional)"
+                    placeholder="Add a note ({t.optional})"
                     className="w-full rounded-md border bg-lightGray px-2 pb-20 pt-2 outline-none"
                   ></textarea>
                 </div>
@@ -274,14 +280,14 @@ function CalendarPage() {
 
               {/* Buttons */}
               <Button color="primary" className="mt-4">
-                Save
+                {t.save}
               </Button>
               <Button
                 theme="outline"
                 className="mt-4"
                 onClick={() => setIsCreateModalOpen(false)}
               >
-                Close
+                {t.close}
               </Button>
             </div>
           </div>
@@ -290,70 +296,74 @@ function CalendarPage() {
         <>
           {isCalendarInMobile ? (
             <>
-              <MdOutlineKeyboardBackspace size={30} onClick={() => setIsCalendarInMobile(false)} className="text-textPrimary cursor-pointer ml-4" />
-              <div className="h-fit w-full overflow-x-auto rounded-xl bg-bgPrimary px-4 pt-4 pb-28 md:block">
-                  <div className="min-w-[800px] rounded-lg bg-bgPrimary p-4">
-                    <div className="flex items-center justify-between pb-4">
-                      <div className="flex items-center gap-2">
-                        <h2 className="border-r border-borderPrimary pr-4 text-2xl font-bold">
-                          Calendar
-                        </h2>
-                        <span className="font-semibold text-primary">
-                          March, 2024
-                        </span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-8 gap-0 rounded-lg border">
-                      {/* Header Row */}
-                      {daysOfWeek.map((day, index) => (
-                        <div
-                          key={index}
-                          className={`bg-bgFourth p-3 text-center font-semibold ${
-                            index === 0
-                              ? "text-textPrimary"
-                              : "text-textSecondary"
-                          }`}
-                        >
-                          {day}
-                        </div>
-                      ))}
-
-                      {/* Schedule Grid */}
-                      {timeSlots.map((time, rowIndex) => (
-                        <React.Fragment key={rowIndex}>
-                          {/* Time Column */}
-                          <div className="h-32 border p-3 text-sm font-semibold text-textSecondary">
-                            {time}
-                          </div>
-
-                          {/* Day Columns */}
-                          {daysOfWeek.slice(1).map((day, colIndex) => {
-                            const event = schedule.find(
-                              (e) => e.time === time && e.day === day,
-                            );
-                            return (
-                              <div
-                                key={colIndex}
-                                className="relative flex items-center border"
-                              >
-                                {event && (
-                                  <div
-                                    className={`absolute h-10 rounded-r-lg border-l-2 p-2 text-left text-xs ${colorClasses[event.category]}`}
-                                  >
-                                    {event.event}
-                                  </div>
-                                )}
-                                <span className="absolute right-2 top-2 text-xs text-textSecondary">
-                                  {rowIndex}
-                                </span>
-                              </div>
-                            );
-                          })}
-                        </React.Fragment>
-                      ))}
+              <MdOutlineKeyboardBackspace
+                size={30}
+                onClick={() => setIsCalendarInMobile(false)}
+                className="ml-4 cursor-pointer text-textPrimary"
+              />
+              <div className="h-fit w-full overflow-x-auto rounded-xl bg-bgPrimary px-4 pb-28 pt-4 md:block">
+                <div className="min-w-[800px] rounded-lg bg-bgPrimary p-4">
+                  <div className="flex items-center justify-between pb-4">
+                    <div className="flex items-center gap-2">
+                      <h2 className="border-r border-borderPrimary pr-4 text-2xl font-bold">
+                        {t.calendar}
+                      </h2>
+                      <span className="font-semibold text-primary">
+                        {t.march}, 2024
+                      </span>
                     </div>
                   </div>
+                  <div className="grid grid-cols-8 gap-0 rounded-lg border">
+                    {/* Header Row */}
+                    {daysOfWeek.map((day, index) => (
+                      <div
+                        key={index}
+                        className={`bg-bgFourth p-3 text-center font-semibold ${
+                          index === 0
+                            ? "text-textPrimary"
+                            : "text-textSecondary"
+                        }`}
+                      >
+                        {day}
+                      </div>
+                    ))}
+
+                    {/* Schedule Grid */}
+                    {timeSlots.map((time, rowIndex) => (
+                      <React.Fragment key={rowIndex}>
+                        {/* Time Column */}
+                        <div className="h-32 border p-3 text-sm font-semibold text-textSecondary">
+                          {time}
+                        </div>
+
+                        {/* Day Columns */}
+                        {daysOfWeek.slice(1).map((day, colIndex) => {
+                          const event = schedule.find(
+                            (e) => e.time === time && e.day === day,
+                          );
+                          return (
+                            <div
+                              key={colIndex}
+                              className="relative flex items-center border"
+                            >
+                              {event && (
+                                <div
+                                  className={`absolute h-10 ${language === "ar" ? "rounded-l-lg border-r-2 text-right" : "rounded-r-lg border-l-2 text-left"} p-2 text-xs ${colorClasses[event.category]}`}
+                                >
+                                  {event.event}
+                                </div>
+                              )}
+                              <span className={`absolute right-2 top-2 text-xs text-textSecondary`}>
+                                {rowIndex}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </React.Fragment>
+                    ))}
+                  </div>
                 </div>
+              </div>
             </>
           ) : (
             <Container className="overflow-hidden pb-8">
@@ -361,10 +371,10 @@ function CalendarPage() {
                 <div className="w-full min-w-[300px] rounded-xl bg-bgPrimary px-4 pb-8 pt-4 md:w-fit">
                   <div className="mb-4 flex items-center gap-2 md:hidden">
                     <h2 className="border-r border-borderPrimary pr-4 text-2xl font-bold">
-                      Calendar
+                      {t.calendar}
                     </h2>
                     <span className="font-semibold text-primary">
-                      March, 2024
+                      {t.march}, 2024
                     </span>
                   </div>
                   <div className="hidden w-fit md:block">
@@ -373,7 +383,7 @@ function CalendarPage() {
                       onClick={() => setIsCreateModalOpen(true)}
                       className="mb-4 w-full rounded-xl"
                     >
-                      + Create
+                      {t.create}
                     </Button>
                   </div>
                   <div className="flex w-full justify-start gap-3 md:hidden">
@@ -383,7 +393,7 @@ function CalendarPage() {
                         onClick={() => setIsCreateMobileModalOpen(true)}
                         className="mb-4 flex-1 rounded-xl px-4 py-2 text-white"
                       >
-                        + Create
+                        {t.create}
                       </Button>
                     </div>
 
@@ -394,7 +404,7 @@ function CalendarPage() {
                         onClick={() => setIsMeetModalOpen((e) => !e)}
                       >
                         <CiVideoOn size={25} className="text-primary" />
-                        Meet Now
+                        {t.meetNow}
                       </Button>
                     </div>
                   </div>
@@ -403,13 +413,13 @@ function CalendarPage() {
                     size={"xl"}
                     className="my-4 block md:hidden"
                   >
-                    Select a Date & Time
+                    {t.selectDateTime}
                   </Text>
                   <div className="w-full pb-4 md:w-fit">
                     <Calendar />
                   </div>
                   <div className="relative my-4 block md:hidden">
-                    <h2 className="mb-4 font-semibold">20 September 2022</h2>
+                    <h2 className="mb-4 font-semibold">20 {t.march} 2022</h2>
                     <div className="space-y-2">
                       {events.map((event, index) => (
                         <div
@@ -432,7 +442,7 @@ function CalendarPage() {
                         </div>
                       ))}
                     </div>
-                    <button className="absolute -top-3 right-2 flex items-center justify-center rounded-full bg-primary p-3 text-white shadow-lg">
+                    <button className={`absolute -top-3 ${language === "ar" ? "left-2" : "right-2"} flex items-center justify-center rounded-full bg-primary p-3 text-white shadow-lg`}>
                       <IoCalendarNumberOutline
                         size={18}
                         onClick={() => {
@@ -454,7 +464,9 @@ function CalendarPage() {
                         size={20}
                         className="text-primary2"
                       />
-                      <span className="text-sm font-medium">My calendars</span>
+                      <span className="text-sm font-medium">
+                        {t.selectCalendar}
+                      </span>
                     </div>
                     {isOpen && (
                       <ul className="mt-2 space-y-2">
@@ -479,7 +491,7 @@ function CalendarPage() {
                   </div>
                   <div className="mt-4 w-full rounded-xl bg-bgPrimary p-4 md:shadow-md">
                     <div className="mb-2 flex items-center justify-between">
-                      <h3 className="text-lg font-semibold">Reminders</h3>
+                      <h3 className="text-lg font-semibold">{t.reminders}</h3>
                       <IoMdNotificationsOutline
                         size={25}
                         className="rounded-full bg-primary/10 p-1 text-primary md:bg-primary2/10 md:text-primary2"
@@ -497,10 +509,10 @@ function CalendarPage() {
                               className="rounded-xl bg-primary/10 p-2 text-primary"
                             />
                             <div>
-                              <p className="text-sm font-medium">
+                              <p className="text-sm mx-2 font-medium">
                                 {reminder.title}
                               </p>
-                              <p className="cursor-pointer text-xs text-primary md:text-primary2">
+                              <p className="cursor-pointer mx-2 text-xs text-primary md:text-primary2">
                                 {reminder.action}
                               </p>
                             </div>
@@ -518,10 +530,10 @@ function CalendarPage() {
                     <div className="flex items-center justify-between pb-4">
                       <div className="flex items-center gap-2">
                         <h2 className="border-r border-borderPrimary pr-4 text-2xl font-bold">
-                          Calendar
+                          {t.calendar}
                         </h2>
                         <span className="font-semibold text-primary2">
-                          March, 2024
+                          {t.march}, 2024
                         </span>
                       </div>
                       <div className="relative flex items-center gap-2">
@@ -530,7 +542,7 @@ function CalendarPage() {
                           className="flex items-center gap-2 rounded-full border border-borderPrimary/10 px-4 py-2 text-primary2 shadow"
                         >
                           <FaVideo size={25} className="text-primary2" />
-                          Meet Now
+                          {t.meetNow}
                         </button>
                         {isMeetModalOpen && (
                           <div
@@ -567,13 +579,13 @@ function CalendarPage() {
                               {/* Buttons */}
                               <div className="mt-4 flex flex-col justify-end gap-2">
                                 <button className="rounded-lg border border-[#2388FF33] bg-bgPrimary px-4 py-2 font-semibold">
-                                  Get a link to share
+                                  {t.getLink}
                                 </button>
                                 <Button
                                   color="primary2"
                                   className="rounded-lg px-4 py-2"
                                 >
-                                  Start Meet
+                                  {t.meetNow}
                                 </Button>
                               </div>
                             </div>
@@ -616,7 +628,7 @@ function CalendarPage() {
                               >
                                 {event && (
                                   <div
-                                    className={`absolute h-10 rounded-r-lg border-l-2 p-2 text-left text-xs ${colorClasses[event.category]}`}
+                                    className={`absolute h-10 ${language === "ar" ? "rounded-l-lg border-r-2 text-right" : "rounded-r-lg border-l-2 text-left"} p-2 text-xs ${colorClasses[event.category]}`}
                                   >
                                     {event.event}
                                   </div>
@@ -688,7 +700,7 @@ function CalendarPage() {
                   />
                 </div>
                 <span className="absolute right-4 ml-2 cursor-pointer font-medium text-primary2">
-                  <span className="text-xl font-bold">+</span> Optional
+                  <span className="text-xl font-bold">+</span> {t.optional}
                 </span>
               </div>
               <div className="flex w-fit items-center gap-3">
@@ -718,9 +730,9 @@ function CalendarPage() {
                       className="rounded-none bg-bgSecondary p-2"
                     />
                   </div>
-                  <span>1hr</span>
+                  <span>1{t.hour}</span>
                   <Switch />
-                  <span>All day</span>
+                  <span>{t.allDay}</span>
                 </div>
               </div>
 
@@ -738,7 +750,7 @@ function CalendarPage() {
                   />
                   <div className="absolute right-4 top-3 ml-2 flex items-center">
                     <span className="mr-2 text-textPrimary">
-                      Online meeting
+                      {t.onlineMeeting}
                     </span>
                     <Switch />
                   </div>
@@ -747,7 +759,7 @@ function CalendarPage() {
               <div className="flex items-start gap-2">
                 <FiList size={25} className="mt-2 text-textSecondary" />
                 <textarea
-                  placeholder="Add a note (optional)"
+                  placeholder="Add a note ({t.optional})"
                   className="w-full rounded border bg-bgSecondary px-2 pb-14 pt-2 outline-none"
                 ></textarea>
               </div>
@@ -759,11 +771,11 @@ function CalendarPage() {
                 onClick={() => setIsCreateModalOpen(false)}
                 className="rounded-sm border border-borderPrimary bg-bgPrimary px-8 py-2 transition duration-300 hover:bg-bgSecondary"
               >
-                Close
+                {t.close}
               </button>
               <div className="w-fit">
                 <Button color="primary2" className="rounded-sm px-8">
-                  Save
+                  {t.save}
                 </Button>
               </div>
             </div>
@@ -781,7 +793,7 @@ function CalendarPage() {
           >
             <div className="flex items-center justify-between">
               <Text font={"bold"} size={"2xl"} className="mb-4">
-                Start a meeting now
+                {t.startMeetNow}
               </Text>
               <IoClose
                 size={30}
@@ -802,10 +814,10 @@ function CalendarPage() {
             {/* Buttons */}
             <div className="mt-4 flex flex-col justify-end gap-2">
               <Button color="primary" className="rounded-lg px-4 py-2">
-                Start Meet
+                {t.startMeet}
               </Button>
               <button className="rounded-lg border border-primary bg-bgPrimary px-4 py-2 font-semibold text-primary">
-                Get a link to share
+                {t.getLink}
               </button>
             </div>
           </div>
