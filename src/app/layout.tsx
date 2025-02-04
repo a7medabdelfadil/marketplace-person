@@ -28,8 +28,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <title>Person</title>
-        <meta name="description" content="MarketPlace Person" />
+        <title>Opream Person</title>
+        <meta name="description" content="Opream Person" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, initial-scale=1.0, user-scalable=yes"

@@ -8,10 +8,11 @@ import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
 import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
-// import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import translations from "./translations";
-// import { login } from "~/APIs/features/auth";
+import { login } from "~/APIs/features/auth";
+import Cookies from "js-cookie";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -25,23 +26,38 @@ function Signin() {
 
   useInitializeLanguage();
 
-  // const loginMutation = useMutation({
-  //   mutationFn: async () => {
-  //     return login({ email, password });
-  //   },
-  //   onSuccess: (data) => {
-  //     localStorage.setItem("token", data.token);
-  //     router.push("/");
-  //   },
-  //   onError: () => {
-  //     console.error("Login failed");
-  //   },
-  // });
-
-  // const handleSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   loginMutation.mutate();
-  // };
+  const loginMutation = useMutation({
+    mutationFn: async (formData: { email: string; password: string }) => {
+      return login(formData);
+    },
+    onSuccess: (response) => {
+      console.log("✅ Login response:", response);
+      
+      const tokens = response?.data?.tokens;
+      
+      if (tokens?.accessToken) {
+        console.log("✅ Tokens received:", tokens);
+        
+        Cookies.set("token", tokens.accessToken, { sameSite: "Strict", secure: true });
+    
+        localStorage.setItem("token", tokens.accessToken);
+        router.push("/");
+      } else {
+        console.error("❌ No access token received from server!");
+      }
+    },
+    
+    onError: (error) => {
+      console.error("Login failed", error);
+    },
+  });
+  
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("✅ handleSubmit called, sending data...");
+    loginMutation.mutate({ email, password });
+  };
+  
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -86,7 +102,7 @@ function Signin() {
               </a>
             </div>
             <form
-              //  onSubmit={handleSubmit}
+               onSubmit={handleSubmit}
               className="space-y-8 py-8"
             >
               <Input
@@ -149,18 +165,18 @@ function Signin() {
                 </a>
               </div>
 
-              {/* {loginMutation.isError && (
+              {loginMutation.isError && (
                 <Text className="text-red-500">{t.loginError}</Text>
-              )} */}
+              )}
 
               <Button
                 type="submit"
                 className="mb-10 py-6"
                 color="primary"
-                // disabled={loginMutation.isPending}
+                disabled={loginMutation.isPending}
               >
-                {/* {loginMutation.isPending ? t.loggingIn : t.loginButton} */}
-                {t.loginButton}
+                {loginMutation.isPending ? t.loggingIn : t.loginButton}
+                {/* {t.loginButton} */}
               </Button>
             </form>
           </div>

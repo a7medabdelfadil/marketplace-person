@@ -2,6 +2,7 @@ const translations = {
   en: {
     create: "+ Create",
     createMeeting: "Create Meeting",
+    meetingName: "Meeting name",
     event: "Event",
     task: "Task",
     appointmentSchedule: "Appointment Schedule",
@@ -56,6 +57,7 @@ const translations = {
   ar: {
     create: "+ إنشاء",
     createMeeting: "إنشاء اجتماع",
+    meetingName: "اسم الاجتماع",
     event: "حدث",
     task: "مهمة",
     appointmentSchedule: "جدولة المواعيد",
@@ -110,6 +112,7 @@ const translations = {
   fr: {
     create: "+ Créer",
     createMeeting: "Créer une réunion",
+    meetingName: "Nom de la réunion",
     event: "Événement",
     task: "Tâche",
     appointmentSchedule: "Planification de rendez-vous",
@@ -164,6 +167,7 @@ const translations = {
   ru: {
     create: "+ Создать",
     createMeeting: "Создать встречу",
+    meetingName: "Название встречи",
     event: "Событие",
     task: "Задача",
     appointmentSchedule: "Расписание встреч",

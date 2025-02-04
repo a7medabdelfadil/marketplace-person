@@ -104,30 +104,29 @@ function CalendarPage() {
     },
   ];
 
-
-const events = [
-  {
-    title: "Daily Meeting",
-    subtitle: "Opream Dev",
-    time: t.allDay,
-    bgColor: "bg-primary/10",
-    textColor: "text-primary",
-  },
-  {
-    title: "Task",
-    subtitle: "Ux and Ui",
-    time: "07:20 AM",
-    bgColor: "bg-pink/10",
-    textColor: "text-pink",
-  },
-  {
-    title: "Events",
-    subtitle: "Festivals",
-    time: "07:20 AM",
-    bgColor: "bg-warning/10",
-    textColor: "text-warning",
-  },
-];
+  const events = [
+    {
+      title: "Daily Meeting",
+      subtitle: "Opream Dev",
+      time: t.allDay,
+      bgColor: "bg-primary/10",
+      textColor: "text-primary",
+    },
+    {
+      title: "Task",
+      subtitle: "Ux and Ui",
+      time: "07:20 AM",
+      bgColor: "bg-pink/10",
+      textColor: "text-pink",
+    },
+    {
+      title: "Events",
+      subtitle: "Festivals",
+      time: "07:20 AM",
+      bgColor: "bg-warning/10",
+      textColor: "text-warning",
+    },
+  ];
 
   const [screenWidth, setScreenWidth] = useState<number>(768); // Set a default value
 
@@ -169,23 +168,20 @@ const events = [
             >
               {/* Tabs */}
               <div className="flex rounded-t-lg border-b font-medium text-textPrimary">
-                {[
-                  "Create Meeting",
-                  "Event",
-                  "Task",
-                  "Appointment Schedule",
-                ].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`flex-1 py-2 text-center text-xs ${
-                      selectedTab === tab
-                        ? "border-b-2 border-primary text-primary"
-                        : "hover:text-primary"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
+                {[t.createMeeting, t.event, t.task, t.appointmentSchedule].map(
+                  (tab) => (
+                    <button
+                      key={tab}
+                      className={`flex-1 py-2 text-center text-xs ${
+                        selectedTab === tab
+                          ? "border-b-2 border-primary text-primary"
+                          : "hover:text-primary"
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  ),
+                )}
               </div>
 
               {/* Form Fields */}
@@ -272,7 +268,7 @@ const events = [
                 <div className="flex items-start gap-2">
                   <FiList size={25} className="text-textSecondary" />
                   <textarea
-                    placeholder="Add a note ({t.optional})"
+                    placeholder={t.addNote}
                     className="w-full rounded-md border bg-lightGray px-2 pb-20 pt-2 outline-none"
                   ></textarea>
                 </div>
@@ -353,7 +349,9 @@ const events = [
                                   {event.event}
                                 </div>
                               )}
-                              <span className={`absolute right-2 top-2 text-xs text-textSecondary`}>
+                              <span
+                                className={`absolute right-2 top-2 text-xs text-textSecondary`}
+                              >
                                 {rowIndex}
                               </span>
                             </div>
@@ -442,7 +440,9 @@ const events = [
                         </div>
                       ))}
                     </div>
-                    <button className={`absolute -top-3 ${language === "ar" ? "left-2" : "right-2"} flex items-center justify-center rounded-full bg-primary p-3 text-white shadow-lg`}>
+                    <button
+                      className={`absolute -top-3 ${language === "ar" ? "left-2" : "right-2"} flex items-center justify-center rounded-full bg-primary p-3 text-white shadow-lg`}
+                    >
                       <IoCalendarNumberOutline
                         size={18}
                         onClick={() => {
@@ -509,10 +509,10 @@ const events = [
                               className="rounded-xl bg-primary/10 p-2 text-primary"
                             />
                             <div>
-                              <p className="text-sm mx-2 font-medium">
+                              <p className="mx-2 text-sm font-medium">
                                 {reminder.title}
                               </p>
-                              <p className="cursor-pointer mx-2 text-xs text-primary md:text-primary2">
+                              <p className="mx-2 cursor-pointer text-xs text-primary md:text-primary2">
                                 {reminder.action}
                               </p>
                             </div>
@@ -546,7 +546,7 @@ const events = [
                         </button>
                         {isMeetModalOpen && (
                           <div
-                            className="absolute right-0 top-14 z-[1000] hidden items-center justify-center md:flex"
+                            className={`absolute ${language === "ar" ? "left-20" : "right-0"} top-14 z-[1000] hidden items-center justify-center md:flex`}
                             onClick={() => setIsMeetModalOpen(false)}
                           >
                             <div
@@ -559,7 +559,7 @@ const events = [
                                   size={"2xl"}
                                   className="mb-4"
                                 >
-                                  Start a meeting now
+                                  {t.startMeetNow}
                                 </Text>
                                 <IoClose
                                   size={30}
@@ -572,8 +572,8 @@ const events = [
                                 theme="gray"
                                 border="gray"
                                 type="text"
-                                label="Meeting name"
-                                placeholder="Write meeting name"
+                                label={t.meetingName}
+                                placeholder={t.enterMeetingName}
                               />
 
                               {/* Buttons */}
@@ -662,7 +662,7 @@ const events = [
           >
             {/* Tabs */}
             <div className="flex border-b text-textSecondary">
-              {["Create Meeting", "Event", "Task", "Appointment Schedule"].map(
+              {[t.createMeeting, t.event, t.task, t.appointmentSchedule].map(
                 (tab) => (
                   <button
                     key={tab}
@@ -685,7 +685,7 @@ const events = [
                 <Input
                   border="none"
                   type="text"
-                  placeholder="Add a title"
+                  placeholder={t.addTitle}
                   className="w-full rounded-none bg-bgSecondary"
                 />
               </div>
@@ -695,7 +695,7 @@ const events = [
                   <Input
                     border="none"
                     type="text"
-                    placeholder="Add required attendees"
+                    placeholder={t.addAttendees}
                     className="w-full rounded-none bg-bgSecondary pr-28"
                   />
                 </div>
@@ -745,7 +745,7 @@ const events = [
                   <Input
                     border="none"
                     type="text"
-                    placeholder="Add location"
+                    placeholder={t.addLocation}
                     className="w-full rounded-none border bg-bgSecondary p-2 pr-52"
                   />
                   <div className="absolute right-4 top-3 ml-2 flex items-center">
@@ -759,7 +759,7 @@ const events = [
               <div className="flex items-start gap-2">
                 <FiList size={25} className="mt-2 text-textSecondary" />
                 <textarea
-                  placeholder="Add a note ({t.optional})"
+                  placeholder={t.addNote}
                   className="w-full rounded border bg-bgSecondary px-2 pb-14 pt-2 outline-none"
                 ></textarea>
               </div>
@@ -784,7 +784,7 @@ const events = [
       )}
       {isMeetModalOpen && (
         <div
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 md:hidden"
           onClick={() => setIsMeetModalOpen(false)}
         >
           <div
@@ -807,8 +807,8 @@ const events = [
               theme="gray"
               border="gray"
               type="text"
-              label="Meeting name"
-              placeholder="Write meeting name"
+              label={t.meetingName}
+              placeholder={t.enterMeetingName}
             />
 
             {/* Buttons */}
