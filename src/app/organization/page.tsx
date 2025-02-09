@@ -22,6 +22,12 @@ const Organization = () => {
   const [selected, setSelected] = useState("product");
   const [search, setSearch] = useState("");
 
+  const cards = Array(8).fill({
+    image: "/images/meeting.jpg", // Replace with the actual image path
+    university: "Stanford University",
+    qs: 5,
+  });
+
   const [openSections, setOpenSections] = useState<{
     academia: boolean;
     company: boolean;
@@ -114,7 +120,7 @@ const Organization = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-64 rounded-lg p-4 text-left">
+              <div className="rounded-lg text-left">
                 <div className="space-y-4">
                   {/* Academia Section */}
                   <div>
@@ -139,14 +145,14 @@ const Organization = () => {
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="ml-6 mt-2 space-y-2 text-gray-600">
-                        <div className="cursor-pointer hover:text-black">
+                      <div className="text-gray-600">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary py-1 pl-8 hover:text-black">
                           University
                         </div>
-                        <div className="cursor-pointer hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
                           School
                         </div>
-                        <div className="cursor-pointer hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
                           Training Course
                         </div>
                       </div>
@@ -176,14 +182,14 @@ const Organization = () => {
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="ml-6 mt-2 space-y-2 text-gray-600">
-                        <div className="cursor-pointer hover:text-black">
+                      <div className="text-gray-600">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
                           Programming
                         </div>
-                        <div className="cursor-pointer hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
                           Technology
                         </div>
-                        <div className="cursor-pointer hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
                           Industry
                         </div>
                       </div>
@@ -214,11 +220,11 @@ const Organization = () => {
             <Box
               rounded="none"
               padding="0"
-              className="h-[1000px] px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px]"
+              className="px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px]"
             >
               <div className="relative mx-auto w-full overflow-hidden rounded-lg shadow-lg">
                 <div
-                  className="flex transition-transform duration-500"
+                  className="mt-4 flex transition-transform duration-500"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {slides.map((slide, index) => (
@@ -253,10 +259,50 @@ const Organization = () => {
                   {slides.map((_, index) => (
                     <div
                       key={index}
-                      className={`h-2 w-2 rounded-full ${currentSlide === index ? "bg-white" : "bg-gray-400"}`}
+                      className={`h-2 w-2 rounded-full ${currentSlide === index ? "bg-primary2" : "bg-bgPrimary"}`}
                     ></div>
                   ))}
                 </div>
+              </div>
+              <div className="mt-4 flex flex-col items-center">
+                <Text font={"semiBold"} size={"2xl"}>
+                  Discover Universities
+                </Text>
+                <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
+              </div>
+              <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
+                {cards.map((card, index) => (
+                  <div
+                    key={index}
+                    className="relative max-w-sm rounded-lg bg-white shadow-lg"
+                  >
+                    {/* Image */}
+                    <img
+                      src={card.image}
+                      alt="University"
+                      className="h-48 w-full rounded-t-lg object-cover"
+                    />
+
+                    {/* Badge */}
+                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-gray-800 shadow-md">
+                      QS:{card.qs}
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-gray-800">
+                        {card.university}
+                      </h3>
+                      <a
+                        href="#"
+                        className="mt-1 flex items-center text-blue-600 hover:underline"
+                      >
+                        View University{" "}
+                        <span className="ml-1 text-xl">&rarr;</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </Box>
           </div>
