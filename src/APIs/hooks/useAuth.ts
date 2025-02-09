@@ -1,17 +1,17 @@
 import {
   useMutation,
-  UseMutationOptions,
+  type UseMutationOptions,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import { AuthResponse, login } from "../features/auth";
+import { type AuthResponse, login } from "../features/auth";
 
 export const useAuth = () => {
   return useQuery({
     queryKey: ["auth"],
     queryFn: async () => {
-      const token = Cookies.get("accessToken"); // ✅ استرجاع التوكن من الكوكيز
+      const token = Cookies.get("accessToken"); 
       if (!token) return null;
 
       const response = await fetch(
@@ -29,7 +29,7 @@ export const useAuth = () => {
 
       return response.json();
     },
-    staleTime: 1000 * 60 * 10, // البيانات تظل حديثة لمدة 10 دقائق
+    staleTime: 1000 * 60 * 10, 
   });
 };
 
@@ -43,14 +43,13 @@ export const useLogin = (
     onSuccess: (response) => {
       console.log("✅ Login response:", response);
 
-      const tokens = response.data.tokens; // ✅ استخراج `tokens` من `data`
+      const tokens = response.data.tokens;
 
       if (tokens?.accessToken) {
         console.log("✅ Storing tokens in cookies...");
         Cookies.set("accessToken", tokens.accessToken, { sameSite: "Strict", secure: true });
         Cookies.set("refreshToken", tokens.refreshToken, { sameSite: "Strict", secure: true });
 
-        // ✅ تحديث كاش `React Query` بمعلومات المستخدم
         queryClient.setQueryData(["auth"], response.data);
       } else {
         console.error("❌ No access token received from server!");
@@ -69,8 +68,11 @@ export const useLogout = () => {
   const queryClient = useQueryClient();
 
   return () => {
-    Cookies.remove("accessToken"); // ✅ حذف التوكن من الكوكيز
-    Cookies.remove("refreshToken");
-    queryClient.setQueryData(["auth"], null); // ✅ مسح بيانات المستخدم من الكاش
+    Cookies.remove("token", { sameSite: "Strict", secure: true });
+
+    queryClient.setQueryData(["auth"], null);
+    queryClient.invalidateQueries({ queryKey: ["auth"] });
+
+    console.log("User logged out ✅");
   };
 };

@@ -1,16 +1,15 @@
 import axios from "axios";
-import Cookies from "js-cookie"; // استيراد مكتبة js-cookie
+import Cookies from "js-cookie"; 
 
 const axiosInstance = axios.create({
-  baseURL: "http://apiopream.uralcen.com/api/v1",
+  baseURL: "https://api-onway.opream.net/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// ✅ إضافة `Interceptor` لتحديث `Authorization` من الكوكيز
 axiosInstance.interceptors.request.use((config) => {
-  const token = Cookies.get("accessToken"); // ✅ استرجاع التوكن من الكوكيز
+  const token = Cookies.get("accessToken"); 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

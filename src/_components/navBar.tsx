@@ -22,6 +22,7 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useLogout } from "~/APIs/hooks/useAuth";
 
 const translations = {
   en: {
@@ -166,7 +167,12 @@ const NavBar = () => {
   const url = usePathname();
   const [profile, setProfile] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const logout = useLogout();
 
+  const handleLogout = () => {
+    logout();
+    window.location.href = "/login";
+  };
   const toggleProfile = () => {
     setProfile((prev) => !prev);
   };
@@ -333,7 +339,7 @@ const NavBar = () => {
                             </DropdownMenu.Item>
                             <DropdownMenu.Item asChild>
                               <a
-                                // onClick={() => DeleteCookie()}
+                                onClick={() => handleLogout()}
                                 href="/sign-in"
                                 className="flex items-center gap-x-3 rounded-md px-3 py-2 text-sm text-error outline-none hover:bg-error hover:text-white"
                               >
