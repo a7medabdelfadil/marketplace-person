@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguageStore } from "~/APIs/store";
 import translations from "../market/translations";
+import { FaArrowRight } from "react-icons/fa6";
 
 const Organization = () => {
   const language = useLanguageStore((state) => state.language);
@@ -23,6 +24,12 @@ const Organization = () => {
   const [search, setSearch] = useState("");
 
   const cards = Array(8).fill({
+    image: "/images/meeting.jpg", // Replace with the actual image path
+    university: "Stanford University",
+    qs: 5,
+  });
+
+  const cardsFour = Array(4).fill({
     image: "/images/meeting.jpg", // Replace with the actual image path
     university: "Stanford University",
     qs: 5,
@@ -280,7 +287,7 @@ const Organization = () => {
                     <img
                       src={card.image}
                       alt="University"
-                      className="h-48 w-full rounded-t-lg object-cover"
+                      className="h-56 w-full rounded-t-lg object-cover"
                     />
 
                     {/* Badge */}
@@ -303,6 +310,58 @@ const Organization = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="flex justify-center">
+                <button className="flex items-center gap-2 rounded border border-gray-700 px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  <span className="font-bold">SEE ALL</span>
+                  <FaArrowRight />
+                </button>
+              </div>
+              <div className="mt-4 flex flex-col items-center">
+                <Text font={"semiBold"} size={"2xl"}>
+                Top ranking universities
+                </Text>
+                <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
+              </div>
+              <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
+                {cardsFour.map((card, index) => (
+                  <div
+                    key={index}
+                    className="relative max-w-sm rounded-lg bg-white shadow-lg"
+                  >
+                    {/* Image */}
+                    <img
+                      src={card.image}
+                      alt="University"
+                      className="h-56 w-full rounded-t-lg object-cover"
+                    />
+
+                    {/* Badge */}
+                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-gray-800 shadow-md">
+                      QS:{card.qs}
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-gray-800">
+                        {card.university}
+                      </h3>
+                      <a
+                        href="#"
+                        className="mt-1 flex items-center text-blue-600 hover:underline"
+                      >
+                        View University{" "}
+                        <span className="ml-1 text-xl">&rarr;</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                <button className="flex items-center gap-2 rounded border border-gray-700 px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  <span className="font-bold">SEE ALL</span>
+                  <FaArrowRight />
+                </button>
               </div>
             </Box>
           </div>
