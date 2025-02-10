@@ -172,7 +172,7 @@ const ViewOrganization = () => {
   return (
     <>
       <Container mr={false}>
-        <div className="flex gap-5">
+        <div className="flex justify-between">
           <div className="w-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
@@ -295,7 +295,7 @@ const ViewOrganization = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-4/5">
+          <div className="w-full ml-5 md:w-4/7">
             <div className="flex items-center">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -318,10 +318,10 @@ const ViewOrganization = () => {
               padding="0"
               className="px-0 pb-[120px] pt-4 md:mb-8 md:px-4 md:pb-[20px]"
             >
-              <div className="flex justify-between rounded-xl bg-bgThird">
-                <div className="w-1/2 rounded-lg p-14">
+              <div className="flex flex-col-reverse lg:flex-row justify-between rounded-xl bg-bgThird">
+                <div className="w-full lg:w-1/2 rounded-lg p-14">
                   {/* Title */}
-                  <Text font={"bold"} color={"primary"} size={"4xl"}>
+                  <Text font={"bold"} color={"primary"} className="text-2xl lg:text-4xl">
                     Stanford University
                   </Text>
                   {/* Description */}
@@ -335,7 +335,7 @@ const ViewOrganization = () => {
                     {/* Request Meeting Button */}
                     <div className="w-fit">
                       <Button className="rounded-sm">
-                        Request Meeting
+                        <a href="/organization/request-meeting">Request Meeting</a>
                         <IoVideocam size={22} />
                       </Button>
                     </div>
@@ -355,7 +355,7 @@ const ViewOrganization = () => {
                     </div>
                   </div>
                 </div>
-                <div className="relative mx-auto w-1/2 overflow-hidden rounded-xl shadow-lg">
+                <div className="relative mx-auto w-full p-4 lg:p-0 lg:w-1/2 overflow-hidden rounded-xl">
                   <div
                     className="flex rounded-xl transition-transform duration-500"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -432,7 +432,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="mt-4 grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-4 grid grid-cols-1 gap-6 p-4 lg:grid-cols-2 xl:grid-cols-3">
                 {courses.map((course, index) => (
                   <div key={index} className="rounded-xl">
                     {/* Image */}
@@ -470,7 +470,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-64 rounded-full bg-primary"></div>
               </div>
-              <div className="grid mt-8 grid-cols-1 p-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="grid mt-8 grid-cols-1 p-4 lg:grid-cols-2 xl:grid-cols-4">
                 {team.map((member, index) => (
                   <div
                     key={index}
@@ -504,7 +504,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="mt-8 grid grid-cols-1 gap-6 p-4 md:grid-cols-3 lg:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-6 p-4 lg:grid-cols-2 lg:grid-cols-3">
                 {coursesRecord.map((course, index) => (
                   <div key={index} className="flex flex-col items-center">
                     {/* Course Image */}

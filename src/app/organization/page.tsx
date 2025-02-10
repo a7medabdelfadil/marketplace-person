@@ -83,7 +83,7 @@ const Organization = () => {
   return (
     <>
       <Container mr={false}>
-        <div className="flex gap-5">
+        <div className="flex justify-between">
           <div className="w-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
@@ -206,7 +206,7 @@ const Organization = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-4/5">
+          <div className="w-full ml-5 md:w-4/7">
             <div className="flex items-center">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -277,7 +277,7 @@ const Organization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-8 grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
                 {cards.map((card, index) => (
                   <div
                     key={index}
@@ -302,7 +302,7 @@ const Organization = () => {
                       </h3>
                       <a
                         href="/organization/view/1"
-                        className="mt-1 flex items-center text-blue-600 hover:underline"
+                        className="mt-1 flex items-center text-primary font-bold hover:underline"
                       >
                         View University{" "}
                         <span className="ml-1 text-xl">&rarr;</span>
@@ -323,7 +323,7 @@ const Organization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-8 grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
                 {cardsFour.map((card, index) => (
                   <div
                     key={index}
@@ -348,7 +348,7 @@ const Organization = () => {
                       </h3>
                       <a
                         href="/organization/view/1"
-                        className="mt-1 flex items-center text-blue-600 hover:underline"
+                        className="mt-1 flex items-center text-primary font-bold hover:underline"
                       >
                         View University{" "}
                         <span className="ml-1 text-xl">&rarr;</span>
