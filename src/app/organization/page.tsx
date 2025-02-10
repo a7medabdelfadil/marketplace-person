@@ -101,7 +101,7 @@ const Organization = () => {
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
                       <svg
-                        className="size-4 flex-shrink-0 text-gray-400"
+                        className="size-4 flex-shrink-0 text-textSecondary"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -132,7 +132,7 @@ const Organization = () => {
                   {/* Academia Section */}
                   <div>
                     <div
-                      className="flex cursor-pointer items-center gap-2 text-lg font-bold text-black"
+                      className="flex cursor-pointer items-center gap-2 text-lg font-bold text-textPrimary"
                       onClick={() => toggleSection("academia")}
                     >
                       <div className="flex items-center gap-2">
@@ -152,14 +152,14 @@ const Organization = () => {
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="text-gray-600">
-                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary py-1 pl-8 hover:text-black">
+                      <div className="text-textSecondary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary py-1 pl-8 hover:text-textPrimary">
                           University
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
                           School
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
                           Training Course
                         </div>
                       </div>
@@ -169,7 +169,7 @@ const Organization = () => {
                   {/* Company Section */}
                   <div>
                     <div
-                      className="flex cursor-pointer items-center gap-2 text-lg font-bold text-black"
+                      className="flex cursor-pointer items-center gap-2 text-lg font-bold text-textPrimary"
                       onClick={() => toggleSection("company")}
                     >
                       <div className="flex items-center gap-2">
@@ -189,14 +189,14 @@ const Organization = () => {
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="text-gray-600">
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
+                      <div className="text-textSecondary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
                           Programming
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
                           Technology
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-black">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
                           Industry
                         </div>
                       </div>
@@ -291,17 +291,17 @@ const Organization = () => {
                     />
 
                     {/* Badge */}
-                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-gray-800 shadow-md">
+                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-textPrimary shadow-md">
                       QS:{card.qs}
                     </div>
 
                     {/* Content */}
                     <div className="p-4">
-                      <h3 className="text-lg font-bold text-gray-800">
+                      <h3 className="text-lg font-bold text-textPrimary">
                         {card.university}
                       </h3>
                       <a
-                        href="#"
+                        href="/organization/view/1"
                         className="mt-1 flex items-center text-blue-600 hover:underline"
                       >
                         View University{" "}
@@ -312,14 +312,14 @@ const Organization = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="flex items-center gap-2 rounded border border-gray-700 px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
                   <span className="font-bold">SEE ALL</span>
                   <FaArrowRight />
                 </button>
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                Top ranking universities
+                  Top ranking universities
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
@@ -337,17 +337,17 @@ const Organization = () => {
                     />
 
                     {/* Badge */}
-                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-gray-800 shadow-md">
+                    <div className="absolute right-3 top-3 rounded bg-white px-3 py-1 text-sm font-bold text-textPrimary shadow-md">
                       QS:{card.qs}
                     </div>
 
                     {/* Content */}
                     <div className="p-4">
-                      <h3 className="text-lg font-bold text-gray-800">
+                      <h3 className="text-lg font-bold text-textPrimary">
                         {card.university}
                       </h3>
                       <a
-                        href="#"
+                        href="/organization/view/1"
                         className="mt-1 flex items-center text-blue-600 hover:underline"
                       >
                         View University{" "}
@@ -358,11 +358,12 @@ const Organization = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="flex items-center gap-2 rounded border border-gray-700 px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
                   <span className="font-bold">SEE ALL</span>
                   <FaArrowRight />
                 </button>
               </div>
+              
             </Box>
           </div>
         </div>

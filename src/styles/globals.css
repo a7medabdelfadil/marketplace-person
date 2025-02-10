@@ -33,7 +33,7 @@ html {
   --navLinks: 84, 101, 111; /* #54656F */
   --bg-primary: 255, 255, 255; /* #ffffff */
   --bg-secondary: 240, 240, 240; /* #F0F0F0 */
-  --bg-third: 245, 250, 255; /* ##F5FAFF */
+  --bg-third: 245, 250, 255; /* #F5FAFF */
   --bg-fourth: #DFEBFF; /* #DFEBFF */
   --bg-input: 243, 244, 246;  /* #F3F4F6 */
   --comment: 241, 245, 249; /* #F1F5F9 */ 
@@ -45,7 +45,7 @@ html {
   --warning: 244, 189, 14; /* #f4bd0e */
   --error: 229, 56, 53; /* #e53835 */
   --soft-red: 255, 127, 116; /* #ff7f74 */
-  --success: 30, 224, 172; /* #1ee0ac */
+  --success: 46, 204, 113; /* #2ECC71 */
   --pink: 255, 136, 250; /* #FF88FA */
   --limeGreen: 147, 213, 10; /* #93D50A */
   --info: 9, 194, 222; /* #09c2de */
@@ -78,7 +78,7 @@ html {
   --warning: 248, 155, 34; /* #f89b22 */
   --error: 235, 103, 94; /* #eb675e */
   --soft-red: 255, 127, 116; /* #ff7f74 */
-  --success: 26, 200, 119; /* #1ac877 */
+  --success: 46, 204, 113; /* #2ECC71 */
   --pink: 255, 136, 250; /* #FF88FA */
   --limeGreen: 147, 213, 10; /* #93D50A */
   --info: 52, 228, 181; /* #34e4b5 */
