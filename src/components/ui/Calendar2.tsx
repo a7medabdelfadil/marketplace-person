@@ -32,7 +32,7 @@ function Calendar2({
           nav_button_previous: `bg-bgPrimary text-textSecondary hover:bg-bgSecondary ${
             language === "ar" ? "rotate-180 order-2" : "order-1"
           }`,
-          nav_button_next: `bg-primary/10 text-white hover:bg-primaryHover ${
+          nav_button_next: `bg-primary/10 text-primary2 hover:bg-primary2Hover hover:text-white transition duration-300 ${
             language === "ar" ? "rotate-180 order-1" : "order-2"
           }`,
           table: "w-full border-collapse text-center rounded-xl",
@@ -41,9 +41,9 @@ function Calendar2({
           row: "grid grid-cols-7 px-4",
           cell: "relative w-10 h-10 cursor-pointer flex items-center justify-center text-sm rounded-full hover:bg-bgSecondary transition",
           day: "w-full h-full flex items-center justify-center",
-          day_selected: "bg-primary text-white font-medium",
+          day_selected: "bg-primary2 text-white rounded-full font-bold hover:bg-primary2Hover",
           day_today:
-            "rounded-full bg-bgFourth text-primary2 font-bold",
+            "rounded-full bg-bgFourth text-primary2 font-bold hover:bg-primary2 hover:text-white",
           day_outside: "text-textSecondary",
           day_disabled: "text-textSecondary opacity-50",
           ...classNames,
@@ -53,7 +53,7 @@ function Calendar2({
             <ChevronLeft className={cn("h-5 w-5", className)} {...props} />
           ),
           IconRight: ({ className, ...props }) => (
-            <ChevronRight className={cn("h-5 w-5 text-primary2", className)} {...props} />
+            <ChevronRight className={cn("h-5 w-5", className)} {...props} />
           ),
         }}
         {...props}

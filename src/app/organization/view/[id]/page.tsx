@@ -110,19 +110,9 @@ const ViewOrganization = () => {
     { title: "Courses IIII", image: "/images/coursebord.jpeg" },
     { title: "Courses IIIII", image: "/images/coursebord.jpeg" },
     { title: "Courses IIIIII", image: "/images/coursebord.jpeg" },
+    { title: "Courses IIIIIII", image: "/images/coursebord.jpeg" },
+    { title: "Courses IIIIIIII", image: "/images/coursebord.jpeg" },
   ];
-
-  const cards = Array(8).fill({
-    image: "/images/meeting.jpg",
-    university: "Stanford University",
-    qs: 5,
-  });
-
-  const cardsFour = Array(4).fill({
-    image: "/images/meeting.jpg",
-    university: "Stanford University",
-    qs: 5,
-  });
 
   const [openSections, setOpenSections] = useState<{
     academia: boolean;
@@ -242,13 +232,13 @@ const ViewOrganization = () => {
                     </div>
                     {openSections.academia && (
                       <div className="text-textSecondary">
-                        <div className="mt-2 w-full cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           University
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           School
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Training Course
                         </div>
                       </div>
@@ -279,13 +269,13 @@ const ViewOrganization = () => {
                     </div>
                     {openSections.company && (
                       <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Programming
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Technology
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Industry
                         </div>
                       </div>
@@ -295,7 +285,7 @@ const ViewOrganization = () => {
               </div>
             </div>
           </div>
-          <div className="w-full ml-5 md:w-4/7">
+          <div className="md:w-4/7 w-full md:ml-5">
             <div className="flex items-center">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -316,12 +306,16 @@ const ViewOrganization = () => {
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] pt-4 md:mb-8 md:px-4 md:pb-[20px]"
+              className="px-0 pb-[120px] xl:pt-4 xl:mb-8 xl:px-4 md:pb-[20px]"
             >
-              <div className="flex flex-col-reverse lg:flex-row justify-between rounded-xl bg-bgThird">
-                <div className="w-full lg:w-1/2 rounded-lg p-14">
+              <div className="flex flex-col-reverse justify-between xl:rounded-xl bg-bgThird xl:flex-row">
+                <div className="w-full xl:rounded-lg p-4 xl:p-14 xl:w-1/2">
                   {/* Title */}
-                  <Text font={"bold"} color={"primary"} className="text-2xl lg:text-4xl">
+                  <Text
+                    font={"bold"}
+                    color={"primary"}
+                    className="text-2xl xl:text-4xl"
+                  >
                     Stanford University
                   </Text>
                   {/* Description */}
@@ -331,31 +325,38 @@ const ViewOrganization = () => {
                   </p>
 
                   {/* Buttons */}
-                  <div className="mt-6 space-y-4">
-                    {/* Request Meeting Button */}
-                    <div className="w-fit">
-                      <Button className="rounded-sm">
-                        <a href="/organization/request-meeting">Request Meeting</a>
-                        <IoVideocam size={22} />
-                      </Button>
-                    </div>
-
-                    {/* Secondary Buttons */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-fit">
-                        <Button className="rounded-sm">
-                          Apply
-                          <IoArrowForwardOutline size={22} />
+                  <div className="flex justify-center xl:block">
+                    <div className="mt-6 flex w-4/5 xl:w-3/5 flex-wrap items-center justify-center gap-4">
+                      {/* Request Meeting Button */}
+                      <div className="w-full">
+                        <Button className="flex items-center gap-2 rounded-sm">
+                          <a href="/organization/request-meeting">
+                            Request Meeting
+                          </a>
+                          <IoVideocam size={22} />
                         </Button>
                       </div>
-                      <button className="flex items-center rounded border border-borderSecondary px-6 py-2 font-semibold text-textPrimary transition duration-300 hover:bg-bgSecondary">
-                        Watch Video
-                        <AiOutlinePlaySquare size={20} className="ml-2" />
-                      </button>
+
+                      {/* Secondary Buttons */}
+                      <div className=" flex w-full items-center gap-4">
+                        {/* Apply Button */}
+                        <div className="w-full xl:w-fit">
+                          <Button className="flex items-center gap-2 rounded-sm">
+                            Apply
+                            <IoArrowForwardOutline size={22} />
+                          </Button>
+                        </div>
+
+                        {/* Watch Video Button */}
+                        <button className="flex w-full items-center gap-2 rounded border border-borderSecondary px-6 py-2 font-semibold text-textPrimary transition duration-300 hover:bg-bgSecondary">
+                          Watch Video
+                          <AiOutlinePlaySquare size={20} className="ml-2" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="relative mx-auto w-full p-4 lg:p-0 lg:w-1/2 overflow-hidden rounded-xl">
+                <div className="relative mx-auto w-full overflow-hidden p-0 xl:rounded-xl xl:w-1/2">
                   <div
                     className="flex rounded-xl transition-transform duration-500"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -363,12 +364,12 @@ const ViewOrganization = () => {
                     {slides.map((slide, index) => (
                       <div
                         key={index}
-                        className="relative w-full flex-shrink-0 overflow-hidden rounded-xl bg-red-500"
+                        className="relative w-full flex-shrink-0 overflow-hidden xl:rounded-xl"
                       >
                         <img
                           src={slide.image}
                           alt={slide.title}
-                          className="h-96 w-full object-cover"
+                          className="h-72 lg:h-80 xl:h-96 w-full object-cover"
                         />
                         {currentSlide === index && (
                           <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-white"></div>
@@ -404,7 +405,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="mt-4 grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-4 p-4 lg:grid-cols-4">
                 {stats.map((stat, index) => (
                   <div
                     key={index}
@@ -470,7 +471,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-64 rounded-full bg-primary"></div>
               </div>
-              <div className="grid mt-8 grid-cols-1 p-4 lg:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-8 grid grid-cols-2 p-4 gap-4 md:gap-0 lg:grid-cols-2 xl:grid-cols-4">
                 {team.map((member, index) => (
                   <div
                     key={index}
@@ -504,7 +505,7 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
-              <div className="mt-8 grid grid-cols-1 gap-6 p-4 lg:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid grid-cols-2 gap-6 p-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
                 {coursesRecord.map((course, index) => (
                   <div key={index} className="flex flex-col items-center">
                     {/* Course Image */}
@@ -515,8 +516,8 @@ const ViewOrganization = () => {
                         className="rounded-lg object-cover shadow-md"
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg">
-                          <FaPlay className="text-xl text-primary" />
+                        <div className="flex h-10 lg:h-14 w-10 lg:w-14 items-center justify-center rounded-full bg-bgPrimary shadow-lg">
+                          <FaPlay className="text-lg lg:text-xl text-primary" />
                         </div>
                       </div>
                     </div>
@@ -539,14 +540,14 @@ const ViewOrganization = () => {
                 </Text>
                 <div className="mt-1 h-2 w-48 rounded-full bg-primary"></div>
               </div>
-              <div className="flex flex-col lg:flex-row gap-6 mt-8 p-4">
-                <div className="flex w-1/2 flex-col items-center">
+              <div className="mt-8 flex flex-col gap-6 p-4 lg:flex-row">
+                <div className="flex w-full lg:w-1/2 flex-col items-center">
                   <img
                     src="/images/meeting.jpg"
                     alt="Photo"
                     className="h- rounded-lg"
                   />
-                  <div className="h-30 relative -top-10 w-4/5 bg-bgPrimary p-4 rounded-xl shadow-md">
+                  <div className="h-30 relative -top-10 w-4/5 rounded-xl bg-bgPrimary p-4 shadow-md">
                     <h3 className="text-xl font-bold text-gray-800">
                       Scholarship
                     </h3>
@@ -557,19 +558,19 @@ const ViewOrganization = () => {
                     </p>
                     <a
                       href="#"
-                      className="mt-4 inline-flex items-center text-primary font-bold hover:underline"
+                      className="mt-4 inline-flex items-center font-bold text-primary hover:underline"
                     >
                       Learn more <span className="ml-2 text-xl">&rarr;</span>
                     </a>
                   </div>
                 </div>
-                <div className="flex w-1/2 flex-col items-center">
+                <div className="flex w-full lg:w-1/2 flex-col items-center">
                   <img
                     src="/images/meeting.jpg"
                     alt="Photo"
                     className="h- rounded-lg"
                   />
-                  <div className="h-30 relative -top-10 w-4/5 bg-bgPrimary p-4 rounded-xl shadow-md">
+                  <div className="h-30 relative -top-10 w-4/5 rounded-xl bg-bgPrimary p-4 shadow-md">
                     <h3 className="text-xl font-bold text-gray-800">
                       Scholarship
                     </h3>
@@ -580,7 +581,7 @@ const ViewOrganization = () => {
                     </p>
                     <a
                       href="#"
-                      className="mt-4 inline-flex items-center text-primary font-bold hover:underline"
+                      className="mt-4 inline-flex items-center font-bold text-primary hover:underline"
                     >
                       Learn more <span className="ml-2 text-xl">&rarr;</span>
                     </a>

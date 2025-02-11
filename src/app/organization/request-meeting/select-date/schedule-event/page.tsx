@@ -10,23 +10,26 @@ import { useLanguageStore } from "~/APIs/store";
 import translations from "~/app/market/translations";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Calendar2 } from "~/components/ui/Calendar2";
 import Button from "~/_components/Button";
 import { FaRegClock } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
 import { motion } from "framer-motion";
-import { HiOutlineAcademicCap } from "react-icons/hi2";
+import Input from "~/_components/Input";
+import { FaCheck } from "react-icons/fa6";
+import { HiOutlineAcademicCap } from "react-icons/hi";
+import { MdOutlineCalendarToday } from "react-icons/md";
 
-const SelectDate = () => {
+const ScheduleEvent = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
-
-  const handleDayClick = (day: Date) => {
-    setSelectedDay(day);
-  };
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    idea: "",
+    requirements: "",
+  });
 
   const [openSections, setOpenSections] = useState<{
     academia: boolean;
@@ -35,6 +38,32 @@ const SelectDate = () => {
     academia: true,
     company: true,
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate form submission
+    setIsSubmitted(true);
+  };
+
+  const handleBack = () => {
+    // Reset state and form
+    setFormData({
+      name: "",
+      email: "",
+      idea: "",
+      requirements: "",
+    });
+    setIsSubmitted(false);
+  };
 
   const toggleSection = (section: keyof typeof openSections) => {
     setOpenSections((prevState) => ({
@@ -188,13 +217,13 @@ const SelectDate = () => {
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] lg:pt-4 md:mb-8 px-4 md:pb-[20px]"
+              className="px-0 pb-[120px] xl:pt-4 md:mb-8 md:px-4 md:pb-[20px]"
             >
               <div
-                className={`mx-auto flex min-h-[700px] w-full 2xl:w-4/5 flex-col rounded-lg border-borderPrimary/25 xl:flex-row lg:border lg:shadow-md`}
+                className={`mx-auto flex min-h-[700px] w-4/5 flex-col rounded-lg border-borderPrimary/25 xl:flex-row lg:border lg:shadow-md`}
               >
                 {/* Sidebar */}
-                <div className="w-full bg-bgPrimary xl:pt-4 xl:w-1/3 xl:border-r">
+                <div className="w-full bg-bgPrimary pt-4 xl:w-1/3 xl:border-r">
                   {/* Back Button */}
                   <div className="hidden justify-between p-6 xl:flex">
                     <div
@@ -211,18 +240,19 @@ const SelectDate = () => {
                   </div>
 
                   {/* University Services */}
-                  <div className="p-0 md:pt-10 xl:border-t lg:p-4">
-                    {/* <h3 className="text-lg font-bold text-gray-800"> */}
-                    {/* </h3> */}
+                  <div className="xl:pt-10 xl:border-t xl:p-4">
                     <Text font={"bold"} size={"xl"}>
                       University Services
                     </Text>
                     <div className="mt-2 flex items-center">
-                      <HiOutlineAcademicCap className="block md:hidden mt-1 mr-1" size={20} />
+                      <HiOutlineAcademicCap
+                        className="mr-1 mt-1 block md:hidden"
+                        size={20}
+                      />
                       <Text
                         font={"bold"}
                         size={"lg"}
-                        className="mt-2 ml-0 lg:ml-4 text-textPrimary md:text-textSecondary"
+                        className="ml-0 mt-2 text-textPrimary md:text-textSecondary lg:ml-4"
                       >
                         Academic Support
                       </Text>
@@ -239,87 +269,165 @@ const SelectDate = () => {
                         </Text>
                       </div>
                     </div>
-                    
+                    <div className="mt-4">
+                      <div className="mt-2 flex items-center">
+                        <MdOutlineCalendarToday size={20} />
+                        <Text
+                          font={"bold"}
+                          size={"lg"}
+                          className="ml-2 text-textPrimary md:text-textSecondary"
+                        >
+                          2:30pm - 3:00pm, Monday, November 25, 2024
+                        </Text>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <div className="mt-2 flex items-center">
+                        <BiWorld />
+                        <Text
+                          font={"bold"}
+                          size={"lg"}
+                          className="ml-2 text-textPrimary md:text-textSecondary"
+                        >
+                          Africa/Cairo
+                        </Text>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Main Content */}
-                <div className="mt-8 flex-1 xl:mt-0 xl:p-6">
-                  <Text font={"bold"} size={"xl"}>
-                    Select a Date & Time
-                  </Text>
+                <div className="mx-auto mt-8 flex-1 xl:mt-0 xl:p-6">
+                  {!isSubmitted ? (
+                    <>
+                      <Text font="bold" size="xl" className="mb-6">
+                        Enter Details
+                      </Text>
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Name Field */}
+                        <div className="w-full lg:w-4/5">
+                          <Input
+                            theme="transparent"
+                            label="Name *"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            className="w-full border-[#A6BBD1]"
+                          />
+                        </div>
 
-                  {/* Calendar Placeholder */}
-                  <div className="flex flex-col xl:flex-row">
-                    <div
-                      className={`mt-8 ${selectedDay ? "w-full xl:w-fit" : "w-full"}`}
-                    >
-                      <Calendar2
-                        selected={selectedDay}
-                        onDayClick={handleDayClick}
-                        className="w-full"
-                      />
-                    </div>
-                    {selectedDay && (
-                      <motion.div
-                        className="mt-4 flex-1 px-8"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                      >
-                        <h2 className="text-xl font-bold text-textPrimary">
-                          {selectedDay.toDateString()}
-                        </h2>
-                        <div className="mt-4 flex flex-col space-y-4">
+                        {/* Email Field */}
+                        <div className="w-full lg:w-4/5">
+                          <Input
+                            theme="transparent"
+                            label="Email *"
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="w-full border-[#A6BBD1]"
+                          />
+                        </div>
+
+                        {/* Idea Field */}
+                        <div className="w-full lg:w-4/5">
+                          <Input
+                            theme="transparent"
+                            label="Kindly state the idea briefly. *"
+                            name="idea"
+                            type="text"
+                            value={formData.idea}
+                            onChange={handleChange}
+                            required
+                            className="w-full border-[#A6BBD1]"
+                          />
+                        </div>
+
+                        {/* Requirements Field */}
+                        <div className="w-full lg:w-4/5">
+                          <Input
+                            theme="transparent"
+                            label="Are there any specific requirements or preparations needed before the meeting? *"
+                            name="requirements"
+                            type="text"
+                            value={formData.requirements}
+                            onChange={handleChange}
+                            required
+                            className="w-full border-[#A6BBD1]"
+                          />
+                        </div>
+
+                        {/* Terms and Conditions */}
+                        <div className="w-full lg:w-4/5">
+                          <Text size="sm" color="gray" className="text-start">
+                            By proceeding, you confirm that you have read and
+                            agree to{" "}
+                            <a
+                              href="#"
+                              className="font-bold text-primary lg:text-primary2 hover:underline"
+                            >
+                              Calendly&apos;s Terms of Use
+                            </a>{" "}
+                            and{" "}
+                            <a
+                              href="#"
+                              className="font-bold text-primary lg:text-primary2 hover:underline"
+                            >
+                              Privacy Notice
+                            </a>
+                            .
+                          </Text>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="w-fit">
                           <Button
-                            theme="outline"
-                            onClick={() =>
-                              router.push(
-                                "/organization/request-meeting/select-date/schedule-event",
-                              )
-                            }
-                            color="primary2"
+
+                            type="submit"
+                            className="mt-4 lg:hover:bg-primary2Hover lg:bg-primary2"
                           >
-                            12:30pm
-                          </Button>
-                          <Button
-                            theme="outline"
-                            onClick={() =>
-                              router.push(
-                                "/organization/request-meeting/select-date/schedule-event",
-                              )
-                            }
-                            color="primary2"
-                          >
-                            1:00pm
-                          </Button>
-                          <Button
-                            theme="outline"
-                            onClick={() =>
-                              router.push(
-                                "/organization/request-meeting/select-date/schedule-event",
-                              )
-                            }
-                            color="primary2"
-                          >
-                            1:30pm
+                            Schedule Event
                           </Button>
                         </div>
-                      </motion.div>
-                    )}
-                  </div>
+                      </form>
+                    </>
+                  ) : (
+                    <motion.div
+                      className="flex h-full items-center justify-center"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.1, ease: "easeInOut" }}
+                    >
+                      {/* Success Content */}
+                      <div className="flex w-4/5 flex-col items-center justify-center space-y-6 text-center">
+                        {/* Success Icon */}
+                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary2">
+                          <FaCheck size={30} className="text-white" />
+                        </div>
 
-                  {/* Time Zone */}
-                  <div className="mt-4 flex flex-col justify-center">
-                    <Text font={"bold"} size={"lg"} className="mb-2">
-                      Time Zone
-                    </Text>
-                    <Text className="flex items-center">
-                      <BiWorld className="mr-2" size={20} />
-                      UTC Time (12:32pm) <span className="ml-2">▼</span>
-                    </Text>
-                  </div>
+                        {/* Success Message */}
+                        <Text font="bold" size="xl">
+                          Successful
+                        </Text>
+                        <Text size="md" font="medium" color="gray">
+                          The meeting has been booked successfully. You can
+                          return to continue browsing.
+                        </Text>
+
+                        {/* Back Button */}
+                        <Button
+                          color="primary2"
+                          onClick={handleBack}
+                          className="w-full"
+                        >
+                          Back
+                        </Button>
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </Box>
@@ -329,4 +437,4 @@ const SelectDate = () => {
     </>
   );
 };
-export default SelectDate;
+export default ScheduleEvent;

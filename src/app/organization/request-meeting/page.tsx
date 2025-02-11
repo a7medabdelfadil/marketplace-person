@@ -33,22 +33,26 @@ const RequestMeeting = () => {
     {
       title: "Career Guidance",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      url: "/select-date",
     },
     {
       title: "Mental Health and Well-being",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      url: "/select-date",
     },
     {
       title: "Administrative Support",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      url: "/select-date",
     },
     {
       title: "Research Guidance",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      url: "/select-date",
     },
   ];
 
@@ -132,13 +136,13 @@ const RequestMeeting = () => {
                     </div>
                     {openSections.academia && (
                       <div className="text-textSecondary">
-                        <div className="mt-2 w-full cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div onClick={() => router.push("/organization")} className="mt-2 w-full cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           University
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           School
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Training Course
                         </div>
                       </div>
@@ -169,13 +173,13 @@ const RequestMeeting = () => {
                     </div>
                     {openSections.company && (
                       <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Programming
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Technology
                         </div>
-                        <div className="mt-2 cursor-pointer py-1 pl-8 hover:text-textPrimary">
+                        <div className="mt-2 cursor-pointer py-1 pl-8 rounded-lg transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
                           Industry
                         </div>
                       </div>
@@ -185,8 +189,8 @@ const RequestMeeting = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-4/7 ml-5 w-full">
-            <div className="flex items-center">
+          <div className="md:w-4/7 md:ml-5 w-full">
+            <div className="hidden md:flex items-center">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
                   <Text font={"bold"} size={"xl"} className="hover:underline">
@@ -203,10 +207,10 @@ const RequestMeeting = () => {
               padding="0"
               className="px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px]"
             >
-              <div className="mx-auto w-4/5 p-8">
+              <div className="mx-auto w-full lg:w-4/5 p-4 md:p-8">
                 {/* Title */}
                 <div className="mb-8 flex items-center justify-center">
-                  <div className="flex w-1/3 flex-col items-center justify-center">
+                  <div className="flex w-full md:w-1/3 flex-col items-center justify-center">
                     <Text font={"bold"} size={"xl"}>
                       University Services
                     </Text>
@@ -223,7 +227,7 @@ const RequestMeeting = () => {
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
                   {services.map((service, index) => (
                     <div
                       key={index}
@@ -234,17 +238,17 @@ const RequestMeeting = () => {
                     >
                       {/* Icon */}
                       <div className="flex-shrink-0">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-borderSecondary/50"></div>
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-borderPrimary"></div>
                       </div>
 
                       {/* Content */}
                       <div className="ml-4">
-                        <h3 className="text-lg font-bold text-gray-800">
+                        <Text font={"bold"} size={"lg"}>
                           {service.title}
-                        </h3>
-                        <p className="mt-2 text-sm text-gray-600">
+                        </Text>
+                        <Text font={"bold"} color={"gray"} size={"sm"}>
                           {service.description}
-                        </p>
+                        </Text>
                       </div>
                     </div>
                   ))}
