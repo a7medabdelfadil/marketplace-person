@@ -8,6 +8,7 @@ import {
   IoIosArrowBack,
   IoIosArrowDown,
   IoIosArrowForward,
+  IoMdClose,
 } from "react-icons/io";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,6 +27,10 @@ import { LuBookOpen } from "react-icons/lu";
 const ViewOrganization = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const router = useRouter();
   const [selected, setSelected] = useState("product");
@@ -341,7 +346,7 @@ const ViewOrganization = () => {
                       <div className=" flex w-full items-center gap-4">
                         {/* Apply Button */}
                         <div className="w-full xl:w-fit">
-                          <Button className="flex items-center gap-2 rounded-sm">
+                          <Button onClick={openModal} className="flex items-center gap-2 rounded-sm">
                             Apply
                             <IoArrowForwardOutline size={22} />
                           </Button>
@@ -592,6 +597,47 @@ const ViewOrganization = () => {
           </div>
         </div>
       </Container>
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/50">
+          {/* Modal Overlay */}
+          <div
+            className="absolute inset-0"
+            onClick={closeModal}
+          ></div>
+
+          {/* Modal Content */}
+          <div className="relative w-11/12 max-w-sm rounded-lg bg-white p-6 shadow-lg">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+            >
+              <IoMdClose size={24} />
+            </button>
+
+            {/* Modal Header */}
+            <Text font="bold" size="xl" className="mb-6">
+              Let’s get started!
+            </Text>
+
+            {/* Modal Options */}
+            <div className="space-y-4">
+              <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
+                First year student
+              </Button>
+              <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
+                Transfer student
+              </Button>
+              <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
+                Education Professional
+              </Button>
+              <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
+                Parent or other adult
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
