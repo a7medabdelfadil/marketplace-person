@@ -7,9 +7,8 @@ import { Text } from "~/_components/Text";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
-import translations from "~/app/market/translations";
 import { useRouter } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import Button from "~/_components/Button";
 import { FaRegClock } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
@@ -18,6 +17,7 @@ import Input from "~/_components/Input";
 import { FaCheck } from "react-icons/fa6";
 import { HiOutlineAcademicCap } from "react-icons/hi";
 import { MdOutlineCalendarToday } from "react-icons/md";
+import translations from "./translations";
 
 const ScheduleEvent = () => {
   const language = useLanguageStore((state) => state.language);
@@ -80,7 +80,7 @@ const ScheduleEvent = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Organization
+                  {t.organization}
                 </Text>
               </div>
             </div>
@@ -88,7 +88,7 @@ const ScheduleEvent = () => {
               <div className="hidden justify-between text-center max-[502px]:grid max-[502px]:justify-center md:flex">
                 <div className="mb-3 hidden md:block">
                   <label htmlFor="icon" className="sr-only">
-                    Search for organization
+                    {t.searchPlaceholder}
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
@@ -140,22 +140,19 @@ const ScheduleEvent = () => {
                           />
                         )}
                         <img src="/images/academia.png" alt="academia" />
-                        Academia
+                        {t.academia}
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="text-textSecondary">
-                        <div
-                          onClick={() => router.push("/organization")}
-                          className="mt-2 w-full cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary"
-                        >
-                          University
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                          {t.university}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          School
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.school}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Training Course
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.trainingCourse}
                         </div>
                       </div>
                     )}
@@ -180,19 +177,19 @@ const ScheduleEvent = () => {
                           />
                         )}
                         <img src="/images/company.png" alt="academia" />
-                        Company
+                        {t.company}
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Programming
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.programming}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Technology
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.technology}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Industry
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.industry}
                         </div>
                       </div>
                     )}
@@ -207,12 +204,17 @@ const ScheduleEvent = () => {
             <div className="hidden items-center md:flex">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
-                  <Text font={"bold"} size={"xl"} className="hover:underline">
-                    University
+                  <Text
+                    font={"bold"}
+                    color={"primary"}
+                    size={"xl"}
+                    className="hover:underline"
+                  >
+                    {t.university}
                   </Text>
-                  <Text>Find Programs</Text>
-                  <Text>Top Universities</Text>
-                  <Text>Student Reviews</Text>
+                  <Text>{t.findPrograms}</Text>
+                  <Text>{t.topUniversities}</Text>
+                  <Text>{t.studentReviews}</Text>
                 </div>
               </div>
             </div>
@@ -232,11 +234,15 @@ const ScheduleEvent = () => {
                       onClick={() => router.back()}
                       className="-mt-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary2 p-1 hover:bg-primary2Hover"
                     >
-                      <FaArrowLeft className="text-white" size={25} />
+                      {language === "ar" ? (
+                        <FaArrowRight className="text-white" size={25} />
+                      ) : (
+                        <FaArrowLeft className="text-white" size={25} />
+                      )}
                     </div>
                     {/* Logo */}
                     <Text font={"bold"} size={"4xl"} className="mr-8">
-                      Logo
+                      {t.logo}
                     </Text>
                     <div></div>
                   </div>
@@ -244,7 +250,7 @@ const ScheduleEvent = () => {
                   {/* University Services */}
                   <div className="xl:border-t xl:p-4 xl:pt-10">
                     <Text font={"bold"} size={"xl"}>
-                      University Services
+                      {t.universityServices}
                     </Text>
                     <div className="mt-2 flex items-center">
                       <HiOutlineAcademicCap
@@ -256,7 +262,7 @@ const ScheduleEvent = () => {
                         size={"lg"}
                         className="ml-0 mt-2 text-textPrimary md:text-textSecondary lg:ml-4"
                       >
-                        Academic Support
+                        {t.academicSupport}
                       </Text>
                     </div>
                     <div className="mt-4">
@@ -267,7 +273,7 @@ const ScheduleEvent = () => {
                           size={"lg"}
                           className="ml-2 text-textPrimary md:text-textSecondary"
                         >
-                          30 Minutes
+                          {t.thirtyMinutes}
                         </Text>
                       </div>
                     </div>
@@ -291,7 +297,7 @@ const ScheduleEvent = () => {
                           size={"lg"}
                           className="ml-2 text-textPrimary md:text-textSecondary"
                         >
-                          Africa/Cairo
+                          {t.africaCairo}
                         </Text>
                       </div>
                     </div>
@@ -303,14 +309,14 @@ const ScheduleEvent = () => {
                   {!isSubmitted ? (
                     <>
                       <Text font="bold" size="xl" className="mb-6">
-                        Enter Details
+                        {t.enterDetails}
                       </Text>
                       <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Name Field */}
                         <div className="w-full lg:w-4/5">
                           <Input
                             theme="transparent"
-                            label="Name *"
+                            label={t.nameField}
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -323,7 +329,7 @@ const ScheduleEvent = () => {
                         <div className="w-full lg:w-4/5">
                           <Input
                             theme="transparent"
-                            label="Email *"
+                            label={t.emailField}
                             type="email"
                             name="email"
                             value={formData.email}
@@ -337,7 +343,7 @@ const ScheduleEvent = () => {
                         <div className="w-full lg:w-4/5">
                           <Input
                             theme="transparent"
-                            label="Kindly state the idea briefly. *"
+                            label={t.ideaField}
                             name="idea"
                             type="text"
                             value={formData.idea}
@@ -351,7 +357,7 @@ const ScheduleEvent = () => {
                         <div className="w-full lg:w-4/5">
                           <Input
                             theme="transparent"
-                            label="Are there any specific requirements or preparations needed before the meeting? *"
+                            label={t.requirementsField}
                             name="requirements"
                             type="text"
                             value={formData.requirements}
@@ -364,20 +370,19 @@ const ScheduleEvent = () => {
                         {/* Terms and Conditions */}
                         <div className="w-full lg:w-4/5">
                           <Text size="sm" color="gray" className="text-start">
-                            By proceeding, you confirm that you have read and
-                            agree to{" "}
+                            {t.termsAndConditionsProceeding}
                             <a
                               href="#"
                               className="font-bold text-primary hover:underline lg:text-primary2"
                             >
-                              Calendly&apos;s Terms of Use
+                              {t.termsAndConditionsTerms}
                             </a>{" "}
-                            and{" "}
+                            {t.termsAndConditionsAnd}
                             <a
                               href="#"
                               className="font-bold text-primary hover:underline lg:text-primary2"
                             >
-                              Privacy Notice
+                              {t.termsAndConditionsPrivacy}
                             </a>
                             .
                           </Text>
@@ -389,7 +394,7 @@ const ScheduleEvent = () => {
                             type="submit"
                             className="mt-4 lg:bg-primary2 lg:hover:bg-primary2Hover"
                           >
-                            Schedule Event
+                            {t.scheduleEvent}
                           </Button>
                         </div>
                       </form>
@@ -411,11 +416,10 @@ const ScheduleEvent = () => {
 
                         {/* Success Message */}
                         <Text font="bold" size="xl">
-                          Successful
+                          {t.successful}
                         </Text>
                         <Text size="md" font="medium" color="gray">
-                          The meeting has been booked successfully. You can
-                          return to continue browsing.
+                          {t.successMessage}
                         </Text>
 
                         {/* Back Button */}
@@ -424,7 +428,7 @@ const ScheduleEvent = () => {
                           onClick={handleBack}
                           className="w-full"
                         >
-                          Back
+                          {t.back}
                         </Button>
                       </div>
                     </motion.div>

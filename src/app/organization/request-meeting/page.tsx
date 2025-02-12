@@ -7,8 +7,8 @@ import { Text } from "~/_components/Text";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
-import translations from "~/app/market/translations";
 import { useRouter } from "next/navigation";
+import translations from "./translations";
 
 const RequestMeeting = () => {
   const language = useLanguageStore((state) => state.language);
@@ -25,31 +25,31 @@ const RequestMeeting = () => {
   });
   const services = [
     {
-      title: "Academic Support",
+      title: t.academicSupport,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       url: "/select-date",
     },
     {
-      title: "Career Guidance",
+      title: t.careerGuidance,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       url: "/select-date",
     },
     {
-      title: "Mental Health and Well-being",
+      title: t.mentalHealth,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       url: "/select-date",
     },
     {
-      title: "Administrative Support",
+      title: t.administrativeSupport,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       url: "/select-date",
     },
     {
-      title: "Research Guidance",
+      title: t.researchGuidance,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       url: "/select-date",
@@ -71,7 +71,7 @@ const RequestMeeting = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Organization
+                  {t.organization}
                 </Text>
               </div>
             </div>
@@ -79,7 +79,7 @@ const RequestMeeting = () => {
               <div className="hidden justify-between text-center max-[502px]:grid max-[502px]:justify-center md:flex">
                 <div className="mb-3 hidden md:block">
                   <label htmlFor="icon" className="sr-only">
-                    Search for organization
+                    {t.searchPlaceholder}
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
@@ -131,22 +131,19 @@ const RequestMeeting = () => {
                           />
                         )}
                         <img src="/images/academia.png" alt="academia" />
-                        Academia
+                        {t.academia}
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="text-textSecondary">
-                        <div
-                          onClick={() => router.push("/organization")}
-                          className="mt-2 w-full cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary"
-                        >
-                          University
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                          {t.university}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          School
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.school}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Training Course
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.trainingCourse}
                         </div>
                       </div>
                     )}
@@ -171,19 +168,19 @@ const RequestMeeting = () => {
                           />
                         )}
                         <img src="/images/company.png" alt="academia" />
-                        Company
+                        {t.company}
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Programming
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.programming}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Technology
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.technology}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Industry
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.industry}
                         </div>
                       </div>
                     )}
@@ -199,11 +196,11 @@ const RequestMeeting = () => {
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
                   <Text font={"bold"} size={"xl"} className="hover:underline">
-                    University
+                    {t.university}
                   </Text>
-                  <Text>Find Programs</Text>
-                  <Text>Top Universities</Text>
-                  <Text>Student Reviews</Text>
+                  <Text>{t.findPrograms}</Text>
+                  <Text>{t.topUniversities}</Text>
+                  <Text>{t.studentReviews}</Text>
                 </div>
               </div>
             </div>
@@ -217,7 +214,7 @@ const RequestMeeting = () => {
                 <div className="mb-8 flex items-center justify-center">
                   <div className="flex w-full flex-col items-center justify-center md:w-1/3">
                     <Text font={"bold"} size={"xl"}>
-                      University Services
+                      {t.universityServices}
                     </Text>
                     <Text
                       font={"medium"}
@@ -225,8 +222,7 @@ const RequestMeeting = () => {
                       color={"gray"}
                       className="mt-4 text-center"
                     >
-                      Welcome to my scheduling page. Please follow the
-                      instructions to add an event to my calendar.
+                      {t.welcomeScheduling}
                     </Text>
                   </div>
                 </div>
@@ -250,7 +246,7 @@ const RequestMeeting = () => {
                       </div>
 
                       {/* Content */}
-                      <div className="ml-4">
+                      <div className="mx-4">
                         <Text font={"bold"} size={"lg"}>
                           {service.title}
                         </Text>

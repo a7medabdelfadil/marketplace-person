@@ -7,15 +7,15 @@ import { Text } from "~/_components/Text";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
-import translations from "~/app/market/translations";
 import { useRouter } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { Calendar2 } from "~/components/ui/Calendar2";
 import Button from "~/_components/Button";
 import { FaRegClock } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { HiOutlineAcademicCap } from "react-icons/hi2";
+import translations from "./translations";
 
 const SelectDate = () => {
   const language = useLanguageStore((state) => state.language);
@@ -51,7 +51,7 @@ const SelectDate = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Organization
+                  {t.organization}
                 </Text>
               </div>
             </div>
@@ -59,7 +59,7 @@ const SelectDate = () => {
               <div className="hidden justify-between text-center max-[502px]:grid max-[502px]:justify-center md:flex">
                 <div className="mb-3 hidden md:block">
                   <label htmlFor="icon" className="sr-only">
-                    Search for organization
+                    {t.searchPlaceholder}
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
@@ -111,22 +111,19 @@ const SelectDate = () => {
                           />
                         )}
                         <img src="/images/academia.png" alt="academia" />
-                        Academia
+                        {t.academia}
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="text-textSecondary">
-                        <div
-                          onClick={() => router.push("/organization")}
-                          className="mt-2 w-full cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary"
-                        >
-                          University
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                          {t.university}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          School
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.school}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Training Course
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.trainingCourse}
                         </div>
                       </div>
                     )}
@@ -139,31 +136,33 @@ const SelectDate = () => {
                       onClick={() => toggleSection("company")}
                     >
                       <div className="flex items-center gap-2">
-                        {openSections.academia ? (
-                          <IoIosArrowDown
-                            size={14}
-                            className="ml-auto text-textSecondary"
-                          />
-                        ) : (
-                          <IoIosArrowForward
-                            size={14}
-                            className="ml-auto text-textSecondary"
-                          />
+                        {openSections.academia && (
+                          <div className="text-start text-textSecondary">
+                            <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                              {t.university}
+                            </div>
+                            <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                              {t.school}
+                            </div>
+                            <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                              {t.trainingCourse}
+                            </div>
+                          </div>
                         )}
                         <img src="/images/company.png" alt="academia" />
-                        Company
+                        {t.company}
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Programming
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.programming}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Technology
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.technology}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Industry
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.industry}
                         </div>
                       </div>
                     )}
@@ -178,19 +177,24 @@ const SelectDate = () => {
             <div className="hidden items-center md:flex">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
-                  <Text font={"bold"} size={"xl"} className="hover:underline">
-                    University
+                  <Text
+                    font={"bold"}
+                    color={"primary"}
+                    size={"xl"}
+                    className="hover:underline"
+                  >
+                    {t.university}
                   </Text>
-                  <Text>Find Programs</Text>
-                  <Text>Top Universities</Text>
-                  <Text>Student Reviews</Text>
+                  <Text>{t.findPrograms}</Text>
+                  <Text>{t.topUniversities}</Text>
+                  <Text>{t.studentReviews}</Text>
                 </div>
               </div>
             </div>
             <Box
               rounded="none"
               padding="0"
-              className="px-0 px-4 pb-[120px] md:mb-8 md:pb-[20px] lg:pt-4"
+              className="px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px]"
             >
               <div
                 className={`mx-auto flex min-h-[700px] w-full flex-col rounded-lg border-borderPrimary/25 lg:border lg:shadow-md xl:flex-row 2xl:w-4/5`}
@@ -203,7 +207,11 @@ const SelectDate = () => {
                       onClick={() => router.back()}
                       className="-mt-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary2 p-1 hover:bg-primary2Hover"
                     >
-                      <FaArrowLeft className="text-white" size={25} />
+                      {language === "ar" ? (
+                        <FaArrowRight className="text-white" size={25} />
+                      ) : (
+                        <FaArrowLeft className="text-white" size={25} />
+                      )}
                     </div>
                     {/* Logo */}
                     <Text font={"bold"} size={"4xl"} className="mr-8">
@@ -217,7 +225,7 @@ const SelectDate = () => {
                     {/* <h3 className="text-lg font-bold text-gray-800"> */}
                     {/* </h3> */}
                     <Text font={"bold"} size={"xl"}>
-                      University Services
+                      {t.universityServices}
                     </Text>
                     <div className="mt-2 flex items-center">
                       <HiOutlineAcademicCap
@@ -229,7 +237,7 @@ const SelectDate = () => {
                         size={"lg"}
                         className="ml-0 mt-2 text-textPrimary md:text-textSecondary lg:ml-4"
                       >
-                        Academic Support
+                        {t.academicSupport}
                       </Text>
                     </div>
                     <div className="mt-4">
@@ -240,7 +248,7 @@ const SelectDate = () => {
                           size={"lg"}
                           className="ml-2 text-textPrimary md:text-textSecondary"
                         >
-                          30 Minutes
+                          {t.thirtyMinutes}
                         </Text>
                       </div>
                     </div>
@@ -250,7 +258,7 @@ const SelectDate = () => {
                 {/* Main Content */}
                 <div className="mt-8 flex-1 xl:mt-0 xl:p-6">
                   <Text font={"bold"} size={"xl"}>
-                    Select a Date & Time
+                    {t.selectDateTime}
                   </Text>
 
                   {/* Calendar Placeholder */}
@@ -317,7 +325,7 @@ const SelectDate = () => {
                   {/* Time Zone */}
                   <div className="mt-4 flex flex-col justify-center">
                     <Text font={"bold"} size={"lg"} className="mb-2">
-                      Time Zone
+                      {t.timeZone}
                     </Text>
                     <Text className="flex items-center">
                       <BiWorld className="mr-2" size={20} />
