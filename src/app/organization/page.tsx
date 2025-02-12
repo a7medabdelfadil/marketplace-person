@@ -12,11 +12,11 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguageStore } from "~/APIs/store";
-import translations from "../market/translations";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 import { BsFillFilterSquareFill } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
+import translations from "./translations";
 
 const Organization = () => {
   const language = useLanguageStore((state) => state.language);
@@ -27,14 +27,14 @@ const Organization = () => {
   const [search, setSearch] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const cards = Array(8).fill({
-    image: "/images/meeting.jpg", // Replace with the actual image path
-    university: "Stanford University",
+    image: "/images/meeting.jpg",
+    university: t.stanfordUniversity,
     qs: 5,
   });
 
   const cardsFour = Array(4).fill({
-    image: "/images/meeting.jpg", // Replace with the actual image path
-    university: "Stanford University",
+    image: "/images/meeting.jpg",
+    university: t.stanfordUniversity,
     qs: 5,
   });
 
@@ -57,21 +57,18 @@ const Organization = () => {
   const slides = [
     {
       image: "/images/service.png",
-      title: "Your Path to the Perfect University",
-      description:
-        "Explore top universities on our website to find the one that aligns with your goals and start your journey to success.",
+      title: t.yourPathToUniversity,
+      description: t.exploreTopUniversities,
     },
     {
       image: "/images/service.png",
-      title: "Find Your Dream Campus",
-      description:
-        "Discover universities with the best facilities, faculty, and learning environment tailored to your ambitions.",
+      title: t.findDreamCampus,
+      description: t.discoverUniversitiesFacilities,
     },
     {
       image: "/images/service.png",
-      title: "Shape Your Future",
-      description:
-        "Choose a university that supports your career aspirations and personal growth with top-tier programs and resources.",
+      title: t.shapeYourFuture,
+      description: t.chooseUniversityCareer,
     },
   ];
 
@@ -95,7 +92,7 @@ const Organization = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Organization
+                  {t.organization}
                 </Text>
               </div>
             </div>
@@ -103,7 +100,7 @@ const Organization = () => {
               <div className="hidden justify-between text-center max-[502px]:grid max-[502px]:justify-center md:flex">
                 <div className="mb-3 hidden md:block">
                   <label htmlFor="icon" className="sr-only">
-                    Search for organization
+                    {t.searchPlaceholder}
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
@@ -155,19 +152,19 @@ const Organization = () => {
                           />
                         )}
                         <img src="/images/academia.png" alt="academia" />
-                        Academia
+                        {t.academia}
                       </div>
                     </div>
                     {openSections.academia && (
-                      <div className="text-textSecondary">
-                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary py-1 pl-8 hover:text-textPrimary">
-                          University
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                          {t.university}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          School
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.school}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Training Course
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.trainingCourse}
                         </div>
                       </div>
                     )}
@@ -192,19 +189,19 @@ const Organization = () => {
                           />
                         )}
                         <img src="/images/company.png" alt="academia" />
-                        Company
+                        {t.company}
                       </div>
                     </div>
                     {openSections.company && (
-                      <div className="text-textSecondary">
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Programming
+                      <div className="text-start text-textSecondary">
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.programming}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Technology
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.technology}
                         </div>
-                        <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Industry
+                        <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                          {t.industry}
                         </div>
                       </div>
                     )}
@@ -213,7 +210,9 @@ const Organization = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-4/7 ml-0 w-full md:ml-5">
+          <div
+            className={`md:w-4/7 ml-0 w-full ${language === "ar" ? "md:mr-5" : "md:ml-5"}`}
+          >
             <div className="hidden items-center md:flex">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -223,11 +222,11 @@ const Organization = () => {
                     size={"xl"}
                     className="hover:underline"
                   >
-                    University
+                    {t.university}
                   </Text>
-                  <Text>Find Programs</Text>
-                  <Text>Top Universities</Text>
-                  <Text>Student Reviews</Text>
+                  <Text>{t.findPrograms}</Text>
+                  <Text>{t.topUniversities}</Text>
+                  <Text>{t.studentReviews}</Text>
                 </div>
               </div>
             </div>
@@ -241,7 +240,7 @@ const Organization = () => {
                   <IoClose
                     onClick={handleFilterClick}
                     size={30}
-                    className="mr-4"
+                    className="mx-4"
                   />
                 </div>
                 <div className="rounded-lg p-8 text-left">
@@ -265,19 +264,19 @@ const Organization = () => {
                             />
                           )}
                           <img src="/images/academia.png" alt="academia" />
-                          Academia
+                          {t.academia}
                         </div>
                       </div>
                       {openSections.academia && (
-                        <div className="text-textSecondary">
-                          <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary py-1 pl-8 hover:text-textPrimary">
-                            University
+                        <div className="text-start text-textSecondary">
+                          <div className="mt-2 w-full cursor-pointer rounded-lg bg-bgPrimary px-4 py-1 pl-8 hover:text-textPrimary">
+                            {t.university}
                           </div>
-                          <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                            School
+                          <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                            {t.school}
                           </div>
-                          <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                            Training Course
+                          <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                            {t.trainingCourse}
                           </div>
                         </div>
                       )}
@@ -302,19 +301,19 @@ const Organization = () => {
                             />
                           )}
                           <img src="/images/company.png" alt="academia" />
-                          Company
+                          {t.company}
                         </div>
                       </div>
                       {openSections.company && (
-                        <div className="text-textSecondary">
-                          <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                            Programming
+                        <div className="text-start text-textSecondary">
+                          <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                            {t.programming}
                           </div>
-                          <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                            Technology
+                          <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                            {t.technology}
                           </div>
-                          <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                            Industry
+                          <div className="mt-2 cursor-pointer rounded-lg px-4 py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
+                            {t.industry}
                           </div>
                         </div>
                       )}
@@ -331,7 +330,9 @@ const Organization = () => {
                 <div className="relative mx-auto w-full overflow-hidden shadow-lg md:rounded-lg">
                   <div
                     className="mt-4 flex transition-transform duration-500"
-                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                    style={{
+                      transform: `translateX(${language === "ar" ? currentSlide * 100 : -currentSlide * 100}%)`,
+                    }}
                   >
                     {slides.map((slide, index) => (
                       <div
@@ -355,7 +356,7 @@ const Organization = () => {
                             </div>
                             <div className="mb-8 block w-4/5 md:hidden">
                               <label htmlFor="icon" className="sr-only">
-                                Search for organization
+                                {t.searchPlaceholder}
                               </label>
                               <div className="relative flex w-full">
                                 <input
@@ -364,7 +365,7 @@ const Organization = () => {
                                   id="icon"
                                   name="icon"
                                   className="block w-full rounded-lg border border-borderPrimary px-4 py-2 text-sm shadow outline-none focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                                  placeholder="Search for organization"
+                                  placeholder={t.searchPlaceholder}
                                 />
                                 <BsFillFilterSquareFill
                                   onClick={handleFilterClick}
@@ -390,22 +391,24 @@ const Organization = () => {
                   >
                     <IoIosArrowForward size={24} />
                   </button>
-                  <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
+                  <div
+                    className={`absolute bottom-4 ${language === "ar" ? "right-1/2 translate-x-1/2" : "left-1/2 -translate-x-1/2"} flex transform space-x-2`}
+                  >
                     {slides.map((_, index) => (
                       <div
                         key={index}
-                        className={`h-2 w-2 rounded-full ${currentSlide === index ? "bg-primary2" : "bg-bgPrimary"}`}
+                        className={`h-2 w-2 rounded-full ${language === "ar" ? "ml-2" : ""} ${currentSlide === index ? "bg-primary2" : "bg-bgPrimary"}`}
                       ></div>
                     ))}
                   </div>
                 </div>
                 <div className="mt-4 flex flex-col items-center">
                   <Text font={"semiBold"} size={"2xl"}>
-                    Discover Universities
+                    {t.discoverUniversities}
                   </Text>
                   <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
                 </div>
-                <div className="mt-8 flex grid-cols-1 flex-col items-center justify-center gap-6 p-4 lg:grid md:grid-cols-2 xl:grid-cols-4">
+                <div className="mt-8 flex grid-cols-1 flex-col items-center justify-center gap-6 p-4 md:grid-cols-2 lg:grid xl:grid-cols-4">
                   {cards.map((card, index) => (
                     <div
                       key={index}
@@ -432,8 +435,12 @@ const Organization = () => {
                           href="/organization/view/1"
                           className="mt-1 flex items-center font-bold text-primary hover:underline"
                         >
-                          View University{" "}
-                          <span className="ml-1 text-xl">&rarr;</span>
+                          {t.viewUniversity}
+                          {language === "ar" ? (
+                            <FaArrowLeft className="mx-1" />
+                          ) : (
+                            <FaArrowRight className="mx-1" />
+                          )}
                         </Link>
                       </div>
                     </div>
@@ -441,18 +448,18 @@ const Organization = () => {
                 </div>
                 <div className="flex justify-center">
                   <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
-                    <span className="font-bold">SEE ALL</span>
-                    <FaArrowRight />
+                    <span className="font-bold">{t.seeAll}</span>
+                    {language === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
                   </button>
                 </div>
                 <div className="mt-4 flex flex-col items-center">
                   <Text font={"semiBold"} size={"2xl"}>
-                    Top ranking universities
+                    {t.topRankingUniversities}
                   </Text>
                   <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
                 </div>
                 <div className="flex justify-center">
-                <div className="mt-8 flex grid-cols-1 flex-col items-center justify-center gap-6 p-4 lg:grid md:grid-cols-2 xl:grid-cols-4">
+                  <div className="mt-8 flex grid-cols-1 flex-col items-center justify-center gap-6 p-4 md:grid-cols-2 lg:grid xl:grid-cols-4">
                     {cardsFour.map((card, index) => (
                       <div
                         key={index}
@@ -479,8 +486,12 @@ const Organization = () => {
                             href="/organization/view/1"
                             className="mt-1 flex items-center font-bold text-primary hover:underline"
                           >
-                            View University{" "}
-                            <span className="ml-1 text-xl">&rarr;</span>
+                            {t.viewUniversity}{" "}
+                            {language === "ar" ? (
+                              <FaArrowLeft className="mx-1" />
+                            ) : (
+                              <FaArrowRight className="mx-1" />
+                            )}
                           </Link>
                         </div>
                       </div>
@@ -489,8 +500,8 @@ const Organization = () => {
                 </div>
                 <div className="flex justify-center">
                   <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
-                    <span className="font-bold">SEE ALL</span>
-                    <FaArrowRight />
+                    <span className="font-bold">{t.seeAll}</span>
+                    {language === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
                   </button>
                 </div>
               </Box>

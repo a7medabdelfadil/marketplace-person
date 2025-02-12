@@ -49,6 +49,7 @@ export default {
         comment: "rgba(var(--comment))",
         borderPrimary: "rgba(var(--border-primary))",
         borderSecondary: "rgba(var(--border-secondary))",
+        borderInput: "rgba(var(--border-input))",
         blackOrWhite: "rgba(var(--black-or-white))",
         thead: "rgba(var(--thead))",
         lightGray: "rgba(var(--light-gray))",

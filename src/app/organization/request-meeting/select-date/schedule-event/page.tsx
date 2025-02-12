@@ -201,7 +201,9 @@ const ScheduleEvent = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-4/7 w-full md:ml-5">
+          <div
+            className={`md:w-4/7 ml-0 w-full ${language === "ar" ? "md:mr-5" : "md:ml-5"}`}
+          >
             <div className="hidden items-center md:flex">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -217,10 +219,10 @@ const ScheduleEvent = () => {
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] xl:pt-4 md:mb-8 md:px-4 md:pb-[20px]"
+              className="px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px] xl:pt-4"
             >
               <div
-                className={`mx-auto flex min-h-[700px] w-4/5 flex-col rounded-lg border-borderPrimary/25 xl:flex-row lg:border lg:shadow-md`}
+                className={`mx-auto flex min-h-[700px] w-4/5 flex-col rounded-lg border-borderPrimary/25 lg:border lg:shadow-md xl:flex-row`}
               >
                 {/* Sidebar */}
                 <div className="w-full bg-bgPrimary pt-4 xl:w-1/3 xl:border-r">
@@ -240,7 +242,7 @@ const ScheduleEvent = () => {
                   </div>
 
                   {/* University Services */}
-                  <div className="xl:pt-10 xl:border-t xl:p-4">
+                  <div className="xl:border-t xl:p-4 xl:pt-10">
                     <Text font={"bold"} size={"xl"}>
                       University Services
                     </Text>
@@ -270,8 +272,8 @@ const ScheduleEvent = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <div className="mt-2 flex items-center">
-                        <MdOutlineCalendarToday size={20} />
+                      <div className="mt-2 flex items-start">
+                        <MdOutlineCalendarToday size={20} className="mt-1" />
                         <Text
                           font={"bold"}
                           size={"lg"}
@@ -366,14 +368,14 @@ const ScheduleEvent = () => {
                             agree to{" "}
                             <a
                               href="#"
-                              className="font-bold text-primary lg:text-primary2 hover:underline"
+                              className="font-bold text-primary hover:underline lg:text-primary2"
                             >
                               Calendly&apos;s Terms of Use
                             </a>{" "}
                             and{" "}
                             <a
                               href="#"
-                              className="font-bold text-primary lg:text-primary2 hover:underline"
+                              className="font-bold text-primary hover:underline lg:text-primary2"
                             >
                               Privacy Notice
                             </a>
@@ -384,9 +386,8 @@ const ScheduleEvent = () => {
                         {/* Submit Button */}
                         <div className="w-fit">
                           <Button
-
                             type="submit"
-                            className="mt-4 lg:hover:bg-primary2Hover lg:bg-primary2"
+                            className="mt-4 lg:bg-primary2 lg:hover:bg-primary2Hover"
                           >
                             Schedule Event
                           </Button>

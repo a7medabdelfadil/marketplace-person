@@ -11,18 +11,16 @@ import {
   IoMdClose,
 } from "react-icons/io";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useLanguageStore } from "~/APIs/store";
-import { FaArrowRight, FaPlay } from "react-icons/fa6";
-import translations from "~/app/market/translations";
+import { FaArrowLeft, FaArrowRight, FaPlay } from "react-icons/fa6";
 import Button from "~/_components/Button";
 import { IoVideocam } from "react-icons/io5";
-import { IoArrowForwardOutline } from "react-icons/io5";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import { AiOutlinePieChart } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { LuBookOpen } from "react-icons/lu";
+import translations from "./translations";
 
 const ViewOrganization = () => {
   const language = useLanguageStore((state) => state.language);
@@ -32,23 +30,21 @@ const ViewOrganization = () => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const router = useRouter();
-  const [selected, setSelected] = useState("product");
   const [search, setSearch] = useState("");
 
   const courses = [
     {
-      title: "Business management",
+      title: t.businessManagement,
       image: "/images/meeting.jpg",
       link: "#",
     },
     {
-      title: "Business management",
+      title: t.businessManagement,
       image: "/images/meeting.jpg",
       link: "#",
     },
     {
-      title: "Business management",
+      title: t.businessManagement,
       image: "/images/meeting.jpg",
       link: "#",
     },
@@ -58,22 +54,22 @@ const ViewOrganization = () => {
     {
       icon: <AiOutlinePieChart className="text-3xl text-textPrimary" />,
       value: "5",
-      label: "Ranking",
+      label: t.ranking,
     },
     {
       icon: <BsStars className="text-3xl text-warning" />,
       value: "97%",
-      label: "Number Of Programs",
+      label: t.numberOfPrograms,
     },
     {
       icon: <PiUsersThreeBold className="text-3xl text-primary" />,
       value: "34+",
-      label: "Number Of Student",
+      label: t.numberOfStudents,
     },
     {
       icon: <LuBookOpen className="text-3xl text-success" />,
       value: "100+",
-      label: "Free Online Courses",
+      label: t.freeOnlineCourses,
     },
   ];
 
@@ -172,7 +168,7 @@ const ViewOrganization = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Organization
+                  {t.organization}
                 </Text>
               </div>
             </div>
@@ -180,7 +176,7 @@ const ViewOrganization = () => {
               <div className="hidden justify-between text-center max-[502px]:grid max-[502px]:justify-center md:flex">
                 <div className="mb-3 hidden md:block">
                   <label htmlFor="icon" className="sr-only">
-                    Search for organization
+                    {t.searchPlaceholder}
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
@@ -232,19 +228,19 @@ const ViewOrganization = () => {
                           />
                         )}
                         <img src="/images/academia.png" alt="academia" />
-                        Academia
+                        {t.academia}
                       </div>
                     </div>
                     {openSections.academia && (
                       <div className="text-textSecondary">
                         <div className="mt-2 w-full cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          University
+                          {t.university}
                         </div>
                         <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          School
+                          {t.school}
                         </div>
                         <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Training Course
+                          {t.trainingCourse}
                         </div>
                       </div>
                     )}
@@ -269,19 +265,19 @@ const ViewOrganization = () => {
                           />
                         )}
                         <img src="/images/company.png" alt="academia" />
-                        Company
+                        {t.company}
                       </div>
                     </div>
                     {openSections.company && (
                       <div className="text-textSecondary">
                         <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Programming
+                          {t.programming}
                         </div>
                         <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Technology
+                          {t.technology}
                         </div>
                         <div className="mt-2 cursor-pointer rounded-lg py-1 pl-8 transition duration-300 hover:bg-bgPrimary hover:text-textPrimary">
-                          Industry
+                          {t.industry}
                         </div>
                       </div>
                     )}
@@ -290,38 +286,35 @@ const ViewOrganization = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-4/7 w-full md:ml-5">
+          <div
+            className={`md:w-4/7 ml-0 w-full ${language === "ar" ? "md:mr-5" : "md:ml-5"}`}
+          >
             <div className="flex items-center">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
-                  <Text
-                    font={"bold"}
-                    // color={"primary"}
-                    size={"xl"}
-                    className="hover:underline"
-                  >
-                    University
+                  <Text font={"bold"} size={"xl"} className="hover:underline">
+                    {t.university}
                   </Text>
-                  <Text>Find Programs</Text>
-                  <Text>Top Universities</Text>
-                  <Text>Student Reviews</Text>
+                  <Text>{t.findPrograms}</Text>
+                  <Text>{t.topUniversities}</Text>
+                  <Text>{t.studentReviews}</Text>
                 </div>
               </div>
             </div>
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] xl:pt-4 xl:mb-8 xl:px-4 md:pb-[20px]"
+              className="px-0 pb-[120px] md:pb-[20px] xl:mb-8 xl:px-4 xl:pt-4"
             >
-              <div className="flex flex-col-reverse justify-between xl:rounded-xl bg-bgThird xl:flex-row">
-                <div className="w-full xl:rounded-lg p-4 xl:p-14 xl:w-1/2">
+              <div className="flex flex-col-reverse justify-between bg-bgThird xl:flex-row xl:rounded-xl">
+                <div className="w-full p-4 xl:w-1/2 xl:rounded-lg xl:p-14">
                   {/* Title */}
                   <Text
                     font={"bold"}
                     color={"primary"}
                     className="text-2xl xl:text-4xl"
                   >
-                    Stanford University
+                    {t.stanfordUniversity}
                   </Text>
                   {/* Description */}
                   <p className="mt-2 text-textSecondary">
@@ -331,37 +324,44 @@ const ViewOrganization = () => {
 
                   {/* Buttons */}
                   <div className="flex justify-center xl:block">
-                    <div className="mt-6 flex w-4/5 xl:w-3/5 flex-wrap items-center justify-center gap-4">
+                    <div className="mt-6 flex w-4/5 flex-wrap items-center justify-center gap-4 xl:w-3/5">
                       {/* Request Meeting Button */}
                       <div className="w-full">
-                        <Button className="flex items-center gap-2 rounded-sm">
-                          <a href="/organization/request-meeting">
-                            Request Meeting
-                          </a>
-                          <IoVideocam size={22} />
-                        </Button>
+                        <a href="/organization/request-meeting">
+                          <Button className="flex items-center gap-2 rounded-sm">
+                            {t.requestMeeting}
+                            <IoVideocam size={22} />
+                          </Button>
+                        </a>
                       </div>
 
                       {/* Secondary Buttons */}
-                      <div className=" flex w-full items-center gap-4">
+                      <div className="flex w-full items-center gap-4">
                         {/* Apply Button */}
                         <div className="w-full xl:w-fit">
-                          <Button onClick={openModal} className="flex items-center gap-2 rounded-sm">
-                            Apply
-                            <IoArrowForwardOutline size={22} />
+                          <Button
+                            onClick={openModal}
+                            className="flex items-center gap-2 rounded-sm"
+                          >
+                            {t.apply}
+                            {language == "ar" ? (
+                              <FaArrowLeft size={22} className="mx-1" />
+                            ) : (
+                              <FaArrowRight size={22} className="mx-1" />
+                            )}
                           </Button>
                         </div>
 
                         {/* Watch Video Button */}
-                        <button className="flex w-full items-center gap-2 rounded border border-borderSecondary px-6 py-2 font-semibold text-textPrimary transition duration-300 hover:bg-bgSecondary">
-                          Watch Video
+                        <button className="flex w-full items-center justify-center gap-2 rounded border border-borderSecondary px-2 py-2 font-semibold text-textPrimary transition duration-300 hover:bg-bgSecondary">
+                          {t.watchVideo}
                           <AiOutlinePlaySquare size={20} className="ml-2" />
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="relative mx-auto w-full overflow-hidden p-0 xl:rounded-xl xl:w-1/2">
+                <div className="relative mx-auto w-full overflow-hidden p-0 xl:w-1/2 xl:rounded-xl">
                   <div
                     className="flex rounded-xl transition-transform duration-500"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -374,7 +374,7 @@ const ViewOrganization = () => {
                         <img
                           src={slide.image}
                           alt={slide.title}
-                          className="h-72 lg:h-80 xl:h-96 w-full object-cover"
+                          className="h-72 w-full object-cover lg:h-80 xl:h-96"
                         />
                         {currentSlide === index && (
                           <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-white"></div>
@@ -406,7 +406,7 @@ const ViewOrganization = () => {
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                  Discover Universities
+                  {t.discoverUniversities}
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
@@ -434,7 +434,7 @@ const ViewOrganization = () => {
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                  Most popular Program
+                  {t.mostPopularScholarship}
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
@@ -457,8 +457,12 @@ const ViewOrganization = () => {
                         href={course.link}
                         className="mt-2 inline-flex items-center text-primary hover:underline"
                       >
-                        SEE COURSE GUIDE
-                        <IoArrowForwardOutline size={18} className="ml-2" />
+                        {t.seeCourseGuide}
+                        {language == "ar" ? (
+                          <FaArrowLeft size={22} className="mx-1" />
+                        ) : (
+                          <FaArrowRight size={22} className="mx-1" />
+                        )}
                       </a>
                     </div>
                   </div>
@@ -466,17 +470,21 @@ const ViewOrganization = () => {
               </div>
               <div className="flex justify-center">
                 <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
-                  <span className="font-bold">SEE ALL</span>
-                  <FaArrowRight />
+                  <span className="font-bold">{t.seeAll}</span>
+                  {language == "ar" ? (
+                    <FaArrowLeft size={22} className="mx-1" />
+                  ) : (
+                    <FaArrowRight size={22} className="mx-1" />
+                  )}
                 </button>
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                  Meet the university Administration{" "}
+                  {t.meetUniversityAdministration}
                 </Text>
                 <div className="mt-1 h-2 w-64 rounded-full bg-primary"></div>
               </div>
-              <div className="mt-8 grid grid-cols-2 p-4 gap-4 md:gap-0 lg:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-8 grid grid-cols-2 gap-4 p-4 md:gap-0 lg:grid-cols-2 xl:grid-cols-4">
                 {team.map((member, index) => (
                   <div
                     key={index}
@@ -500,13 +508,17 @@ const ViewOrganization = () => {
               </div>
               <div className="flex justify-center">
                 <button className="flex items-center gap-2 rounded border border-borderSecondary px-4 py-2 text-textPrimary hover:bg-bgSecondary">
-                  <span className="font-bold">SEE ALL</span>
-                  <FaArrowRight />
+                  <span className="font-bold">{t.seeAll}</span>
+                  {language == "ar" ? (
+                    <FaArrowLeft size={22} className="mx-1" />
+                  ) : (
+                    <FaArrowRight size={22} className="mx-1" />
+                  )}
                 </button>
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                  Courses Record{" "}
+                  {t.coursesRecord}
                 </Text>
                 <div className="mt-1 h-2 w-36 rounded-full bg-primary"></div>
               </div>
@@ -521,8 +533,8 @@ const ViewOrganization = () => {
                         className="rounded-lg object-cover shadow-md"
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex h-10 lg:h-14 w-10 lg:w-14 items-center justify-center rounded-full bg-bgPrimary shadow-lg">
-                          <FaPlay className="text-lg lg:text-xl text-primary" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-bgPrimary shadow-lg lg:h-14 lg:w-14">
+                          <FaPlay className="text-lg text-primary lg:text-xl" />
                         </div>
                       </div>
                     </div>
@@ -533,7 +545,11 @@ const ViewOrganization = () => {
                         {course.title}
                       </Text>
                       <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-md hover:bg-primaryHover">
-                        <FaArrowRight />
+                        {language == "ar" ? (
+                          <FaArrowLeft size={22} className="mx-1" />
+                        ) : (
+                          <FaArrowRight size={22} className="mx-1" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -541,12 +557,12 @@ const ViewOrganization = () => {
               </div>
               <div className="mt-4 flex flex-col items-center">
                 <Text font={"semiBold"} size={"2xl"}>
-                  Most Popular Scholarship
+                  {t.mostPopularScholarship}
                 </Text>
                 <div className="mt-1 h-2 w-48 rounded-full bg-primary"></div>
               </div>
               <div className="mt-8 flex flex-col gap-6 p-4 lg:flex-row">
-                <div className="flex w-full lg:w-1/2 flex-col items-center">
+                <div className="flex w-full flex-col items-center lg:w-1/2">
                   <img
                     src="/images/meeting.jpg"
                     alt="Photo"
@@ -554,7 +570,7 @@ const ViewOrganization = () => {
                   />
                   <div className="h-30 relative -top-10 w-4/5 rounded-xl bg-bgPrimary p-4 shadow-md">
                     <h3 className="text-xl font-bold text-gray-800">
-                      Scholarship
+                      {t.scholarship}
                     </h3>
                     <p className="mt-2 text-sm text-gray-600">
                       Ornare arcu dui vivamus arcu felis bibendum ut tristique
@@ -565,11 +581,16 @@ const ViewOrganization = () => {
                       href="#"
                       className="mt-4 inline-flex items-center font-bold text-primary hover:underline"
                     >
-                      Learn more <span className="ml-2 text-xl">&rarr;</span>
+                      {t.learnMore}{" "}
+                      {language == "ar" ? (
+                        <FaArrowLeft size={22} className="mx-1" />
+                      ) : (
+                        <FaArrowRight size={22} className="mx-1" />
+                      )}
                     </a>
                   </div>
                 </div>
-                <div className="flex w-full lg:w-1/2 flex-col items-center">
+                <div className="flex w-full flex-col items-center lg:w-1/2">
                   <img
                     src="/images/meeting.jpg"
                     alt="Photo"
@@ -577,7 +598,7 @@ const ViewOrganization = () => {
                   />
                   <div className="h-30 relative -top-10 w-4/5 rounded-xl bg-bgPrimary p-4 shadow-md">
                     <h3 className="text-xl font-bold text-gray-800">
-                      Scholarship
+                      {t.scholarship}
                     </h3>
                     <p className="mt-2 text-sm text-gray-600">
                       Ornare arcu dui vivamus arcu felis bibendum ut tristique
@@ -588,7 +609,12 @@ const ViewOrganization = () => {
                       href="#"
                       className="mt-4 inline-flex items-center font-bold text-primary hover:underline"
                     >
-                      Learn more <span className="ml-2 text-xl">&rarr;</span>
+                      {t.learnMore}{" "}
+                      {language == "ar" ? (
+                        <FaArrowLeft size={22} className="mx-1" />
+                      ) : (
+                        <FaArrowRight size={22} className="mx-1" />
+                      )}
                     </a>
                   </div>
                 </div>
@@ -600,39 +626,36 @@ const ViewOrganization = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/50">
           {/* Modal Overlay */}
-          <div
-            className="absolute inset-0"
-            onClick={closeModal}
-          ></div>
+          <div className="absolute inset-0" onClick={closeModal}></div>
 
           {/* Modal Content */}
           <div className="relative w-11/12 max-w-sm rounded-lg bg-white p-6 shadow-lg">
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+              className="absolute right-4 top-4 text-gray-600 hover:text-gray-800"
             >
               <IoMdClose size={24} />
             </button>
 
             {/* Modal Header */}
             <Text font="bold" size="xl" className="mb-6">
-              Let’s get started!
+              {t.letGetStarted}
             </Text>
 
             {/* Modal Options */}
             <div className="space-y-4">
               <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
-                First year student
+                {t.firstYearStudent}
               </Button>
               <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
-                Transfer student
+                {t.transferStudent}
               </Button>
               <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
-                Education Professional
+                {t.educationProfessional}
               </Button>
               <Button className="w-full rounded-md md:bg-primary2 md:hover:bg-primary2Hover">
-                Parent or other adult
+                {t.parentOrOtherAdult}
               </Button>
             </div>
           </div>

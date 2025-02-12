@@ -47,7 +47,7 @@ const Input: React.FC<InputProps> = ({
         ? "rounded-2xl"
         : border === "gray"
           ? "border border-borderPrimary"
-          : "border border-borderSecondary";
+          : "border border-borderInput";
 
   const roundedClass = `rounded-${rounded}`;
 

@@ -172,7 +172,9 @@ const SelectDate = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-4/7 w-full md:ml-5">
+          <div
+            className={`md:w-4/7 ml-0 w-full ${language === "ar" ? "md:mr-5" : "md:ml-5"}`}
+          >
             <div className="hidden items-center md:flex">
               <div className="mb-4 flex w-full justify-start">
                 <div className="ml-6 flex w-[220px] items-center gap-4 md:w-fit">
@@ -188,13 +190,13 @@ const SelectDate = () => {
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] lg:pt-4 md:mb-8 px-4 md:pb-[20px]"
+              className="px-0 px-4 pb-[120px] md:mb-8 md:pb-[20px] lg:pt-4"
             >
               <div
-                className={`mx-auto flex min-h-[700px] w-full 2xl:w-4/5 flex-col rounded-lg border-borderPrimary/25 xl:flex-row lg:border lg:shadow-md`}
+                className={`mx-auto flex min-h-[700px] w-full flex-col rounded-lg border-borderPrimary/25 lg:border lg:shadow-md xl:flex-row 2xl:w-4/5`}
               >
                 {/* Sidebar */}
-                <div className="w-full bg-bgPrimary xl:pt-4 xl:w-1/3 xl:border-r">
+                <div className="w-full bg-bgPrimary xl:w-1/3 xl:border-r xl:pt-4">
                   {/* Back Button */}
                   <div className="hidden justify-between p-6 xl:flex">
                     <div
@@ -211,18 +213,21 @@ const SelectDate = () => {
                   </div>
 
                   {/* University Services */}
-                  <div className="p-0 md:pt-10 xl:border-t lg:p-4">
+                  <div className="p-0 md:pt-10 lg:p-4 xl:border-t">
                     {/* <h3 className="text-lg font-bold text-gray-800"> */}
                     {/* </h3> */}
                     <Text font={"bold"} size={"xl"}>
                       University Services
                     </Text>
                     <div className="mt-2 flex items-center">
-                      <HiOutlineAcademicCap className="block md:hidden mt-1 mr-1" size={20} />
+                      <HiOutlineAcademicCap
+                        className="mr-1 mt-1 block md:hidden"
+                        size={20}
+                      />
                       <Text
                         font={"bold"}
                         size={"lg"}
-                        className="mt-2 ml-0 lg:ml-4 text-textPrimary md:text-textSecondary"
+                        className="ml-0 mt-2 text-textPrimary md:text-textSecondary lg:ml-4"
                       >
                         Academic Support
                       </Text>
@@ -239,7 +244,6 @@ const SelectDate = () => {
                         </Text>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
 
