@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-'use client';
+"use client";
 
 import Box from "~/_components/Box";
 import Container from "~/_components/Container";
@@ -13,6 +13,7 @@ import { useLanguageStore } from "~/APIs/store";
 import translations from "./translations";
 import Product from "./1-product/Product";
 import Service from "./2-service/Service";
+import { LuSearch } from "react-icons/lu";
 
 const Market = () => {
   const language = useLanguageStore((state) => state.language);
@@ -49,21 +50,7 @@ const Market = () => {
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
-                      <svg
-                        className="size-4 flex-shrink-0 text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                      </svg>
+                      <LuSearch size={20} className="text-textSecondary" />
                     </div>
                     <input
                       onChange={(e) => setSearch(e.target.value)}

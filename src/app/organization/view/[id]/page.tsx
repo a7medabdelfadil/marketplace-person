@@ -19,7 +19,7 @@ import { AiOutlinePlaySquare } from "react-icons/ai";
 import { AiOutlinePieChart } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { PiUsersThreeBold } from "react-icons/pi";
-import { LuBookOpen } from "react-icons/lu";
+import { LuBookOpen, LuSearch } from "react-icons/lu";
 import translations from "./translations";
 
 const ViewOrganization = () => {
@@ -180,21 +180,7 @@ const ViewOrganization = () => {
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
-                      <svg
-                        className="size-4 flex-shrink-0 text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                      </svg>
+                      <LuSearch size={20} className="text-textSecondary" />
                     </div>
                     <input
                       onChange={(e) => setSearch(e.target.value)}

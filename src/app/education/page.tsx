@@ -1,13 +1,21 @@
+// The Structure -> 
+// Education -> the main page that have the nav bar and change between the sections
+// and inside the education this a route /grades/id to show the grades of the course
+// why i make sections? because don't repeat the code of navbar
+// 
+
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Box from "~/_components/Box";
 import Container from "~/_components/Container";
 import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import translations from "../market/translations";
-import Home from "./1-home/Home";
+import Home from "./sections/1-home/Home";
+import Grades from "./sections/2-grade/Grades";
+import Courses from "./sections/3-courses/Courses";
+import { LuSearch } from "react-icons/lu";
 
 const Education = () => {
   const language = useLanguageStore((state) => state.language);
@@ -40,21 +48,7 @@ const Education = () => {
                   </label>
                   <div className="relative min-w-[150px]">
                     <div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
-                      <svg
-                        className="size-4 flex-shrink-0 text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                      </svg>
+                    <LuSearch size={20} className="text-textSecondary" />
                     </div>
                     <input
                       onChange={(e) => setSearch(e.target.value)}
@@ -101,6 +95,8 @@ const Education = () => {
             </div>
           </div>
           {selected === 1 && <Home />}
+          {selected === 2 && <Grades />}
+          {selected === 3 && <Courses />}
         </div>
       </Container>
     </>

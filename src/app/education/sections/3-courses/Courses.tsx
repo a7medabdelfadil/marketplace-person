@@ -6,10 +6,10 @@ import { Text } from "~/_components/Text";
 function Courses() {
   return (
     <>
-      <Container>
+        <Box className="h-[80vh]">
         <Text font={'bold'} size={'2xl'}>Courses</Text>
-        <Box className="h-[80vh]"></Box>
-      </Container>
+
+        </Box>
     </>
   );
 }
