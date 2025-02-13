@@ -35,6 +35,7 @@ html {
   --bg-secondary: 240, 240, 240; /* #F0F0F0 */
   --bg-third: 245, 250, 255; /* #F5FAFF */
   --bg-fourth: #DFEBFF; /* #DFEBFF */
+  --bg-fifth: 239, 249, 255; /* #EFF9FF */
   --bg-input: 243, 244, 246;  /* #F3F4F6 */
   --comment: 241, 245, 249; /* #F1F5F9 */ 
   --bg-gray: 224, 224, 224; /* #e0e0e0 */
@@ -70,6 +71,7 @@ html {
   --bg-secondary: 23, 28, 35; /* #171c23 */
   --bg-third: 7, 31, 58; /* #071f3a */
   --bg-fourth: #0d43af6c; /* #0d43af1e */
+  --bg-fifth: 7, 31, 58; /* #071f3a */
   --bg-gray: 224, 224, 224; /* #e0e0e0 */
   --bg-input: 23, 28, 35; /* #171c23 */
   --text-primary: 253, 253, 255; /* #fdfdff */

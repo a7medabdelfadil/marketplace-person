@@ -31,6 +31,7 @@ export default {
         bgSecondary: "rgba(var(--bg-secondary))",
         bgThird: "rgba(var(--bg-third))",
         bgFourth: "var(--bg-fourth)",
+        bgFifth: "rgba(var(--bg-fifth))",
         bgInput: "rgba(var(--bg-input))",
         bgPowderBlue: "rgba(var(--bg-powder-blue))",
         bgGray: "rgba(var(--bg-gray))",
