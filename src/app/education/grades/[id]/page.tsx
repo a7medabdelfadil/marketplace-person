@@ -15,17 +15,13 @@ import { LuSearch } from "react-icons/lu";
 import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { VscSettings } from "react-icons/vsc";
+import { useRouter } from "next/navigation";
 
 const Education = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
-
-  const [selected, setSelected] = useState(1);
+  const router = useRouter();
   const [search, setSearch] = useState("");
-
-  const handleButtonClick = (button: any) => {
-    setSelected(button);
-  };
   const cardsData = [
     {
       title: "Articulate structure of C++ and Java in Semester I",
@@ -128,13 +124,13 @@ const Education = () => {
   const getStatusClass = (status: any) => {
     switch (status) {
       case "Passed":
-        return "text-green-500";
+        return "text-success bg-success/10";
       case "Failed":
-        return "text-red-500";
+        return "text-softRed bg-softRed/10";
       case "Missed":
-        return "text-yellow-500";
+        return "text-warning bg-warning/10";
       default:
-        return "text-gray-500";
+        return "text-textSecondary bg-bgSecondary";
     }
   };
 
@@ -146,7 +142,7 @@ const Education = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  {t.marketPlace}
+                  Education
                 </Text>
               </div>
             </div>
@@ -172,28 +168,23 @@ const Education = () => {
                 </div>
               </div>
               <div
-                className={`${
-                  selected === 1 ? "bg-bgPrimary" : "bg-transparent"
-                } flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
-                onClick={() => handleButtonClick(1)}
-              >
+                className={`flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
+                onClick={() => router.push("/education")}
+                >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
                 <Text font={"bold"}>Home</Text>
               </div>
               <div
-                className={`${
-                  selected === 2 ? "bg-bgPrimary" : "bg-transparent"
-                } mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
-                onClick={() => handleButtonClick(2)}
-              >
+                className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
+                onClick={() => router.push("/education/grades")}
+
+                >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
                 <Text font={"bold"}>Grade</Text>
               </div>
               <div
-                className={`${
-                  selected === 3 ? "bg-bgPrimary" : "bg-transparent"
-                } mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
-                onClick={() => handleButtonClick(3)}
+                className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
+                onClick={() => router.push("/education/courses")}
               >
                 <img
                   src="/images/Courses.png"
@@ -239,10 +230,10 @@ const Education = () => {
         {cardsData.map((card, index) => (
           <div
             key={index}
-            className="rounded-xl border bg-white p-4 shadow-md hover:shadow-lg transition-shadow"
+            className="relative pt-8 rounded-xl border bg-white p-4 shadow-md hover:shadow-lg transition-shadow"
           >
             {/* Status */}
-            <div className={`mb-2 text-sm font-semibold ${getStatusClass(card.status)}`}>
+            <div className={`absolute top-0 right-0 p-2 rounded-bl-3xl mb-2 text-sm font-semibold ${getStatusClass(card.status)}`}>
               {card.status}
             </div>
 
@@ -274,10 +265,10 @@ const Education = () => {
 
             {/* Percentages */}
             <p className="mb-1 text-sm text-gray-600">
-              Passing Percentage: <span className="text-blue-500">{card.passingPercentage}</span>
+              Passing Percentage: <span className="text-primary2">{card.passingPercentage}</span>
             </p>
             <p className="text-sm text-gray-600">
-              Scored Percentage: <span className="text-green-500">{card.scoredPercentage}</span>
+              Scored Percentage: <span className="text-success">{card.scoredPercentage}</span>
             </p>
           </div>
         ))}
