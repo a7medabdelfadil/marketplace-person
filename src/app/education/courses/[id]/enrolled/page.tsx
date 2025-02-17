@@ -1,9 +1,3 @@
-// The Structure ->
-// Education -> the main page that have the nav bar and change between the sections
-// and inside the education this a route /grades/id to show the grades of the course
-// why i make sections? because don't repeat the code of navbar
-//
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -12,10 +6,10 @@ import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import { LuSearch } from "react-icons/lu";
-import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { VscSettings } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
+import translations from "./translations";
 
 const Enrolled = () => {
   const language = useLanguageStore((state) => state.language);
@@ -37,12 +31,12 @@ const Enrolled = () => {
   return (
     <>
       <Container mr={false}>
-        <div className="flex gap-5">
-          <div className="w-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
+        <div className="flex gap-5 justify-center ">
+          <div className="mw-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -72,46 +66,95 @@ const Enrolled = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl bg-bgPrimary py-2 pl-2`}
                 onClick={() => router.push("/education/courses")}
-              
               >
-
                 <img
                   src="/images/Courses.png"
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
 
-          <div>
-            <div className="mx-4 mb-4 flex items-center gap-4">
+          <div className="w-full mt-4">
+            <div className="mx-4 mb-4 hidden items-center gap-4 md:flex">
               <Text font={"bold"} size={"xl"}>
-                Courses
+                {t.courses}
               </Text>
-              <p onClick={() => router.push("/education/courses")} className="cursor-pointer">All</p>
-              <p onClick={() => router.push("/education/courses/1/enrolled")} className="cursor-pointer text-primary underline">Enrolled</p>
-              <p onClick={() => router.push("/education/courses/1/completed")} className="cursor-pointer">Completed</p>
+              <p
+                onClick={() => router.push("/education/courses")}
+                className="cursor-pointer"
+              >
+                {t.all}
+              </p>
+              <p
+                onClick={() => router.push("/education/courses/1/enrolled")}
+                className="cursor-pointer text-primary underline"
+              >
+                {t.enrolled}
+              </p>
+              <p
+                onClick={() => router.push("/education/courses/1/completed")}
+                className="cursor-pointer"
+              >
+                {t.completed}
+              </p>
             </div>
-            <Box padding="0" rounded="none">
+            <Box padding="0" rounded="none" className="pb-28 md:pb-4">
+              <div className="mx-6 flex justify-between space-x-4 md:hidden">
+                {/* Home Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgPrimary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education")}
+                >
+                  <img src="/images/home.png" alt="Home" className="h-6 w-6" />
+                  <Text font="bold">{t.home}</Text>
+                </div>
+
+                {/* Grade Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgPrimary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education/grades")}
+                >
+                  <img
+                    src="/images/Grade.png"
+                    alt="Grade"
+                    className="h-6 w-6"
+                  />
+                  <Text font="bold">{t.grade}</Text>
+                </div>
+
+                {/* Courses Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgSecondary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education/courses")}
+                >
+                  <img
+                    src="/images/Courses.png"
+                    alt="Courses"
+                    className="h-6 w-6"
+                  />
+                  <Text font="bold">{t.courses}</Text>
+                </div>
+              </div>
               <div className="mx-6 flex justify-between pt-4">
-                <Text font={"bold"} size={"2xl"}>
-                  Courses
+                <Text font={"bold"} className="hidden md:block" size={"2xl"}>
+                  {t.courses}
                 </Text>
-                <div className="relative flex w-1/3">
+                <div className="relative flex w-full md:w-1/3">
                   <div className="relative w-full">
                     <input
                       onChange={(e) => setSearch(e.target.value)}
@@ -133,10 +176,10 @@ const Enrolled = () => {
                 </div>
               </div>
               <Text font={"bold"} size={"2xl"} className="mx-6 mt-4">
-                  In Progress
-                </Text>
-              <div className="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-4">
-                {courses.map((course, index) => (
+                {t.inProgress}
+              </Text>
+              <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 xl:grid-cols-4 lg:pb-0">
+              {courses.map((course, index) => (
                   <div
                     key={index}
                     onClick={() => router.push("/education/courses/1/enroll")}
@@ -162,7 +205,7 @@ const Enrolled = () => {
                     </div>
 
                     {/* Course Title */}
-                    <Text font={"bold"} size={"lg"}  className="mb-2">
+                    <Text font={"bold"} size={"lg"} className="mb-2">
                       {course.title}
                     </Text>
 

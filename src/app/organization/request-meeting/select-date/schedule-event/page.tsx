@@ -12,7 +12,6 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import Button from "~/_components/Button";
 import { FaRegClock } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
-import { motion } from "framer-motion";
 import Input from "~/_components/Input";
 import { FaCheck } from "react-icons/fa6";
 import { HiOutlineAcademicCap } from "react-icons/hi";
@@ -400,12 +399,8 @@ const ScheduleEvent = () => {
                       </form>
                     </>
                   ) : (
-                    <motion.div
+                    <div
                       className="flex h-full items-center justify-center"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.1, ease: "easeInOut" }}
                     >
                       {/* Success Content */}
                       <div className="flex w-4/5 flex-col items-center justify-center space-y-6 text-center">
@@ -431,7 +426,7 @@ const ScheduleEvent = () => {
                           {t.back}
                         </Button>
                       </div>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               </div>

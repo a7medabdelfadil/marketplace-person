@@ -15,7 +15,6 @@ import Container from "~/_components/Container";
 import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
-import translations from "../market/translations";
 import { LuSearch } from "react-icons/lu";
 import {
   CalendarIcon,
@@ -27,6 +26,7 @@ import CourseCard from "~/_components/CourseCard";
 import Box from "~/_components/Box";
 import { Calendar } from "~/components/ui/Calendar";
 import { useRouter } from "next/navigation";
+import translations from "./translations";
 
 const Education = () => {
   const language = useLanguageStore((state) => state.language);
@@ -73,28 +73,28 @@ const Education = () => {
 
   const cardData = [
     {
-      title: "Today's productivity",
+      title: t.todaysProductivity,
       value: "10/8",
       percentage: "+55%",
       gradient: "bg-primary lg:bg-gradient-to-b from-[#2388FF33] to-[#919191]",
       icon: <RocketIcon className="text-white" />,
     },
     {
-      title: "Monthly productivity",
+      title: t.monthlyProductivity,
       value: "620/598",
       percentage: "+95%",
       gradient: "bg-primary lg:bg-gradient-to-b from-[#9854CB] to-[#1D192B1F]",
       icon: <CalendarIcon className="text-white" />,
     },
     {
-      title: "Meetings attended",
+      title: t.meetingsAttended,
       value: "85/85",
       percentage: "+100%",
       gradient: "bg-primary lg:bg-gradient-to-b from-[#27104E] to-[#19213D14]",
       icon: <UsersIcon className="text-white" />,
     },
     {
-      title: "Task done weekly",
+      title: t.taskDoneWeekly,
       value: "29/30",
       percentage: "+101%",
       gradient: "bg-primary lg:bg-gradient-to-b from-[#24D366] to-[#0D0D0D59]",
@@ -159,7 +159,7 @@ const Education = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -189,14 +189,14 @@ const Education = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
@@ -207,7 +207,7 @@ const Education = () => {
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ const Education = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="h-6 w-6" />
-                <Text font="bold">Home</Text>
+                <Text font="bold">{t.home}</Text>
               </div>
 
               {/* Grade Button */}
@@ -232,7 +232,7 @@ const Education = () => {
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="h-6 w-6" />
-                <Text font="bold">Grade</Text>
+                <Text font="bold">{t.grade}</Text>
               </div>
 
               {/* Courses Button */}
@@ -245,7 +245,7 @@ const Education = () => {
                   alt="Courses"
                   className="h-6 w-6"
                 />
-                <Text font="bold">Courses</Text>
+                <Text font="bold">{t.courses}</Text>
               </div>
             </div>
 
@@ -254,7 +254,7 @@ const Education = () => {
                 <div className="mt-14 flex w-full items-center justify-between rounded-2xl bg-bgFifth px-6 py-2 shadow lg:mx-4 lg:w-3/5">
                   <div>
                     <Text size="2xl" font="semiBold" color="default">
-                      Today Task
+                      {t.todayTask}
                     </Text>
                     <Text
                       size="md"
@@ -262,11 +262,11 @@ const Education = () => {
                       color="gray"
                       className="mt-2"
                     >
-                      Check your daily tasks and schedules
+                      {t.checkDailyTasks}
                     </Text>
                     <div className="w-fit">
                       <button className="mt-4 rounded-lg bg-primary px-4 py-2 font-medium text-white lg:rounded-xl lg:px-2 lg:py-1">
-                        Today&apos;s schedule
+                        {t.todaysSchedule}
                       </button>
                     </div>
                   </div>
@@ -309,7 +309,7 @@ const Education = () => {
                   <div className="p-6">
                     <div className="flex justify-between px-4">
                       <Text size="2xl" font="semiBold">
-                        My Courses
+                        {t.myCourses}
                       </Text>
                       <Text
                         size="sm"
@@ -317,7 +317,7 @@ const Education = () => {
                         color="primary"
                         className="cursor-pointer underline"
                       >
-                        See All
+                        {t.seeAll}
                       </Text>
                     </div>
                     <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -330,11 +330,11 @@ const Education = () => {
                     {/* Header */}
                     <div className="mb-4 flex flex-wrap items-center justify-between">
                       <h2 className="text-lg font-semibold text-textPrimary">
-                        Your statistics
+                        {t.yourStatistics}
                       </h2>
                       <div className="relative">
                         <button className="flex items-center gap-2 rounded-lg bg-bgSecondary px-3 py-2 text-sm font-medium text-textPrimary shadow-md md:px-4">
-                          Weekly
+                          {t.weekly}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4 text-textSecondary"
@@ -363,7 +363,7 @@ const Education = () => {
                         }`}
                         onClick={() => setActiveTab("Attendance Hours")}
                       >
-                        Attendance Hours
+                        {t.attendanceHours}
                       </button>
                       <button
                         className={`pb-2 text-sm md:text-base ${
@@ -373,7 +373,7 @@ const Education = () => {
                         }`}
                         onClick={() => setActiveTab("My Courses")}
                       >
-                        My Courses
+                        {t.myCourses}
                       </button>
                     </div>
 

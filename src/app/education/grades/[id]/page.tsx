@@ -1,9 +1,3 @@
-// The Structure ->
-// Education -> the main page that have the nav bar and change between the sections
-// and inside the education this a route /grades/id to show the grades of the course
-// why i make sections? because don't repeat the code of navbar
-//
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -197,11 +191,47 @@ const Education = () => {
           </div>
           <div>
         <Box padding="0">
+        <div className="mx-6 flex justify-between space-x-4 md:hidden">
+                {/* Home Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgPrimary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education")}
+                >
+                  <img src="/images/home.png" alt="Home" className="h-6 w-6" />
+                  <Text font="bold">Home</Text>
+                </div>
+
+                {/* Grade Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgSecondary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education/grades")}
+                >
+                  <img
+                    src="/images/Grade.png"
+                    alt="Grade"
+                    className="h-6 w-6"
+                  />
+                  <Text font="bold">Grade</Text>
+                </div>
+
+                {/* Courses Button */}
+                <div
+                  className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgPrimary px-4 py-2 transition hover:bg-bgSecondary"
+                  onClick={() => router.push("/education/courses")}
+                >
+                  <img
+                    src="/images/Courses.png"
+                    alt="Courses"
+                    className="h-6 w-6"
+                  />
+                  <Text font="bold">Courses</Text>
+                </div>
+              </div>
           <div className="mx-6 flex justify-between pt-8">
-            <Text font={"bold"} size={"2xl"}>
+            <Text font={"bold"} className="hidden md:block" size={"2xl"}>
               My Grades
             </Text>
-            <div className="relative flex w-1/3">
+            <div className="relative flex w-full md:w-1/3">
               <div className="relative w-full">
                 <input
                   onChange={(e) => setSearch(e.target.value)}
@@ -226,7 +256,7 @@ const Education = () => {
       <h1 className="mb-8 text-2xl font-bold text-textPrimary">
         Learning JavaScript With Imagination
       </h1>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-4 pb-40">
         {cardsData.map((card, index) => (
           <div
             key={index}

@@ -1,9 +1,3 @@
-// The Structure ->
-// Education -> the main page that have the nav bar and change between the sections
-// and inside the education this a route /grades/id to show the grades of the course
-// why i make sections? because don't repeat the code of navbar
-//
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -12,12 +6,13 @@ import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import { LuSearch } from "react-icons/lu";
-import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { useRouter } from "next/navigation";
 import Button from "~/_components/Button";
 import { FaCheck } from "react-icons/fa6";
 import { SlArrowDown, SlArrowRight } from "react-icons/sl";
+import { IoArrowBack } from "react-icons/io5";
+import translations from "./translations";
 
 const Enroll = () => {
   const language = useLanguageStore((state) => state.language);
@@ -134,7 +129,7 @@ const Enroll = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -164,14 +159,14 @@ const Enroll = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl bg-bgPrimary py-2 pl-2`}
@@ -182,69 +177,81 @@ const Enroll = () => {
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
 
           <div className="flex-1">
-            <div className="mx-4 mb-4 flex items-center gap-4">
+            <div className="mx-4 mb-4 hidden items-center gap-4 lg:flex">
               <Text font={"bold"} size={"xl"}>
-                Courses
+                {t.courses}
               </Text>
               <p
                 onClick={() => router.push("/education/courses")}
                 className="cursor-pointer"
               >
-                All
+                {t.all}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/enrolled")}
                 className="cursor-pointer text-textPrimary"
               >
-                Enrolled
+                {t.enrolled}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/completed")}
                 className="cursor-pointer text-textPrimary"
               >
-                Completed
+                {t.completed}
               </p>
             </div>
-            <Box padding="0" rounded="none">
-              <div className="flex w-full">
-                <div className="w-3/5">
+
+            <Box padding="0" rounded="none" className="pb-40 md:pb-6">
+              <div className="px-8 flex md:hidden w-full justify-between">
+                <IoArrowBack size={30} onClick={() => router.back()} />
+                <Text font={"bold"} size={"xl"}>
+                  {t.courseDetails}
+                </Text>
+                <div></div>
+              </div>
+              <div className="flex flex-col lg:flex-row w-full">
+                <div className="w-full lg:w-3/5">
                   <div className="flex flex-col justify-center rounded-lg bg-bgPrimary p-6">
                     {/* University Logo */}
                     <img
                       src="/images/enroll.png"
                       alt="UVA Darden Logo"
-                      className="mb-4 h-12 w-[200px]"
+                      className="mb-4 h-10 lg:h-12 w-[150px] lg:w-[200px]"
                     />
 
                     {/* Course Title */}
                     <Text font={"bold"} size={"3xl"} className="mb-2">
-                      Generative AI in Marketing Specialization
+                    Lorem ipsum, dolor sit amet consectetur 
                     </Text>
 
                     {/* Course Description */}
                     <Text color={"gray"} className="mb-6">
-                      Enhance marketing creativity using Generative AI. Discover
-                      how Generative AI can impact and transform your marketing
-                      organization.
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolor omnis, animi mollitia pariatur provident voluptatum ipsam numquam sequi culpa est tenetur debitis id temporibus a dignissimos voluptas voluptate laborum!
                     </Text>
 
                     {/* Enroll Button */}
                     <div className="w-fit">
-                      <Button onClick={() => router.push("/education/courses/1/enroll/details")}>Enroll Now</Button>
+                      <Button
+                        onClick={() =>
+                          router.push("/education/courses/1/enroll/details")
+                        }
+                      >
+                        {t.enrollNow}
+                      </Button>
                     </div>
                   </div>
                 </div>
-                <div className="w-2/5">
+                <div className="w-full lg:w-2/5 mr-8">
                   <div className="relative my-8 w-4/5">
-                    <div className="absolute -left-2 bottom-4 z-0 h-48 w-96 -rotate-[20deg] rounded-[50%] border-8 border-primary"></div>
-                    <div className="bg-bgSixth absolute -top-2 right-0 z-0 h-full w-full rounded-b-full rounded-tl-full"></div>
-                    <div className="relative z-10 mx-8 rounded-2xl bg-bgPrimary p-6 shadow-lg">
+                    <div className="hidden 2xl:block absolute -left-2 bottom-4 z-0 h-48 w-96 -rotate-[20deg] rounded-[50%] border-8 border-primary"></div>
+                    <div className="hidden 2xl:block absolute -top-2 right-0 z-0 h-full w-full rounded-b-full rounded-tl-full bg-bgSixth"></div>
+                    <div className="relative w-full lg:w-auto z-10 mx-8 lg:mx-0 2xl:mx-8 rounded-br-[25%] rounded-md 2xl:rounded-2xl border border-borderPrimary bg-bgPrimary p-6 lg:shadow-lg">
                       {/* Background Decoration */}
 
                       {/* Content */}
@@ -255,25 +262,25 @@ const Enroll = () => {
                             4.1
                           </span>
                           <span className="ml-1 text-xl text-primary2">★</span>
-                          <Text color={"gray"}>(28 reviews)</Text>
+                          <Text color={"gray"}>(28 {t.reviews})</Text>
                         </div>
 
                         {/* Level */}
                         <div className="border-t border-borderPrimary py-3">
-                          <Text font={"medium"}>Beginner level</Text>
+                          <Text font={"medium"}>{t.beginnerLevel}</Text>
                         </div>
 
                         {/* Duration */}
                         <div className="border-t border-borderPrimary py-3">
-                          <Text font={"medium"}>1 month</Text>
+                          <Text font={"medium"}>1 {t.month}</Text>
                           <Text color={"gray"} size={"sm"}>
-                            at 3 hours a week
+                            3 {t.hoursPerWeek}
                           </Text>
                         </div>
 
                         {/* Language */}
                         <div className="border-t border-borderPrimary py-3">
-                          <Text font={"medium"}>English</Text>
+                          <Text font={"medium"}>{t.english}</Text>
                         </div>
                       </div>
                     </div>
@@ -283,7 +290,7 @@ const Enroll = () => {
               <div className="mx-6 space-y-4">
                 {/* Title */}
                 <h2 className="text-xl font-bold text-black">
-                  What you&apos;ll learn
+                 {t.whatYouWillLearn}
                 </h2>
 
                 {/* List */}
@@ -302,8 +309,8 @@ const Enroll = () => {
                   ))}
                 </ul>
               </div>
-              <div className="mx-6 my-6 flex">
-                <div className="w-3/5">
+              <div className="mx-6 my-6 flex flex-col lg:flex-row">
+                <div className="w-full lg:w-3/5">
                   <div className="space-y-4 rounded-lg border bg-bgPrimary p-4">
                     {modules.map((module, index) => (
                       <div
@@ -348,25 +355,25 @@ const Enroll = () => {
                     ))}
                   </div>
                 </div>
-                <div className="w-2/5">
+                <div className="w-full lg:w-2/5">
                   <div
-                    className={`rounded-lg border bg-bgPrimary p-6 ${language === "ar" ? "mr-8" : "ml-8"} space-y-6`}
+                    className={`rounded-lg border bg-bgPrimary p-6 ${language === "ar" ? "md:mr-8" : "md:ml-8"} mt-8 lg:mt-0 space-y-6`}
                   >
                     {/* Instructor Section */}
                     <div>
                       <Text font={"bold"} size={"lg"} className="mb-4">
-                        Instructor
+                        {t.instructor}
                       </Text>
                       <div className="flex items-center space-x-4">
                         <img
                           src="/images/profile.png"
                           alt="Instructor"
-                          className="h-12 w-12 rounded-full object-cover"
+                          className="h-12 w-12 ml-2 rounded-full object-cover"
                         />
                         <div>
-                          <Text font={"semiBold"}>Ahmed Mohammed</Text>
+                          <Text font={"semiBold"}>{t.instructorName}</Text>
                           <Text color={"gray"} size={"sm"}>
-                            15 Courses • 407,858 learners
+                            {t.totalCourses} • {t.totalLearners}
                           </Text>
                         </div>
                       </div>
@@ -377,7 +384,7 @@ const Enroll = () => {
                     {/* Offered By Section */}
                     <div>
                       <h3 className="mb-4 text-lg font-bold text-black">
-                        Offered by
+                        {t.offeredBy}
                       </h3>
                       <div className="flex items-center space-x-4">
                         <img
@@ -389,7 +396,7 @@ const Enroll = () => {
                           href="#"
                           className="font-medium transition duration-300 hover:underline"
                         >
-                          University of Virginia Darden School Foundation
+                          {t.instructorName}
                         </a>
                       </div>
                     </div>

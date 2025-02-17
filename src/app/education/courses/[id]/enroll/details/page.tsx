@@ -1,9 +1,3 @@
-// The Structure ->
-// Education -> the main page that have the nav bar and change between the sections
-// and inside the education this a route /grades/id to show the grades of the course
-// why i make sections? because don't repeat the code of navbar
-//
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -12,13 +6,11 @@ import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import { LuSearch } from "react-icons/lu";
-import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { useRouter } from "next/navigation";
-import Button from "~/_components/Button";
-import { FaCheck } from "react-icons/fa6";
 import { SlArrowDown, SlArrowRight } from "react-icons/sl";
 import { MdOutlineFileDownload } from "react-icons/md";
+import translations from "./translations";
 
 const EnrollDetails = () => {
   const language = useLanguageStore((state) => state.language);
@@ -162,7 +154,7 @@ const EnrollDetails = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -192,14 +184,14 @@ const EnrollDetails = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl bg-bgPrimary py-2 pl-2`}
@@ -210,43 +202,42 @@ const EnrollDetails = () => {
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
 
           <div className="flex-1">
-            <div className="mx-4 mb-4 flex items-center gap-4">
+            <div className="mx-4 hidden mb-4 md:flex items-center gap-4">
               <Text font={"bold"} size={"xl"}>
-                Courses
+                {t.courses}
               </Text>
               <p
                 onClick={() => router.push("/education/courses")}
                 className="cursor-pointer text-textPrimary"
               >
-                All
+                {t.all}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/enrolled")}
                 className="cursor-pointer text-textPrimary"
               >
-                Enrolled
+                {t.enrolled}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/completed")}
                 className="cursor-pointer text-textPrimary"
               >
-                Completed
+                {t.completed}
               </p>
             </div>
-            <Box padding="0" rounded="none">
+            <Box padding="0" rounded="none" className="pb-28">
               <Text font={"bold"} className="mx-6 py-8">
-                Generative AI tools in marketing (ChatGPT, DALL-E, MidJourney,
-                etc.).
+                {t.generativeAITools}
               </Text>
-              <div className="flex">
-                <div className="w-3/5">
-                  <div className="mx-auto max-w-4xl rounded-lg bg-bgPrimary p-6">
+              <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-3/5">
+                  <div className="mx-auto w-full lg:max-w-4xl rounded-lg bg-bgPrimary p-6">
                     {/* Video Section */}
                     <div className="mb-6">
                       <div className="relative aspect-video w-full">
@@ -270,7 +261,7 @@ const EnrollDetails = () => {
                           className="text-whiteOrBlack rounded-lg bg-blackOrWhite p-1"
                         />
 
-                        <span>Download SubRip (.srt) file</span>
+                        <span>{t.downloadSubrip}</span>
                       </a>
                       <a
                         href="/path/to/transcript.txt"
@@ -282,14 +273,14 @@ const EnrollDetails = () => {
                           className="text-whiteOrBlack rounded-lg bg-blackOrWhite p-1"
                         />
 
-                        <span>Download Text (.txt) file</span>
+                        <span>{t.downloadText}</span>
                       </a>
                     </div>
 
                     {/* Transcript Section */}
                     <div>
                       <Text font={"bold"} size={"2xl"} className="mb-4">
-                        Course Transcript
+                        {t.courseTranscript}
                       </Text>
                       <Text
                         size={"md"}
@@ -310,7 +301,7 @@ const EnrollDetails = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-2/5">
+                <div className="w-full lg:w-2/5">
                   <div className="mx-6 rounded-lg border border-borderPrimary bg-bgPrimary p-6">
                     {/* Header */}
                     <h2 className="mb-6 text-2xl font-bold text-black">
@@ -328,7 +319,7 @@ const EnrollDetails = () => {
                                 type="checkbox"
                                 checked={completedTopics[index]}
                                 onChange={() => toggleCheckbox(index)}
-                                className="text-whiteOrBlack h-5 w-5 cursor-pointer rounded-full accent-success"
+                                className="text-whiteOrBlack ml-2 h-5 w-5 cursor-pointer rounded-full accent-success"
                               />
                               <h3 className="font-semibold text-textPrimary">
                                 {topic.title}
@@ -364,7 +355,7 @@ const EnrollDetails = () => {
                                           className="flex items-center space-x-2"
                                         >
                                           <span
-                                            className={`h-4 w-4 flex-shrink-0 rounded-full ${
+                                            className={`h-4 w-4 flex-shrink-0 rounded-full ml-2 ${
                                               item.completed
                                                 ? "bg-success"
                                                 : "bg-bgSecondary"

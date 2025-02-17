@@ -1,23 +1,17 @@
-// The Structure ->
-// Education -> the main page that have the nav bar and change between the sections
-// and inside the education this a route /grades/id to show the grades of the course
-// why i make sections? because don't repeat the code of navbar
-//
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Container from "~/_components/Container";
 import { Text } from "~/_components/Text";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import { LuSearch } from "react-icons/lu";
-import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { VscSettings } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 import Button from "~/_components/Button";
+import translations from "./translations";
 
 const Education = () => {
   const language = useLanguageStore((state) => state.language);
@@ -30,6 +24,32 @@ const Education = () => {
   const handleFilterClick = () => {
     setIsFilter((e) => !e);
   };
+
+   const [screenWidth, setScreenWidth] = useState<number>(768); // Set a default value
+  
+    useEffect(() => {
+      /**
+       * Handle window resize event
+       *
+       * When the window is resized, set the screenWidth state to the new value.
+       * If the new width is greater than 768px, close the modal.
+       */
+      const handleResize = () => {
+        const newWidth = window.innerWidth;
+        setScreenWidth(newWidth);
+  
+        // Close the modal if the screen is bigger than md (768px)
+        if (newWidth >= 768) {
+          setIsFilter(false);
+        }
+      };
+  
+      window.addEventListener("resize", handleResize);
+  
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
 
   const courses = [
     {
@@ -85,12 +105,12 @@ const Education = () => {
   return (
     <>
       <Container mr={false}>
-        <div className="flex gap-5">
-          <div className="w-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
+        <div className="flex gap-5 justify-center">
+          <div className="hidden lg:w-3/7 z-10 -m-5 h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -120,14 +140,14 @@ const Education = () => {
                 onClick={() => router.push("/education")}
               >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
               >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl bg-bgPrimary py-2 pl-2`}
@@ -138,33 +158,33 @@ const Education = () => {
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
 
-          <div>
+          <div className="w-full">
             <div className="mx-4 mb-4 hidden items-center gap-4 lg:flex">
               <Text font={"bold"} size={"xl"}>
-                Courses
+                {t.courses}
               </Text>
               <p
                 onClick={() => router.push("/education/courses")}
                 className="cursor-pointer text-primary underline"
               >
-                All
+                {t.all}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/enrolled")}
                 className="cursor-pointer text-textPrimary"
               >
-                Enrolled
+                {t.enrolled}
               </p>
               <p
                 onClick={() => router.push("/education/courses/1/completed")}
                 className="cursor-pointer text-textPrimary"
               >
-                Completed
+                {t.completed}
               </p>
             </div>
             <Box padding="0" rounded="none">
@@ -173,7 +193,7 @@ const Education = () => {
                   <div className="flex justify-between">
                     <div></div>
                     <Text font={"bold"} size={"xl"}>
-                      Filter
+                      {t.filter}
                     </Text>
                     <IoClose
                       onClick={handleFilterClick}
@@ -183,29 +203,29 @@ const Education = () => {
                   </div>
                   <div className="flex flex-wrap gap-4 p-4">
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All</option>
+                      <option>{t.all}</option>
                     </select>
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>Any University</option>
+                      <option>{t.anyUniversity}</option>
                     </select>
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All directions of training</option>
+                      <option>{t.allTrainingDirections}</option>
                     </select>
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All Statuses</option>
+                      <option>{t.allStatuses}</option>
                     </select>
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All Languages</option>
+                      <option>{t.allLanguages}</option>
                     </select>
                     <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>Certificate</option>
+                      <option>{t.certificate}</option>
                     </select>
                   </div>
                   <div className="flex gap-4 px-4">
                     <Button onClick={handleFilterClick} theme="outline">
-                      Reset
+                      {t.reset}
                     </Button>
-                    <Button onClick={handleFilterClick}>Done</Button>
+                    <Button onClick={handleFilterClick}>{t.done}</Button>
                   </div>
                 </div>
               ) : (
@@ -221,7 +241,7 @@ const Education = () => {
                         alt="Home"
                         className="h-6 w-6"
                       />
-                      <Text font="bold">Home</Text>
+                      <Text font="bold">{t.home}</Text>
                     </div>
 
                     {/* Grade Button */}
@@ -234,7 +254,7 @@ const Education = () => {
                         alt="Grade"
                         className="h-6 w-6"
                       />
-                      <Text font="bold">Grade</Text>
+                      <Text font="bold">{t.grade}</Text>
                     </div>
 
                     {/* Courses Button */}
@@ -247,35 +267,19 @@ const Education = () => {
                         alt="Courses"
                         className="h-6 w-6"
                       />
-                      <Text font="bold">Courses</Text>
+                      <Text font="bold">{t.courses}</Text>
                     </div>
                   </div>
-                  <div className="mx-4 hidden flex-wrap gap-4 p-4 lg:flex">
-                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>Any University</option>
-                    </select>
-                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All directions of training</option>
-                    </select>
-                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All Statuses</option>
-                    </select>
-                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>All Languages</option>
-                    </select>
-                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
-                      <option>Certificate</option>
-                    </select>
-                  </div>
-                  <div className="mx-6 flex justify-between pt-8">
+                  
+                  <div className="mx-6 flex justify-between pb-8 pt-4">
                     <Text
-                      className="hidden lg:block"
+                      className="hidden md:block"
                       font={"bold"}
                       size={"2xl"}
                     >
-                      Courses
+                      {t.courses}
                     </Text>
-                    <div className="relative flex w-full lg:w-1/3">
+                    <div className="relative flex w-full md:w-1/3">
                       <div className="relative w-full">
                         <input
                           onChange={(e) => setSearch(e.target.value)}
@@ -283,7 +287,7 @@ const Education = () => {
                           id="icon"
                           name="icon"
                           className="block w-full rounded-lg border border-borderPrimary px-8 py-[14px] pl-10 text-sm outline-none focus:border-primary focus:ring-primary disabled:pointer-events-none disabled:opacity-50"
-                          placeholder="Search..."
+                          placeholder={t.searchPlaceholder}
                         />
                         <LuSearch
                           className="absolute left-3 top-[26px] -translate-y-1/2 text-textSecondary"
@@ -297,14 +301,31 @@ const Education = () => {
                       />
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 sm:grid-cols-2 lg:grid-cols-4 lg:pb-0">
+                  <div className="mx-4 hidden flex-wrap gap-4 p-4 md:flex">
+                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
+                      <option>{t.anyUniversity}</option>
+                    </select>
+                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
+                      <option>{t.allTrainingDirections}</option>
+                    </select>
+                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
+                      <option>{t.allStatuses}</option>
+                    </select>
+                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
+                      <option>{t.allLanguages}</option>
+                    </select>
+                    <select className="curser-pointer flex-1 rounded-lg border border-borderPrimary bg-offWhite px-6 py-4 text-textPrimary outline-none transition duration-300 hover:shadow-md">
+                      <option>{t.certificate}</option>
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 xl:grid-cols-4 lg:pb-0">
                     {courses.map((course, index) => (
                       <div
                         key={index}
                         onClick={() =>
                           router.push("/education/courses/1/enroll")
                         }
-                        className="cursor-pointer rounded-2xl border bg-white p-4 shadow-md transition-shadow hover:shadow-lg"
+                        className="cursor-pointer rounded-2xl border bg-bgPrimary p-4 shadow-md transition-shadow hover:shadow-lg"
                       >
                         {/* Course Image */}
                         <img
@@ -334,7 +355,7 @@ const Education = () => {
                         <div className="flex items-center space-x-2">
                           <img src="/images/prize-icon.png" alt="prize photo" />
                           <Text size={"sm"} color={"gray"} font={"medium"}>
-                            Previous Exam Grade: {course.grade}
+                            {t.previousExamGrade}: {course.grade}
                           </Text>
                         </div>
                       </div>
