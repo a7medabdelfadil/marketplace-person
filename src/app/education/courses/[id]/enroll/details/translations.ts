@@ -11,7 +11,8 @@ const translations = {
     inProgress: "In Progress",
     courseDetails: "Course Details",
     courseTranscript: "Course Transcript",
-    generativeAITools: "Generative AI tools in marketing (ChatGPT, DALL-E, MidJourney, etc.)",
+    generativeAITools:
+      "Generative AI tools in marketing (ChatGPT, DALL-E, MidJourney, etc.)",
     downloadSubrip: "Download SubRip (.srt) file",
     downloadText: "Download Text (.txt) file",
     topic: "Topic",
@@ -21,7 +22,8 @@ const translations = {
     marketingFundamentals: "Marketing Fundamentals",
     pending: "Pending",
     roleOfAI: "Role of AI in modern marketing strategies",
-    traditionalVsAIDriven: "Overview of traditional vs. AI-driven marketing campaigns",
+    traditionalVsAIDriven:
+      "Overview of traditional vs. AI-driven marketing campaigns",
     videoUnavailable: "Video is currently unavailable",
     lessons: "Lessons",
     check: "Check",
@@ -39,7 +41,8 @@ const translations = {
     inProgress: "قيد التنفيذ",
     courseDetails: "تفاصيل الدورة",
     courseTranscript: "نص الدورة",
-    generativeAITools: "أدوات الذكاء الاصطناعي التوليدي في التسويق (ChatGPT، DALL-E، MidJourney، إلخ.)",
+    generativeAITools:
+      "أدوات الذكاء الاصطناعي التوليدي في التسويق (ChatGPT، DALL-E، MidJourney، إلخ.)",
     downloadSubrip: "تحميل ملف SubRip (.srt)",
     downloadText: "تحميل ملف نصي (.txt)",
     topic: "الموضوع",
@@ -49,7 +52,8 @@ const translations = {
     marketingFundamentals: "أساسيات التسويق",
     pending: "قيد التنفيذ",
     roleOfAI: "دور الذكاء الاصطناعي في استراتيجيات التسويق الحديثة",
-    traditionalVsAIDriven: "نظرة عامة على الحملات التسويقية التقليدية مقابل المعتمدة على الذكاء الاصطناعي",
+    traditionalVsAIDriven:
+      "نظرة عامة على الحملات التسويقية التقليدية مقابل المعتمدة على الذكاء الاصطناعي",
     videoUnavailable: "الفيديو غير متاح حاليًا",
     lessons: "الدروس",
     check: "تحقق",
@@ -67,7 +71,8 @@ const translations = {
     inProgress: "En cours",
     courseDetails: "Détails du cours",
     courseTranscript: "Transcription du cours",
-    generativeAITools: "Outils d'IA générative en marketing (ChatGPT, DALL-E, MidJourney, etc.)",
+    generativeAITools:
+      "Outils d'IA générative en marketing (ChatGPT, DALL-E, MidJourney, etc.)",
     downloadSubrip: "Télécharger SubRip (.srt)",
     downloadText: "Télécharger le fichier texte (.txt)",
     topic: "Sujet",
@@ -77,7 +82,8 @@ const translations = {
     marketingFundamentals: "Fondamentaux du marketing",
     pending: "En attente",
     roleOfAI: "Rôle de l'IA dans les stratégies marketing modernes",
-    traditionalVsAIDriven: "Aperçu des campagnes marketing traditionnelles vs pilotées par l'IA",
+    traditionalVsAIDriven:
+      "Aperçu des campagnes marketing traditionnelles vs pilotées par l'IA",
     videoUnavailable: "Vidéo actuellement indisponible",
     lessons: "Leçons",
     check: "Vérifier",
@@ -95,7 +101,8 @@ const translations = {
     inProgress: "В процессе",
     courseDetails: "Детали курса",
     courseTranscript: "Транскрипция курса",
-    generativeAITools: "Инструменты генеративного ИИ в маркетинге (ChatGPT, DALL-E, MidJourney и др.)",
+    generativeAITools:
+      "Инструменты генеративного ИИ в маркетинге (ChatGPT, DALL-E, MidJourney и др.)",
     downloadSubrip: "Скачать SubRip (.srt)",
     downloadText: "Скачать текстовый файл (.txt)",
     topic: "Тема",

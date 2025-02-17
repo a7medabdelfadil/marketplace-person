@@ -208,31 +208,34 @@ const Enroll = () => {
             </div>
 
             <Box padding="0" rounded="none" className="pb-40 md:pb-6">
-              <div className="px-8 flex md:hidden w-full justify-between">
+              <div className="flex w-full justify-between px-8 md:hidden">
                 <IoArrowBack size={30} onClick={() => router.back()} />
                 <Text font={"bold"} size={"xl"}>
                   {t.courseDetails}
                 </Text>
                 <div></div>
               </div>
-              <div className="flex flex-col lg:flex-row w-full">
+              <div className="flex w-full flex-col lg:flex-row">
                 <div className="w-full lg:w-3/5">
                   <div className="flex flex-col justify-center rounded-lg bg-bgPrimary p-6">
                     {/* University Logo */}
                     <img
                       src="/images/enroll.png"
                       alt="UVA Darden Logo"
-                      className="mb-4 h-10 lg:h-12 w-[150px] lg:w-[200px]"
+                      className="mb-4 h-10 w-[150px] lg:h-12 lg:w-[200px]"
                     />
 
                     {/* Course Title */}
                     <Text font={"bold"} size={"3xl"} className="mb-2">
-                    Lorem ipsum, dolor sit amet consectetur 
+                      Lorem ipsum, dolor sit amet consectetur
                     </Text>
 
                     {/* Course Description */}
                     <Text color={"gray"} className="mb-6">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolor omnis, animi mollitia pariatur provident voluptatum ipsam numquam sequi culpa est tenetur debitis id temporibus a dignissimos voluptas voluptate laborum!
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      Recusandae dolor omnis, animi mollitia pariatur provident
+                      voluptatum ipsam numquam sequi culpa est tenetur debitis
+                      id temporibus a dignissimos voluptas voluptate laborum!
                     </Text>
 
                     {/* Enroll Button */}
@@ -247,11 +250,11 @@ const Enroll = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-full lg:w-2/5 mr-8">
+                <div className="mr-8 w-full lg:w-2/5">
                   <div className="relative my-8 w-4/5">
-                    <div className="hidden 2xl:block absolute -left-2 bottom-4 z-0 h-48 w-96 -rotate-[20deg] rounded-[50%] border-8 border-primary"></div>
-                    <div className="hidden 2xl:block absolute -top-2 right-0 z-0 h-full w-full rounded-b-full rounded-tl-full bg-bgSixth"></div>
-                    <div className="relative w-full lg:w-auto z-10 mx-8 lg:mx-0 2xl:mx-8 rounded-br-[25%] rounded-md 2xl:rounded-2xl border border-borderPrimary bg-bgPrimary p-6 lg:shadow-lg">
+                    <div className="absolute -left-2 bottom-4 z-0 hidden h-48 w-96 -rotate-[20deg] rounded-[50%] border-8 border-primary 2xl:block"></div>
+                    <div className="absolute -top-2 right-0 z-0 hidden h-full w-full rounded-b-full rounded-tl-full bg-bgSixth 2xl:block"></div>
+                    <div className="relative z-10 mx-8 w-full rounded-md rounded-br-[25%] border border-borderPrimary bg-bgPrimary p-6 lg:mx-0 lg:w-auto lg:shadow-lg 2xl:mx-8 2xl:rounded-2xl">
                       {/* Background Decoration */}
 
                       {/* Content */}
@@ -290,7 +293,7 @@ const Enroll = () => {
               <div className="mx-6 space-y-4">
                 {/* Title */}
                 <h2 className="text-xl font-bold text-black">
-                 {t.whatYouWillLearn}
+                  {t.whatYouWillLearn}
                 </h2>
 
                 {/* List */}
@@ -357,7 +360,7 @@ const Enroll = () => {
                 </div>
                 <div className="w-full lg:w-2/5">
                   <div
-                    className={`rounded-lg border bg-bgPrimary p-6 ${language === "ar" ? "md:mr-8" : "md:ml-8"} mt-8 lg:mt-0 space-y-6`}
+                    className={`rounded-lg border bg-bgPrimary p-6 ${language === "ar" ? "md:mr-8" : "md:ml-8"} mt-8 space-y-6 lg:mt-0`}
                   >
                     {/* Instructor Section */}
                     <div>
@@ -368,7 +371,7 @@ const Enroll = () => {
                         <img
                           src="/images/profile.png"
                           alt="Instructor"
-                          className="h-12 w-12 ml-2 rounded-full object-cover"
+                          className="ml-2 h-12 w-12 rounded-full object-cover"
                         />
                         <div>
                           <Text font={"semiBold"}>{t.instructorName}</Text>

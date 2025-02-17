@@ -12,7 +12,8 @@ const translations = {
     dailyStandupCall: "Daily Standup Call",
     brandIdentityMeeting: "Brand Identity Meeting",
     discussTeamTasks: "Discuss team tasks for the day.",
-    discussBrandIdentity: "Discuss brand identity guidelines for the print media.",
+    discussBrandIdentity:
+      "Discuss brand identity guidelines for the print media.",
     attendanceHours: "Attendance Hours",
     myCourses: "My Courses",
     seeAll: "See All",
@@ -36,7 +37,8 @@ const translations = {
     dailyStandupCall: "اجتماع الوقوف اليومي",
     brandIdentityMeeting: "اجتماع هوية العلامة التجارية",
     discussTeamTasks: "مناقشة مهام الفريق لهذا اليوم.",
-    discussBrandIdentity: "مناقشة إرشادات هوية العلامة التجارية للوسائط المطبوعة.",
+    discussBrandIdentity:
+      "مناقشة إرشادات هوية العلامة التجارية للوسائط المطبوعة.",
     attendanceHours: "ساعات الحضور",
     myCourses: "دوراتي",
     seeAll: "عرض الكل",
@@ -60,7 +62,8 @@ const translations = {
     dailyStandupCall: "Appel de stand-up quotidien",
     brandIdentityMeeting: "Réunion d'identité de marque",
     discussTeamTasks: "Discuter des tâches de l'équipe pour la journée.",
-    discussBrandIdentity: "Discuter des directives d'identité de marque pour les médias imprimés.",
+    discussBrandIdentity:
+      "Discuter des directives d'identité de marque pour les médias imprimés.",
     attendanceHours: "Heures de présence",
     myCourses: "Mes Cours",
     seeAll: "Voir tout",
@@ -84,7 +87,8 @@ const translations = {
     dailyStandupCall: "Ежедневный стендап-звонок",
     brandIdentityMeeting: "Встреча по фирменному стилю",
     discussTeamTasks: "Обсуждение задач команды на день.",
-    discussBrandIdentity: "Обсуждение руководящих принципов фирменного стиля для печатных СМИ.",
+    discussBrandIdentity:
+      "Обсуждение руководящих принципов фирменного стиля для печатных СМИ.",
     attendanceHours: "Часы посещаемости",
     myCourses: "Мои курсы",
     seeAll: "Смотреть все",

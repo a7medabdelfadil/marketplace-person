@@ -65,8 +65,16 @@ function Signup() {
                   {t.fullName}
                 </label>
                 <div className="mt-1 flex gap-4">
-                  <Input className="bg-bgInput" border="none" placeholder={t.firstName} />
-                  <Input className="bg-bgInput" border="none" placeholder={t.lastName} />
+                  <Input
+                    className="bg-bgInput"
+                    border="none"
+                    placeholder={t.firstName}
+                  />
+                  <Input
+                    className="bg-bgInput"
+                    border="none"
+                    placeholder={t.lastName}
+                  />
                 </div>
               </div>
               <div className="flex flex-col">

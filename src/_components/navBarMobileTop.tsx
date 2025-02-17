@@ -42,7 +42,10 @@ const NavBarMobileTop = () => {
                   href="/calendar"
                   className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold hover:bg-bgSecondary disabled:pointer-events-none disabled:opacity-50"
                 >
-                  <FaCalendarAlt size={20} className={`${url === "/calendar" ? "text-primary" : ""}`} />
+                  <FaCalendarAlt
+                    size={20}
+                    className={`${url === "/calendar" ? "text-primary" : ""}`}
+                  />
                 </Link>
               </div>
               <div className="me-5 lg:me-0 lg:hidden">

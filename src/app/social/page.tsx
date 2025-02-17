@@ -7,7 +7,9 @@ function Social() {
   return (
     <>
       <Container>
-        <Text font={'bold'} size={'2xl'}>Social</Text>
+        <Text font={"bold"} size={"2xl"}>
+          Social
+        </Text>
         <Box className="h-[80vh]"></Box>
       </Container>
     </>

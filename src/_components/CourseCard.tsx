@@ -47,7 +47,7 @@ const CourseCard = ({ course }: any) => {
       </div>
 
       {/* Footer Section */}
-      <div className="mt-4 flex justify-between items-center border-t-2 border-borderPrimary p-4 pt-2 text-sm text-textPrimary">
+      <div className="mt-4 flex items-center justify-between border-t-2 border-borderPrimary p-4 pt-2 text-sm text-textPrimary">
         <div className="flex items-center gap-1">
           <LuBookText size={20} className="text-textSecondary" />
           <Text>{course.lessons}</Text>

@@ -185,8 +185,8 @@ const NavBar = () => {
   };
 
   const clickProfile = () => {
-    router.push("/edit-profile")
-  }
+    router.push("/edit-profile");
+  };
 
   useInitializeLanguage(); // Ensure language state is initialized
   const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading

@@ -41,7 +41,8 @@ function Calendar({
           // row: "flex justify-center",
           cell: "relative w-10 h-10 cursor-pointer flex items-center justify-center text-sm rounded-full hover:bg-bgSecondary transition",
           day: "w-full h-full flex items-center justify-center",
-          day_selected: "bg-primary md:bg-primary2 rounded-full text-white font-bold",
+          day_selected:
+            "bg-primary md:bg-primary2 rounded-full text-white font-bold",
           day_today:
             "border border-primary md:border-primary2 rounded-full bg-primary md:bg-primary2 text-white font-bold",
           day_outside: "text-textSecondary",

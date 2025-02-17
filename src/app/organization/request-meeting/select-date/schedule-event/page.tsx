@@ -399,9 +399,7 @@ const ScheduleEvent = () => {
                       </form>
                     </>
                   ) : (
-                    <div
-                      className="flex h-full items-center justify-center"
-                    >
+                    <div className="flex h-full items-center justify-center">
                       {/* Success Content */}
                       <div className="flex w-4/5 flex-col items-center justify-center space-y-6 text-center">
                         {/* Success Icon */}

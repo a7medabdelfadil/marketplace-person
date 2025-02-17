@@ -31,9 +31,7 @@ const EditProfile = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<SelectedIndexType>(
-    1,
-  );
+  const [selectedIndex, setSelectedIndex] = useState<SelectedIndexType>(1);
 
   const handleItemClick = (index: SelectedIndexType) => {
     setSelectedIndex(index);

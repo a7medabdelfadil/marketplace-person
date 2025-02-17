@@ -191,7 +191,7 @@ const SelectDate = () => {
             <Box
               rounded="none"
               padding="0"
-              className="px-0 pb-[120px] md:mb-8 md:px-4 pt-6 md:pb-[20px]"
+              className="px-0 pb-[120px] pt-6 md:mb-8 md:px-4 md:pb-[20px]"
             >
               <div
                 className={`mx-auto flex min-h-[700px] w-full flex-col rounded-lg border-borderPrimary/25 lg:border lg:shadow-md xl:flex-row 2xl:w-4/5`}
@@ -270,9 +270,7 @@ const SelectDate = () => {
                       />
                     </div>
                     {selectedDay && (
-                      <div
-                        className="mt-4 flex-1 px-8"
-                      >
+                      <div className="mt-4 flex-1 px-8">
                         <h2 className="text-xl font-bold text-textPrimary">
                           {selectedDay.toDateString()}
                         </h2>

@@ -25,31 +25,31 @@ const Education = () => {
     setIsFilter((e) => !e);
   };
 
-   const [screenWidth, setScreenWidth] = useState<number>(768); // Set a default value
-  
-    useEffect(() => {
-      /**
-       * Handle window resize event
-       *
-       * When the window is resized, set the screenWidth state to the new value.
-       * If the new width is greater than 768px, close the modal.
-       */
-      const handleResize = () => {
-        const newWidth = window.innerWidth;
-        setScreenWidth(newWidth);
-  
-        // Close the modal if the screen is bigger than md (768px)
-        if (newWidth >= 768) {
-          setIsFilter(false);
-        }
-      };
-  
-      window.addEventListener("resize", handleResize);
-  
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
+  const [screenWidth, setScreenWidth] = useState<number>(768); // Set a default value
+
+  useEffect(() => {
+    /**
+     * Handle window resize event
+     *
+     * When the window is resized, set the screenWidth state to the new value.
+     * If the new width is greater than 768px, close the modal.
+     */
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      setScreenWidth(newWidth);
+
+      // Close the modal if the screen is bigger than md (768px)
+      if (newWidth >= 768) {
+        setIsFilter(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const courses = [
     {
@@ -105,8 +105,8 @@ const Education = () => {
   return (
     <>
       <Container mr={false}>
-        <div className="flex gap-5 justify-center">
-          <div className="hidden lg:w-3/7 z-10 -m-5 h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
+        <div className="flex justify-center gap-5">
+          <div className="lg:w-3/7 z-10 -m-5 hidden h-screen bg-bgSecondary px-5 pt-5 shadow-[4px_0_4px_rgba(0,0,0,0.05)] md:block xl:w-1/5">
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
@@ -270,7 +270,7 @@ const Education = () => {
                       <Text font="bold">{t.courses}</Text>
                     </div>
                   </div>
-                  
+
                   <div className="mx-6 flex justify-between pb-8 pt-4">
                     <Text
                       className="hidden md:block"
@@ -318,7 +318,7 @@ const Education = () => {
                       <option>{t.certificate}</option>
                     </select>
                   </div>
-                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 xl:grid-cols-4 lg:pb-0">
+                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 lg:pb-0 xl:grid-cols-4">
                     {courses.map((course, index) => (
                       <div
                         key={index}

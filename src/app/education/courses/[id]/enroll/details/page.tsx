@@ -208,7 +208,7 @@ const EnrollDetails = () => {
           </div>
 
           <div className="flex-1">
-            <div className="mx-4 hidden mb-4 md:flex items-center gap-4">
+            <div className="mx-4 mb-4 hidden items-center gap-4 md:flex">
               <Text font={"bold"} size={"xl"}>
                 {t.courses}
               </Text>
@@ -237,7 +237,7 @@ const EnrollDetails = () => {
               </Text>
               <div className="flex flex-col lg:flex-row">
                 <div className="w-full lg:w-3/5">
-                  <div className="mx-auto w-full lg:max-w-4xl rounded-lg bg-bgPrimary p-6">
+                  <div className="mx-auto w-full rounded-lg bg-bgPrimary p-6 lg:max-w-4xl">
                     {/* Video Section */}
                     <div className="mb-6">
                       <div className="relative aspect-video w-full">
@@ -258,7 +258,7 @@ const EnrollDetails = () => {
                       >
                         <MdOutlineFileDownload
                           size={30}
-                          className="text-whiteOrBlack rounded-lg bg-blackOrWhite p-1"
+                          className="rounded-lg bg-blackOrWhite p-1 text-whiteOrBlack"
                         />
 
                         <span>{t.downloadSubrip}</span>
@@ -270,7 +270,7 @@ const EnrollDetails = () => {
                       >
                         <MdOutlineFileDownload
                           size={30}
-                          className="text-whiteOrBlack rounded-lg bg-blackOrWhite p-1"
+                          className="rounded-lg bg-blackOrWhite p-1 text-whiteOrBlack"
                         />
 
                         <span>{t.downloadText}</span>
@@ -319,7 +319,7 @@ const EnrollDetails = () => {
                                 type="checkbox"
                                 checked={completedTopics[index]}
                                 onChange={() => toggleCheckbox(index)}
-                                className="text-whiteOrBlack ml-2 h-5 w-5 cursor-pointer rounded-full accent-success"
+                                className="ml-2 h-5 w-5 cursor-pointer rounded-full text-whiteOrBlack accent-success"
                               />
                               <h3 className="font-semibold text-textPrimary">
                                 {topic.title}
@@ -355,7 +355,7 @@ const EnrollDetails = () => {
                                           className="flex items-center space-x-2"
                                         >
                                           <span
-                                            className={`h-4 w-4 flex-shrink-0 rounded-full ml-2 ${
+                                            className={`ml-2 h-4 w-4 flex-shrink-0 rounded-full ${
                                               item.completed
                                                 ? "bg-success"
                                                 : "bg-bgSecondary"

@@ -6,10 +6,10 @@ import { Text } from "~/_components/Text";
 import { useState } from "react";
 import { useLanguageStore } from "~/APIs/store";
 import { LuSearch } from "react-icons/lu";
-import translations from "~/app/market/translations";
 import Box from "~/_components/Box";
 import { VscSettings } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
+import translations from "./translations";
 
 const Education = () => {
   const language = useLanguageStore((state) => state.language);
@@ -136,7 +136,7 @@ const Education = () => {
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <div className="mb-2 hidden min-w-[250px] md:block">
                 <Text font={"bold"} className="text-2xl md:text-3xl">
-                  Education
+                  {t.education}
                 </Text>
               </div>
             </div>
@@ -164,17 +164,16 @@ const Education = () => {
               <div
                 className={`flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education")}
-                >
+              >
                 <img src="/images/home.png" alt="Home" className="w-[25px]" />
-                <Text font={"bold"}>Home</Text>
+                <Text font={"bold"}>{t.home}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
                 onClick={() => router.push("/education/grades")}
-
-                >
+              >
                 <img src="/images/Grade.png" alt="Grade" className="w-[25px]" />
-                <Text font={"bold"}>Grade</Text>
+                <Text font={"bold"}>{t.grade}</Text>
               </div>
               <div
                 className={`mt-4 flex min-w-[150px] cursor-pointer gap-2 rounded-xl py-2 pl-2`}
@@ -185,20 +184,20 @@ const Education = () => {
                   alt="Service"
                   className="w-[25px]"
                 />
-                <Text font={"bold"}>Courses</Text>
+                <Text font={"bold"}>{t.courses}</Text>
               </div>
             </div>
           </div>
           <div>
-        <Box padding="0">
-        <div className="mx-6 flex justify-between space-x-4 md:hidden">
+            <Box padding="0">
+              <div className="mx-6 flex justify-between space-x-4 md:hidden">
                 {/* Home Button */}
                 <div
                   className="flex cursor-pointer items-center gap-2 rounded-xl bg-bgPrimary px-4 py-2 transition hover:bg-bgSecondary"
                   onClick={() => router.push("/education")}
                 >
                   <img src="/images/home.png" alt="Home" className="h-6 w-6" />
-                  <Text font="bold">Home</Text>
+                  <Text font="bold">{t.home}</Text>
                 </div>
 
                 {/* Grade Button */}
@@ -211,7 +210,7 @@ const Education = () => {
                     alt="Grade"
                     className="h-6 w-6"
                   />
-                  <Text font="bold">Grade</Text>
+                  <Text font="bold">{t.grade}</Text>
                 </div>
 
                 {/* Courses Button */}
@@ -224,88 +223,107 @@ const Education = () => {
                     alt="Courses"
                     className="h-6 w-6"
                   />
-                  <Text font="bold">Courses</Text>
+                  <Text font="bold">{t.courses}</Text>
                 </div>
               </div>
-          <div className="mx-6 flex justify-between pt-8">
-            <Text font={"bold"} className="hidden md:block" size={"2xl"}>
-              My Grades
-            </Text>
-            <div className="relative flex w-full md:w-1/3">
-              <div className="relative w-full">
-                <input
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="text"
-                  id="icon"
-                  name="icon"
-                  className="block w-full rounded-lg border border-borderPrimary px-8 py-[14px] pl-10 text-sm outline-none focus:border-primary focus:ring-primary disabled:pointer-events-none disabled:opacity-50" // Add `pl-10` for padding to the left
-                  placeholder="Search..."
-                />
-                <LuSearch
-                  className="absolute left-3 top-[26px] -translate-y-1/2 text-textSecondary"
-                  size={20}
-                />
+              <div className="mx-6 flex justify-between pt-8">
+                <Text font={"bold"} className="hidden md:block" size={"2xl"}>
+                  {t.myGrades}
+                </Text>
+                <div className="relative flex w-full md:w-1/3">
+                  <div className="relative w-full">
+                    <input
+                      onChange={(e) => setSearch(e.target.value)}
+                      type="text"
+                      id="icon"
+                      name="icon"
+                      className="block w-full rounded-lg border border-borderPrimary px-8 py-[14px] pl-10 text-sm outline-none focus:border-primary focus:ring-primary disabled:pointer-events-none disabled:opacity-50" // Add `pl-10` for padding to the left
+                      placeholder={t.searchPlaceholder}
+                    />
+                    <LuSearch
+                      className="absolute left-3 top-[26px] -translate-y-1/2 text-textSecondary"
+                      size={20}
+                    />
+                  </div>
+                  <VscSettings
+                    className={`rounded-lg border border-borderPrimary p-2 ${language == "ar" ? "mr-2" : "ml-2"} cursor-pointer text-textSecondary`}
+                    size={50}
+                  />
+                </div>
               </div>
-              <VscSettings
-                className={`rounded-lg border border-borderPrimary p-2 ${language == "ar" ? "mr-2" : "ml-2"} cursor-pointer text-textSecondary`}
-                size={50}
-              />
-            </div>
+              <div className="p-6">
+                <h1 className="mb-8 text-2xl font-bold text-textPrimary">
+                  {t.learningJavascript}
+                </h1>
+                <div className="grid grid-cols-1 gap-6 pb-40 lg:grid-cols-2 xl:grid-cols-4">
+                  {cardsData.map((card, index) => (
+                    <div
+                      key={index}
+                      className="relative rounded-xl border bg-white p-4 pt-8 shadow-md transition-shadow hover:shadow-lg"
+                    >
+                      {/* Status */}
+                      <div
+                        className={`absolute right-0 top-0 mb-2 rounded-bl-3xl p-2 text-sm font-semibold ${getStatusClass(card.status)}`}
+                      >
+                        {card.status}
+                      </div>
+
+                      {/* Title */}
+                      <h2 className="mb-2 text-lg font-semibold text-textPrimary">
+                        {card.title}
+                      </h2>
+
+                      {/* Subject */}
+                      <p className="text-testSecondary mb-4 text-sm">
+                        {t.subject}: {card.subject}
+                      </p>
+
+                      {/* Date */}
+                      <div className="text-testSecondary mb-4 flex items-center text-sm">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-2 h-5 w-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="18"
+                            rx="2"
+                            ry="2"
+                          ></rect>
+                          <line x1="16" y1="2" x2="16" y2="6"></line>
+                          <line x1="8" y1="2" x2="8" y2="6"></line>
+                          <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        {card.date}
+                      </div>
+
+                      {/* Percentages */}
+                      <p className="mb-1 text-sm text-gray-600">
+                        {t.passingPercentage}:{" "}
+                        <span className="text-primary2">
+                          {card.passingPercentage}
+                        </span>
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {t.scoredPercentage}:{" "}
+                        <span className="text-success">
+                          {card.scoredPercentage}
+                        </span>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Box>
           </div>
-          <div className="p-6">
-      <h1 className="mb-8 text-2xl font-bold text-textPrimary">
-        Learning JavaScript With Imagination
-      </h1>
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-4 pb-40">
-        {cardsData.map((card, index) => (
-          <div
-            key={index}
-            className="relative pt-8 rounded-xl border bg-white p-4 shadow-md hover:shadow-lg transition-shadow"
-          >
-            {/* Status */}
-            <div className={`absolute top-0 right-0 p-2 rounded-bl-3xl mb-2 text-sm font-semibold ${getStatusClass(card.status)}`}>
-              {card.status}
-            </div>
-
-            {/* Title */}
-            <h2 className="mb-2 text-lg font-semibold text-textPrimary">{card.title}</h2>
-
-            {/* Subject */}
-            <p className="mb-4 text-sm text-testSecondary">Subject: {card.subject}</p>
-
-            {/* Date */}
-            <div className="mb-4 flex items-center text-sm text-testSecondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              {card.date}
-            </div>
-
-            {/* Percentages */}
-            <p className="mb-1 text-sm text-gray-600">
-              Passing Percentage: <span className="text-primary2">{card.passingPercentage}</span>
-            </p>
-            <p className="text-sm text-gray-600">
-              Scored Percentage: <span className="text-success">{card.scoredPercentage}</span>
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-        </Box>
-      </div>
         </div>
       </Container>
     </>

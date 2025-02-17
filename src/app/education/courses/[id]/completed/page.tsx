@@ -124,7 +124,7 @@ const Enrolled = () => {
           </div>
 
           <div className="w-full">
-            <div className="mx-4 hidden mb-4 md:flex items-center gap-4">
+            <div className="mx-4 mb-4 hidden items-center gap-4 md:flex">
               <Text font={"bold"} size={"xl"}>
                 {t.courses}
               </Text>
@@ -212,8 +212,8 @@ const Enrolled = () => {
               <Text font={"bold"} size={"2xl"} className="mx-6 mt-4">
                 {t.inProgress}
               </Text>
-              <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 xl:grid-cols-4 lg:pb-0">
-              {courses.map((course, index) => (
+              <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 lg:pb-0 xl:grid-cols-4">
+                {courses.map((course, index) => (
                   <div
                     key={index}
                     onClick={() => router.push("/education/courses/1/enroll")}

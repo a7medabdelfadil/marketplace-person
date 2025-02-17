@@ -29,7 +29,8 @@ const translations = {
     marketingFundamentals: "Marketing Fundamentals",
     marketingConcepts: "Core concepts in marketing",
     aiInMarketing: "Role of AI in modern marketing strategies",
-    aiVsTraditional: "Overview of traditional vs. AI-driven marketing campaigns",
+    aiVsTraditional:
+      "Overview of traditional vs. AI-driven marketing campaigns",
     instructorName: "Ahmed Mohammed",
     totalCourses: "15 Courses",
     totalLearners: "407,858 learners",
@@ -84,7 +85,8 @@ const translations = {
     marketingFundamentals: "أساسيات التسويق",
     marketingConcepts: "المفاهيم الأساسية في التسويق",
     aiInMarketing: "دور الذكاء الاصطناعي في استراتيجيات التسويق الحديثة",
-    aiVsTraditional: "نظرة عامة على الحملات التسويقية التقليدية مقابل المعتمدة على الذكاء الاصطناعي",
+    aiVsTraditional:
+      "نظرة عامة على الحملات التسويقية التقليدية مقابل المعتمدة على الذكاء الاصطناعي",
     instructorName: "أحمد محمد",
     totalCourses: "15 دورة",
     totalLearners: "407,858 متعلم",
@@ -139,7 +141,8 @@ const translations = {
     marketingFundamentals: "Fondamentaux du marketing",
     marketingConcepts: "Concepts de base du marketing",
     aiInMarketing: "Rôle de l'IA dans les stratégies marketing modernes",
-    aiVsTraditional: "Aperçu des campagnes marketing traditionnelles vs pilotées par l'IA",
+    aiVsTraditional:
+      "Aperçu des campagnes marketing traditionnelles vs pilotées par l'IA",
     instructorName: "Ahmed Mohammed",
     totalCourses: "15 Cours",
     totalLearners: "407,858 apprenants",
