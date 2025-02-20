@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
@@ -8,6 +9,7 @@ import ThemeProvider from "./providers/themeProvider";
 import { usePathname } from "next/navigation";
 import NavBarMobileTop from "~/_components/navBarMobileTop";
 import NavBarMobileBottom from "~/_components/navBarMobileBottom";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -43,6 +45,13 @@ export default function RootLayout({
               <div className="hidden md:block">
                 <NavBar />
               </div>
+              {
+                pathname !== "/ai" && (
+                <div className="absolute top-1/2 right-0">
+                  <Link href="/ai" className="fixed z-50 top-1/2 right-1 p-4 bg-[#8F6BFF] shadow-xl shadow-[#8F6BFF]/50 rounded-full "><img src="/images/stars.svg" alt="#" /></Link>
+                </div>
+                )
+              }
               <div className="block md:hidden">
                 {!isEditProfile && <NavBarMobileTop />}
                 <NavBarMobileBottom />

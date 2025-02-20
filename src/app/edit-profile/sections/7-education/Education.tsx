@@ -37,6 +37,8 @@ const Education = () => {
     },
   ];
 
+
+
   return (
     <>
       <div className="md:w-4/7 mt-14 w-full bg-bgPrimary">

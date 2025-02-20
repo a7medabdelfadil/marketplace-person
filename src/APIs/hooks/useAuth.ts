@@ -11,7 +11,7 @@
 //   return useQuery({
 //     queryKey: ["auth"],
 //     queryFn: async () => {
-//       const token = Cookies.get("accessToken");
+//       const token = Cookies.get("accessToken"); 
 //       if (!token) return null;
 
 //       const response = await fetch(
@@ -29,7 +29,7 @@
 
 //       return response.json();
 //     },
-//     staleTime: 1000 * 60 * 10,
+//     staleTime: 1000 * 60 * 10, 
 //   });
 // };
 
