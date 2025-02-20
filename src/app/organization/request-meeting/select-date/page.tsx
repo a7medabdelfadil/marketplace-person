@@ -13,7 +13,6 @@ import { Calendar2 } from "~/components/ui/Calendar2";
 import Button from "~/_components/Button";
 import { FaRegClock } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
-import { motion } from "framer-motion";
 import { HiOutlineAcademicCap } from "react-icons/hi2";
 import translations from "./translations";
 
@@ -273,12 +272,8 @@ const SelectDate = () => {
                       />
                     </div>
                     {selectedDay && (
-                      <motion.div
+                      <div
                         className="mt-4 flex-1 px-8"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
                       >
                         <h2 className="text-xl font-bold text-textPrimary">
                           {selectedDay.toDateString()}
@@ -318,7 +313,7 @@ const SelectDate = () => {
                             1:30pm
                           </Button>
                         </div>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
 
