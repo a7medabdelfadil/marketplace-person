@@ -55,6 +55,13 @@ function Meeting() {
   const [activeTab, setActiveTab] = useState("meeting");
   const [screenHeight, setScreenHeight] = useState(0); // Initialize with 0 or a default value
 
+  const [message, setMessage] = useState("");
+
+  const handleSend = () => {
+    if (message.trim() === "") return; // Prevent sending empty messages
+    console.log("Message sent:", message); // Mock message send logic
+    setMessage(""); // Clear input after sending
+  };
   useEffect(() => {
     // Check if `window` is available to avoid SSR issues
     if (typeof window !== "undefined") {
@@ -1212,10 +1219,15 @@ function Meeting() {
                   <div className="flex justify-center">
                     <div className="x:w-4/5 my-4 flex h-16 w-full items-center justify-between rounded-full bg-bgSecondary p-4">
                       <div className="flex gap-4">
-                        <FiLink className="text-textSecondary" size={30} />
+                        <FiLink
+                          // data-testid="link-icon"
+                          className="text-textSecondary"
+                          size={30}
+                        />
                       </div>
                       <Input placeholder={t.typeMessage} border="none" />{" "}
                       <FiSend
+                        // data-testid="send-icon"
                         className="rounded-full bg-primary p-2 text-white"
                         size={40}
                       />
@@ -1230,11 +1242,26 @@ function Meeting() {
                   <div className="flex items-center gap-4 xl:gap-6 2xl:gap-8">
                     <BsRecordCircle className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
                     <LuShare className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
-                    <IoMdMic className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
-                    <ImPhoneHangUp className="cursor-pointer rounded-full bg-primary2 p-2 text-5xl text-white lg:text-4xl xl:text-5xl" />
-                    <FaVideo className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
-                    <IoSettingsSharp className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
-                    <FaHandPaper className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
+                    <IoMdMic
+                      data-testid="mic-icon"
+                      className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl"
+                    />
+                    <ImPhoneHangUp
+                      data-testid="hangup-icon"
+                      className="cursor-pointer rounded-full bg-primary2 p-2 text-5xl text-white lg:text-4xl xl:text-5xl"
+                    />
+                    <FaVideo
+                      data-testid="video-icon"
+                      className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl"
+                    />
+                    <IoSettingsSharp
+                      data-testid="settings-icon"
+                      className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl"
+                    />
+                    <FaHandPaper
+                      data-testid="hand-icon"
+                      className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl"
+                    />
                   </div>
                   <FaExpand className="cursor-pointer rounded-full bg-bgSecondary p-2 text-4xl text-textSecondary lg:p-1 lg:text-3xl xl:p-2 xl:text-4xl" />
                 </div>
@@ -1824,13 +1851,28 @@ function Meeting() {
                 <div className="flex justify-center">
                   <div className="x:w-4/5 my-4 flex h-16 w-full items-center justify-between rounded-full bg-bgSecondary p-4">
                     <div className="flex gap-4">
-                      <FiLink className="text-textSecondary" size={30} />
+                      <FiLink
+                        data-testid="link-icon"
+                        className="text-textSecondary"
+                        size={30}
+                      />
                     </div>
-                    <Input placeholder={t.typeMessage} border="none" />{" "}
-                    <FiSend
-                      className="rounded-full bg-primary2 p-2 text-white"
-                      size={40}
-                    />
+                    <Input
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder={t.typeMessage}
+                      border="none"
+                    />{" "}
+                    <button
+                      data-testid="send-icon"
+                      onClick={handleSend}
+                      disabled={!message.trim()}
+                    >
+                      <FiSend
+                        className="rounded-full bg-primary2 p-2 text-white"
+                        size={40}
+                      />
+                    </button>
                   </div>
                 </div>
               </div>

@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import translations from "./translations";
 // import { login } from "~/APIs/features/auth";
 
-function Signin() {
+function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -178,4 +178,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;
