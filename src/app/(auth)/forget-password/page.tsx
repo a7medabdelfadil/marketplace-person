@@ -11,13 +11,8 @@ import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import translations from "./translations";
 
 function ForgetPassword() {
-  const [isChecked, setIsChecked] = useState(false);
   const language = useLanguageStore((state) => state.language); // Get current language
   const t = translations[language] || translations.en; // Fetch translations for the current language
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
 
   useInitializeLanguage(); // Ensure language state is initialized
   const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading

@@ -59,7 +59,6 @@ function Meeting() {
 
   const handleSend = () => {
     if (message.trim() === "") return; // Prevent sending empty messages
-    console.log("Message sent:", message); // Mock message send logic
     setMessage(""); // Clear input after sending
   };
   useEffect(() => {
@@ -71,7 +70,6 @@ function Meeting() {
       // Define the resize handler
       const handleResize = () => {
         if (window.innerWidth >= 768) {
-          console.log("Screen is larger than md (768px)");
           executeYourFunction();
         }
         // Update screen height whenever the window is resized
@@ -99,9 +97,6 @@ function Meeting() {
   const executeYourFunction = () => {
     setActiveTab("meeting");
   };
-
-  console.log("👾 ~ Meeting ~ activeTab:", activeTab);
-  console.log("👾 ~ Meeting ~ screenHeight:", screenHeight);
 
   return (
     <>

@@ -104,6 +104,7 @@ const AIChat = () => {
             <div className="flex w-[800px] max-w-md items-center rounded-2xl bg-bgSecondary px-4 py-3">
               <input
                 type="text"
+                data-testid="type-something"
                 placeholder="Type Something..."
                 className="flex-grow rounded-2xl bg-bgSecondary px-4 py-1 focus:outline-none"
               />

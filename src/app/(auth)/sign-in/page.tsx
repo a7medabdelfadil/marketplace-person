@@ -8,40 +8,18 @@ import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
 import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
-// import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import translations from "./translations";
-// import { login } from "~/APIs/features/auth";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const router = useRouter();
 
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
   const isLoadingLang = useLanguageStore((state) => state.isLoading);
 
   useInitializeLanguage();
-
-  // const loginMutation = useMutation({
-  //   mutationFn: async () => {
-  //     return login({ email, password });
-  //   },
-  //   onSuccess: (data) => {
-  //     localStorage.setItem("token", data.token);
-  //     router.push("/");
-  //   },
-  //   onError: () => {
-  //     console.error("Login failed");
-  //   },
-  // });
-
-  // const handleSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   loginMutation.mutate();
-  // };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -156,6 +134,7 @@ function SignIn() {
               <Button
                 type="submit"
                 className="mb-10 py-6"
+                data-testid="login-button"
                 color="primary"
                 // disabled={loginMutation.isPending}
               >

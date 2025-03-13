@@ -13,7 +13,7 @@ import { IoClose } from "react-icons/io5";
 import Button from "~/_components/Button";
 import translations from "./translations";
 
-const Education = () => {
+const Courses = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
   const [isFilter, setIsFilter] = useState(false);
@@ -318,7 +318,7 @@ const Education = () => {
                       <option>{t.certificate}</option>
                     </select>
                   </div>
-                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 lg:pb-0 xl:grid-cols-4">
+                  <div className="grid grid-cols-1 gap-8 p-6 pb-40 lg:grid-cols-2 lg:pb-10 xl:grid-cols-4">
                     {courses.map((course, index) => (
                       <div
                         key={index}
@@ -370,4 +370,4 @@ const Education = () => {
     </>
   );
 };
-export default Education;
+export default Courses;

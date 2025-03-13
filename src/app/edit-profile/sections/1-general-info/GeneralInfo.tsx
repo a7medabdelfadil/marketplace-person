@@ -55,6 +55,7 @@ function GeneralInfo() {
                   <div className="flex flex-col gap-4 lg:flex-row">
                     {/* Dropdown for Day */}
                     <select
+                    data-testid="day-select"
                       name="day"
                       id="day"
                       className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/5"
@@ -69,6 +70,7 @@ function GeneralInfo() {
 
                     {/* Dropdown for Month */}
                     <select
+                    data-testid="month-select"
                       name="month"
                       id="month"
                       className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/5"
@@ -96,6 +98,7 @@ function GeneralInfo() {
 
                     {/* Dropdown for Year */}
                     <select
+                    data-testid="year-select"
                       name="year"
                       id="year"
                       className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/5"
@@ -284,11 +287,13 @@ function GeneralInfo() {
                     {t.country}
                   </label>
                   <select
+                  data-testid="country-select"
                     name="country"
                     id="day"
                     className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/2"
                   >
-                    <option value="unselected">test</option>
+                    <option value="unselected">Select Country</option>
+                    <option value="USA">USA</option> 
                   </select>
                 </div>
                 <div className="mt-4">
@@ -296,11 +301,13 @@ function GeneralInfo() {
                     {t.city}
                   </label>
                   <select
+                  data-testid="city-select"
                     name="city"
                     id="day"
                     className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/2"
                   >
-                    <option value="unselected">Test</option>
+                    <option value="unselected">Select City</option>
+                    <option value="New York">New York</option> 
                   </select>
                 </div>
                 <div className="mt-4">
@@ -308,11 +315,13 @@ function GeneralInfo() {
                     {t.area}
                   </label>
                   <select
+                  data-testid="area-select"
                     name="area"
                     id="day"
                     className="mt-1 block w-full rounded-lg border-2 border-borderPrimary/50 bg-lightGray p-4 text-sm text-textPrimary focus:outline-none lg:w-1/2"
                   >
-                    <option value="unselected">Test</option>
+                    <option value="unselected">Select Area</option>
+                    <option value="Brooklyn">Brooklyn</option>
                   </select>
                 </div>
                 <div className="mt-4 w-full lg:w-1/2">

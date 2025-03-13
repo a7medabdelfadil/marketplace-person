@@ -12,14 +12,7 @@ import translations from "./translations";
 
 function ChangePassword() {
   const language = useLanguageStore((state) => state.language);
-  console.log("👾 ~ ForgetPassword ~ language:", language);
   const t = translations[language] || translations.en;
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
 
   useInitializeLanguage(); // Ensure language state is initialized
   const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading

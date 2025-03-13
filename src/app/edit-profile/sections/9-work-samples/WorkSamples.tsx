@@ -2,14 +2,7 @@
 "use client";
 
 import Box from "~/_components/Box";
-import Container from "~/_components/Container";
-import { Text } from "~/_components/Text";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useLanguageStore } from "~/APIs/store";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import Link from "next/link";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import Button from "~/_components/Button";
 import translations from "./translations";
 

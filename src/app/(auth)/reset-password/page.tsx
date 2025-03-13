@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React from "react";
 import Button from "~/_components/Button";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
@@ -15,14 +15,8 @@ import {
 import translations from "./translations";
 
 function ResetPassword() {
-  const [isChecked, setIsChecked] = useState(false);
-
   const language = useLanguageStore((state) => state.language); // Get the current language
   const t = translations[language] || translations.en; // Fetch translations for the current language
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
 
   useInitializeLanguage(); // Ensure language state is initialized
   const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading
@@ -65,6 +59,7 @@ function ResetPassword() {
                     <InputOTPSlot
                       key={index}
                       index={index}
+                      data-testid="otp-slot"
                       className="h-16 w-16 rounded-md border border-borderPrimary bg-bgSecondary text-2xl font-semibold"
                     />
                   ))}

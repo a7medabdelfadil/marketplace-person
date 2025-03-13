@@ -253,7 +253,7 @@ const Education = () => {
               <div className="mx-4 flex flex-col lg:flex-row">
                 <div className="mt-14 flex w-full items-center justify-between rounded-2xl bg-bgFifth px-6 py-2 shadow lg:mx-4 lg:w-3/5">
                   <div>
-                    <Text size="2xl" font="semiBold" color="default">
+                    <Text data-testid="today-task" size="2xl" font="semiBold" color="default">
                       {t.todayTask}
                     </Text>
                     <Text

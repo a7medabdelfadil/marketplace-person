@@ -415,6 +415,7 @@ const ProductDetails = () => {
                           .fill(0)
                           .map((_, index) => (
                             <FaStar
+                            data-testid="star-icon"
                               key={index}
                               className={`cursor-pointer text-4xl ${
                                 index < rating
@@ -433,7 +434,7 @@ const ProductDetails = () => {
                         rows={10}
                         className="w-full rounded border border-borderPrimary px-3 py-2 shadow focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                       />
-                      <Button>{t.submit}</Button>
+                      <Button onClick={() => setReview("")}>{t.submit}</Button>
                     </div>
                   </div>
                 </div>
