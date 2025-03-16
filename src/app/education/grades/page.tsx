@@ -11,7 +11,7 @@ import { VscSettings } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import translations from "./translations";
 
-const Education = () => {
+const Grades = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
 
@@ -264,4 +264,4 @@ const Education = () => {
     </>
   );
 };
-export default Education;
+export default Grades;

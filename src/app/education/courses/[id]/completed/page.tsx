@@ -11,7 +11,7 @@ import { VscSettings } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import translations from "./translations";
 
-const Enrolled = () => {
+const Completed = () => {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
 
@@ -273,4 +273,4 @@ const Enrolled = () => {
     </>
   );
 };
-export default Enrolled;
+export default Completed;
