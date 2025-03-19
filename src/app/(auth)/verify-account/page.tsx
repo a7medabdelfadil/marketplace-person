@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Button from "~/_components/Button";
