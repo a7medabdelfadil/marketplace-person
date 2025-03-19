@@ -23,7 +23,6 @@ const Organization = () => {
   const t = translations[language] || translations.en;
 
   const router = useRouter();
-  const [selected, setSelected] = useState("product");
   const [search, setSearch] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const cards = Array(8).fill({

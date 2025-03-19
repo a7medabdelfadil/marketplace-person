@@ -10,16 +10,20 @@ import { usePathname } from "next/navigation";
 import NavBarMobileTop from "~/_components/navBarMobileTop";
 import NavBarMobileBottom from "~/_components/navBarMobileBottom";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
+import { useTheme } from "next-themes";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+    const { theme, setTheme } = useTheme();
+  
   const pathname = usePathname();
   const isAuthPage =
     pathname === "/sign-up" ||
     pathname === "/sign-in" ||
     pathname === "/forget-password" ||
-    pathname === "/reset-password" ||
+    pathname === "/verify-account" ||
     pathname === "/change-password";
 
   const isEditProfile = pathname.includes("/edit-profile");
@@ -45,20 +49,35 @@ export default function RootLayout({
               <div className="hidden md:block">
                 <NavBar />
               </div>
-              {
-                pathname !== "/ai" && (
-                <div className="absolute top-1/2 right-0">
-                  <Link href="/ai" className="fixed z-50 top-1/2 right-1 p-4 bg-[#8F6BFF] shadow-xl shadow-[#8F6BFF]/50 rounded-full "><img src="/images/stars.svg" alt="#" /></Link>
+              {pathname !== "/ai" && (
+                <div className="absolute right-0 top-1/2">
+                  <Link
+                    href="/ai"
+                    className="fixed right-1 top-1/2 z-50 rounded-full bg-[#8F6BFF] p-4 shadow-xl shadow-[#8F6BFF]/50"
+                  >
+                    <img src="/images/stars.svg" alt="#" />
+                  </Link>
                 </div>
-                )
-              }
+              )}
               <div className="block md:hidden">
                 {!isEditProfile && <NavBarMobileTop />}
                 <NavBarMobileBottom />
               </div>
             </>
           )}
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              pauseOnHover
+              draggable
+              theme="light"
+            />
+          </TRPCReactProvider>
         </ThemeProvider>
       </body>
     </html>

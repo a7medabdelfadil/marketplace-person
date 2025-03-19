@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import Button from "~/_components/Button";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
@@ -13,13 +13,57 @@ import {
   InputOTPSlot,
 } from "~/components/ui/input-otp";
 import translations from "./translations";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useVerifyOtp, useResendOtp } from "~/APIs/hooks/useAuth";
 
-function ResetPassword() {
-  const language = useLanguageStore((state) => state.language); // Get the current language
-  const t = translations[language] || translations.en; // Fetch translations for the current language
+function VerifyAccount() {
+  const router = useRouter();
+  const language = useLanguageStore((state) => state.language);
+  const t = translations[language] || translations.en;
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") || "User@gmail.com";
 
-  useInitializeLanguage(); // Ensure language state is initialized
-  const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading
+  const [otp, setOtp] = useState("");
+
+  // 🟢 Verify OTP API Hook
+  const { mutate, isPending } = useVerifyOtp({
+    onSuccess: () => {
+      alert("✅ Your email is verified successfully");
+      router.push("/sign-in");
+    },
+    onError: () => {
+      alert("❌ Invalid OTP, please try again.");
+    },
+  });
+
+  // 🟢 Resend OTP API Hook
+  const { mutate: resend, isPending: resendPending } = useResendOtp({
+    onSuccess: () => {
+      alert("✅ OTP has been resent successfully!");
+    },
+    onError: () => {
+      alert("❌ Failed to resend OTP");
+    },
+  });
+
+  const handleOtpChange = (value: string) => {
+    setOtp(value);
+  };
+
+  const handleVerify = () => {
+    if (otp.length === 6) {
+      mutate({ userName: email, otp: otp });
+    } else {
+      alert("❌ OTP must be 6 digits");
+    }
+  };
+
+  const handleResend = () => {
+    resend({ userName: email });
+  };
+
+  useInitializeLanguage();
+  const isLoading = useLanguageStore((state) => state.isLoading);
 
   if (isLoading) {
     return (
@@ -50,12 +94,12 @@ function ResetPassword() {
             </Text>
             <div className="flex gap-1">
               <Text className="text-textSecondary">{t.description}</Text>
-              <Text font={"medium"}>User@gmail.com</Text>
+              <Text font={"medium"}>{email}</Text>
             </div>
             <div className="space-y-16 py-8">
-              <InputOTP maxLength={4}>
+              <InputOTP maxLength={6} onChange={handleOtpChange} value={otp}>
                 <InputOTPGroup className="flex w-full justify-between">
-                  {[0, 1, 2, 3].map((index) => (
+                  {[0, 1, 2, 3, 4, 5].map((index) => (
                     <InputOTPSlot
                       key={index}
                       index={index}
@@ -65,17 +109,23 @@ function ResetPassword() {
                   ))}
                 </InputOTPGroup>
               </InputOTP>
-              <Button className="mb-10 py-6" color="primary">
-                {t.verifyButton}
+              <Button
+                onClick={handleVerify}
+                className="mb-10 py-6"
+                color="primary"
+                disabled={isPending}
+              >
+                {isPending ? "Verifying..." : t.verifyButton}
               </Button>
               <div className="flex justify-center gap-2">
                 <Text>{t.resendText}</Text>
-                <a
-                  href="sign-in"
-                  className="font-medium text-primary hover:underline"
+                <button
+                  onClick={handleResend}
+                  disabled={resendPending}
+                  className="font-medium text-primary hover:underline disabled:opacity-50"
                 >
-                  {t.resendLink}
-                </a>
+                  {resendPending ? "Sending..." : t.resendLink}
+                </button>
               </div>
             </div>
           </div>
@@ -94,4 +144,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default VerifyAccount;

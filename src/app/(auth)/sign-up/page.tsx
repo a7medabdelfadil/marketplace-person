@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
@@ -10,22 +12,104 @@ import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import Spinner from "~/_components/Spinner";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import translations from "./translations";
+import { useSignup } from "~/APIs/hooks/useAuth";
+import { type SignupPayload } from "~/APIs/features/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 function Signup() {
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const [form, setForm] = useState<SignupPayload>({
+    userName: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    gender: "Male", // Default value to match the type
+    nationality: "",
+    role: "Personal",
+    rolePerson: "Student",
+    // roleOrganization: "Company",
+    identityImage: null,
+  });
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.firstName || form.firstName.length < 3) {
+      newErrors.firstName = "First name is required (min 3 letters)";
+    }
+    if (!form.lastName || form.lastName.length < 3) {
+      newErrors.lastName = "Last name is required (min 3 letters)";
+    }
+    if (!form.userName || form.userName.length < 3) {
+      newErrors.userName = "Username is required (min 3, no spaces)";
+    }
+    if (!form.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!form.password || form.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+    if (!form.phone) {
+      newErrors.phone = "Phone is required";
+    }
+    if (!form.nationality) {
+      newErrors.nationality = "Nationality is required";
+    }
+    if (!form.identityImage) {
+      newErrors.identityImage = "Identity image is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const { mutate, isPending } = useSignup({
+    onSuccess: () => {
+      router.push(`/verify-account?email=${encodeURIComponent(form.email)}`);
+      toast.success(`Code Verification is sent to ${form.email}`);
+    },
+    onError: (err: any) => {
+      const message = err?.response?.data?.message || "Signup Failed";
+      toast.error(`❌ ${message}`);
+    },
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       setFileName(file.name);
+      setForm({ ...form, identityImage: file });
     }
   };
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handleCheckboxChange = () => setIsChecked(!isChecked);
+
+  const handleSubmit = () => {
+    if (!validateForm()) {
+      return;
+    }
+    if (!isChecked) {
+      toast.error("You must agree to the terms");
+      return;
+    }
+    mutate(form);
   };
 
   useInitializeLanguage(); // Ensure language state is initialized
@@ -65,88 +149,194 @@ function Signup() {
                   {t.fullName}
                 </label>
                 <div className="mt-1 flex gap-4">
-                  <Input className="bg-bgInput" border="none" placeholder={t.firstName} />
-                  <Input className="bg-bgInput" border="none" placeholder={t.lastName} />
+                  <div>
+                    <Input
+                      name="firstName"
+                      value={form.firstName}
+                      onChange={handleInputChange}
+                      className="bg-bgInput"
+                      border="none"
+                      placeholder={t.firstName}
+                    />
+                    {errors.firstName && (
+                      <Text color="error" className="mt-1 text-sm">
+                        {errors.firstName}
+                      </Text>
+                    )}
+                  </div>
+                  <div>
+                    <Input
+                      name="lastName"
+                      value={form.lastName}
+                      onChange={handleInputChange}
+                      className="bg-bgInput"
+                      border="none"
+                      placeholder={t.lastName}
+                    />
+                    {errors.lastName && (
+                      <Text color="error" className="mt-1 text-sm">
+                        {errors.lastName}
+                      </Text>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col">
-                <label className="font-semibold" htmlFor="role">
+                <Input
+                  name="userName"
+                  value={form.userName}
+                  onChange={handleInputChange}
+                  label="Username"
+                  className="bg-bgInput"
+                  border="none"
+                  placeholder="username"
+                />
+                {errors.userName && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.userName}
+                  </Text>
+                )}
+                <label className="mt-6 font-semibold" htmlFor="role">
                   {t.role}
                 </label>
                 <select
+                  value={form.role}
                   name="role"
                   id="role"
+                  onChange={handleInputChange}
                   className="mt-1 block w-full rounded-lg border-2 border-bgInput bg-bgInput p-4 text-sm text-textPrimary focus:outline-none"
                 >
-                  <option value="unselected">{t.selectRole}</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="Personal">Personal</option>
+                  <option value="Organization">Organization</option>
+                  <option value="admin">Admin</option>
                 </select>
+                {errors.role && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.role}
+                  </Text>
+                )}
               </div>
               <div className="flex flex-col">
                 <label className="font-semibold" htmlFor="rolePerson">
                   {t.rolePerson}
                 </label>
                 <select
+                  value={form.rolePerson}
                   name="rolePerson"
                   id="rolePerson"
+                  onChange={handleInputChange}
                   className="mt-1 block w-full rounded-lg border-2 border-bgInput bg-bgInput p-4 text-sm text-textPrimary focus:outline-none"
                 >
-                  <option value="unselected">{t.selectRolePerson}</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="Student">Student</option>
+                  <option value="Freelancer">Freelancer</option>
+                  <option value="Entertainment">Entertainment</option>
                 </select>
+                {errors.rolePerson && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.rolePerson}
+                  </Text>
+                )}
               </div>
+              <div>
               <Input
+                name="email"
+                value={form.email}
+                onChange={handleInputChange}
                 className="bg-bgInput"
                 border="none"
                 type="email"
                 label={t.email}
                 placeholder={t.emailPlaceholder}
               />
+              {errors.email && (
+                <Text color="error" className="mt-1 text-sm">
+                  {errors.email}
+                </Text>
+              )}
+              </div>
+              <div>
+
               <Input
+                name="password"
+                value={form.password}
+                onChange={handleInputChange}
                 label={t.password}
                 className="bg-bgInput"
                 border="none"
                 placeholder={t.passwordPlaceholder}
                 type="password"
               />
+              {errors.password && (
+                <Text color="error" className="mt-1 text-sm">
+                  {errors.password}
+                </Text>
+              )}
+              </div>
+<div>
+
               <Input
+                name="phone"
+                value={form.phone}
+                onChange={handleInputChange}
                 label={t.phone}
                 className="bg-bgInput"
                 border="none"
                 placeholder={t.phonePlaceholder}
-                type="number"
               />
+              {errors.phone && (
+                <Text color="error" className="mt-1 text-sm">
+                  {errors.phone}
+                </Text>
+              )}
+</div>
+
               <div className="flex flex-col">
                 <label className="font-semibold" htmlFor="gender">
                   {t.gender}
                 </label>
                 <select
+                  value={form.gender}
                   name="gender"
                   id="gender"
+                  onChange={handleInputChange}
                   className="mt-1 block w-full rounded-lg border-2 border-bgInput bg-bgInput p-4 text-sm text-textPrimary focus:outline-none"
                 >
-                  <option value="unselected">{t.selectGender}</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
+                {errors.gender && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.gender}
+                  </Text>
+                )}
               </div>
+<div>
+
               <Input
+                name="nationality"
+                value={form.nationality}
+                onChange={handleInputChange}
                 label={t.nationality}
                 className="bg-bgInput"
                 border="none"
                 placeholder={t.nationalityPlaceholder}
               />
+              {errors.nationality && (
+                <Text color="error" className="mt-1 text-sm">
+                  {errors.nationality}
+                </Text>
+              )}
+                </div>
               <div>
                 <Input
+                  onChange={handleFileChange}
                   label={t.idPicture}
                   id="product-image"
                   name="product-image"
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={handleFileChange}
                 />
                 <div
                   onClick={() =>
@@ -165,17 +355,23 @@ function Signup() {
                     )}
                   </div>
                 </div>
+                {errors.identityImage && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.identityImage}
+                  </Text>
+                )}
               </div>
+
               <div className="flex items-center space-x-3">
                 <label className="flex cursor-pointer items-center">
-                  <input
+                  <Input
+                    onChange={handleCheckboxChange}
                     type="checkbox"
                     className="hidden"
                     checked={isChecked}
-                    onChange={handleCheckboxChange}
                   />
                   <div
-                    className={`h-6 w-6 rounded border-2 ${
+                    className={`min-h-6 min-w-6 rounded border-2 ${
                       isChecked
                         ? "border-primary bg-primary"
                         : "border-gray-400"
@@ -196,11 +392,15 @@ function Signup() {
                       </svg>
                     )}
                   </div>
-                  <span className="ml-2 text-gray-700">{t.agreeTerms}</span>
+                  <Text color={"gray"} className="ml-2 min-w-[300px]">
+                    {t.agreeTerms}
+                  </Text>
                 </label>
               </div>
-              <Button className="mb-10" color="primary">
-                {t.signUp}
+              <Button onClick={handleSubmit} className="mb-10" color="primary">
+                {
+                  isPending ? "Loading..." : t.signUp
+                }
               </Button>
             </div>
           </div>

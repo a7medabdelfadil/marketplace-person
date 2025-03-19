@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import ResetPassword from './page'
+import VerifyAccount from './page'
 
 // Mock ResizeObserver
 global.ResizeObserver = class {
@@ -15,9 +15,9 @@ global.ResizeObserver = class {
   }
 }
 
-describe('ResetPassword Page', () => {
+describe('verify-account Page', () => {
   beforeEach(() => {
-    render(<ResetPassword />)
+    render(<VerifyAccount />)
   })
 
   it('renders the title and description with email', () => {
@@ -28,7 +28,7 @@ describe('ResetPassword Page', () => {
 
   it('renders four OTP input fields', () => {
     const otpInputs = screen.getAllByTestId('otp-slot')
-    expect(otpInputs).toHaveLength(4)
+    expect(otpInputs).toHaveLength(6)
   })
 
   it('renders the "Verify" button', () => {

@@ -9,10 +9,15 @@ import Spinner from "~/_components/Spinner";
 import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import translations from "./translations";
+import { useSignin } from "~/APIs/hooks/useAuth";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [email, setEmail] = useState("john.doe@example.com");
+  const [password, setPassword] = useState("password123");
   const [isChecked, setIsChecked] = useState(false);
 
   const language = useLanguageStore((state) => state.language);
@@ -20,9 +25,26 @@ function SignIn() {
   const isLoadingLang = useLanguageStore((state) => state.isLoading);
 
   useInitializeLanguage();
-
+  
+  const signinMutation = useSignin({
+    onSuccess: (res) => {
+      toast.success("✅ Login successful!");
+      router.push("/");
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message || "Login failed");
+    },
+  });
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signinMutation.mutate({
+      userName: email,
+      password: password,
+    });    
   };
 
   if (isLoadingLang) {
@@ -63,10 +85,7 @@ function SignIn() {
                 {t.signUp}
               </a>
             </div>
-            <form
-              //  onSubmit={handleSubmit}
-              className="space-y-8 py-8"
-            >
+            <form onSubmit={handleSubmit} className="space-y-8 py-8">
               <Input
                 className="bg-bgInput"
                 border="none"
@@ -127,19 +146,18 @@ function SignIn() {
                 </a>
               </div>
 
-              {/* {loginMutation.isError && (
+              {signinMutation.isError && (
                 <Text className="text-red-500">{t.loginError}</Text>
-              )} */}
+              )}
 
               <Button
                 type="submit"
                 className="mb-10 py-6"
                 data-testid="login-button"
                 color="primary"
-                // disabled={loginMutation.isPending}
+                disabled={signinMutation.isPending}
               >
-                {/* {loginMutation.isPending ? t.loggingIn : t.loginButton} */}
-                {t.loginButton}
+                {signinMutation.isPending ? t.loggingIn : t.loginButton}
               </Button>
             </form>
           </div>

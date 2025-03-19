@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie"; 
 
 const axiosInstance = axios.create({
-  baseURL: "https://api-onway.opream.net/api/v1",
+  baseURL: "https://auth.engz.online/api/v1",
   headers: {
     "Content-Type": "application/json",
   },

@@ -223,7 +223,7 @@ const ScheduleEvent = () => {
               className="px-0 pb-[120px] md:mb-8 md:px-4 md:pb-[20px] xl:pt-4"
             >
               <div
-                className={`mx-auto flex min-h-[700px] w-4/5 flex-col rounded-lg border-borderPrimary/25 lg:border lg:shadow-md xl:flex-row`}
+                className={`mx-auto flex min-h-[700px] w-4/5 flex-col rounded-lg border-borderPrimary/25 xl:border xl:shadow-md xl:flex-row`}
               >
                 {/* Sidebar */}
                 <div className="w-full bg-bgPrimary pt-4 xl:w-1/3 xl:border-r">
