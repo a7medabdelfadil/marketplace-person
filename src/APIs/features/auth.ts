@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import axiosInstance from "~/lib/axios";
 
 export interface SignupPayload {
@@ -30,13 +31,17 @@ export interface ResendOtpPayload {
   userName: string;
 }
 
+export interface ForgetPasswordPayload {
+  userName: string;
+}
+
 export const signup = async (formData: SignupPayload) => {
   const data = new FormData();
   Object.entries(formData).forEach(([key, value]) => {
     data.append(key, value as string | Blob);
   });
 
-  const response = await axiosInstance.post("/auth/sign-up", data, {
+  const response = await axiosInstance.post("/auth-service/api/v1/auth/sign-up", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
@@ -46,7 +51,7 @@ export const signup = async (formData: SignupPayload) => {
 
 export const signin = async (payload: SigninPayload) => {
   const response = await axiosInstance.post(
-    "/auth/login",
+    "auth-service/api/v1/auth/login",
     payload,
     {
       headers: {
@@ -60,7 +65,7 @@ export const signin = async (payload: SigninPayload) => {
 
 export const verifyOtp = async (payload: VerifyOtpPayload) => {
   const response = await axiosInstance.post(
-    "/auth/email/verifyOtp",
+    "auth-service/api/v1/auth/email/verifyOtp",
     payload,
     {
       headers: {
@@ -74,7 +79,7 @@ export const verifyOtp = async (payload: VerifyOtpPayload) => {
 
 export const resendOtp = async (payload: ResendOtpPayload) => {
   const response = await axiosInstance.post(
-    "/auth/email/resend-otp",
+    "auth-service/api/v1/auth/email/resend-otp",
     payload,
     {
       headers: {
@@ -84,4 +89,23 @@ export const resendOtp = async (payload: ResendOtpPayload) => {
   );
 
   return response.data;
+};
+
+export const forgetPassword = async (payload: ForgetPasswordPayload) => {
+  const response = await axiosInstance.post(
+    "/auth-service/api/v1/auth/forget-password",
+    payload,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return response.data;
+};
+
+export const logout = () => {
+  Cookies.remove("token");
+  Cookies.remove("refresh_token");
 };

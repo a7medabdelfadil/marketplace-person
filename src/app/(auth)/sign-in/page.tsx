@@ -12,6 +12,7 @@ import translations from "./translations";
 import { useSignin } from "~/APIs/hooks/useAuth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 
 function SignIn() {
@@ -28,13 +29,25 @@ function SignIn() {
   
   const signinMutation = useSignin({
     onSuccess: (res) => {
+      console.log("Signin Response:", res);
+      
+      const token = res?.data?.access_token;
+      const refreshToken = res?.data?.refresh_token;
+  
+      if (token) {
+        Cookies.set("token", token, { expires: 7 });
+        Cookies.set("refresh_token", refreshToken, { expires: 7 });
+      }
+  
       toast.success("✅ Login successful!");
       router.push("/");
     },
     onError: (err: any) => {
+      console.log("Signin Error:", err?.response);
       toast.error(err?.response?.data?.message || "Login failed");
     },
   });
+  
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -89,8 +102,7 @@ function SignIn() {
               <Input
                 className="bg-bgInput"
                 border="none"
-                type="email"
-                label={t.emailLabel}
+                label="Email Or Username"
                 placeholder={t.emailPlaceholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

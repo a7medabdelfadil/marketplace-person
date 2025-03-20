@@ -19,6 +19,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useLogout } from "~/APIs/hooks/useAuth";
 // import { useLogout } from "~/APIs/hooks/useAuth";
 
 const translations = {
@@ -156,6 +157,7 @@ const localizedLabels: LocalizedLabels = {
 };
 
 const NavBar = () => {
+  
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
   const router = useRouter();
@@ -163,18 +165,18 @@ const NavBar = () => {
   const { theme, setTheme } = useTheme();
   const url = usePathname();
   const [profile, setProfile] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  // const logout = useLogout();
-
-  // const handleLogout = () => {
-  //   logout();
-  //   window.location.href = "/login";
-  // };
   const toggleProfile = () => {
     setProfile((prev) => !prev);
   };
   const handleThemeChange = (value: boolean) => {
     setTheme(value ? "dark" : "light");
+  };
+
+  const logout = useLogout();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/sign-in");
   };
 
   const getLocalizedLabel = (key: string) => {
@@ -335,13 +337,12 @@ const NavBar = () => {
                               </button>
                             </DropdownMenu.Item>
                             <DropdownMenu.Item asChild>
-                              <a
-                                // onClick={() => handleLogout()}
-                                href="/sign-in"
-                                className="flex items-center gap-x-3 rounded-md px-3 py-2 text-sm text-error outline-none hover:bg-error hover:text-white"
+                              <button
+                                onClick={() => handleLogout()}
+                                className="flex items-center gap-x-3 w-full rounded-md px-3 py-2 text-sm text-error outline-none hover:bg-error hover:text-white"
                               >
                                 {t.signOut}
-                              </a>
+                              </button>
                             </DropdownMenu.Item>
                           </div>
                         </DropdownMenu.Content>

@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React from "react";
 import Button from "~/_components/Button";
 import Input from "~/_components/Input";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
@@ -10,7 +10,7 @@ import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import translations from "./translations";
 
-function ChangePassword() {
+function ResetPassword() {
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
 
@@ -87,4 +87,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default ResetPassword;

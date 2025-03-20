@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import ChangePassword from './page'
+import ResetPassword from './page'
 
 describe('ChangePassword Page', () => {
   it('renders the correct title and description', () => {
-    render(<ChangePassword />)
+    render(<ResetPassword />)
 
     const title = screen.getByText('Set a password')
     expect(title).toBeInTheDocument()
@@ -14,7 +14,7 @@ describe('ChangePassword Page', () => {
   })
 
   it('has all three password input fields with correct labels and placeholders', () => {
-    render(<ChangePassword />)
+    render(<ResetPassword />)
 
     const createPasswordInput = screen.getByPlaceholderText('Create Password')
     expect(createPasswordInput).toBeInTheDocument()
@@ -30,7 +30,7 @@ describe('ChangePassword Page', () => {
   })
 
   it('has a confirm button with correct text', () => {
-    render(<ChangePassword />)
+    render(<ResetPassword />)
 
     const confirmButton = screen.getByRole('button', { name: 'Confirm' })
     expect(confirmButton).toBeInTheDocument()

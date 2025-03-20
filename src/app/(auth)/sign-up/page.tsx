@@ -56,8 +56,8 @@ function Signup() {
     if (!form.email) {
       newErrors.email = "Email is required";
     }
-    if (!form.password || form.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
+    if (!form.password || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(form.password)) {
+      newErrors.password = "Password must be at least 8 characters, include at least one letter and one number";
     }
     if (!form.phone) {
       newErrors.phone = "Phone is required";
@@ -238,57 +238,55 @@ function Signup() {
                 )}
               </div>
               <div>
-              <Input
-                name="email"
-                value={form.email}
-                onChange={handleInputChange}
-                className="bg-bgInput"
-                border="none"
-                type="email"
-                label={t.email}
-                placeholder={t.emailPlaceholder}
-              />
-              {errors.email && (
-                <Text color="error" className="mt-1 text-sm">
-                  {errors.email}
-                </Text>
-              )}
+                <Input
+                  name="email"
+                  value={form.email}
+                  onChange={handleInputChange}
+                  className="bg-bgInput"
+                  border="none"
+                  type="email"
+                  label={t.email}
+                  placeholder={t.emailPlaceholder}
+                />
+                {errors.email && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.email}
+                  </Text>
+                )}
               </div>
               <div>
-
-              <Input
-                name="password"
-                value={form.password}
-                onChange={handleInputChange}
-                label={t.password}
-                className="bg-bgInput"
-                border="none"
-                placeholder={t.passwordPlaceholder}
-                type="password"
-              />
-              {errors.password && (
-                <Text color="error" className="mt-1 text-sm">
-                  {errors.password}
-                </Text>
-              )}
+                <Input
+                  name="password"
+                  value={form.password}
+                  onChange={handleInputChange}
+                  label={t.password}
+                  className="bg-bgInput"
+                  border="none"
+                  placeholder={t.passwordPlaceholder}
+                  type="password"
+                />
+                {errors.password && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.password}
+                  </Text>
+                )}
               </div>
-<div>
-
-              <Input
-                name="phone"
-                value={form.phone}
-                onChange={handleInputChange}
-                label={t.phone}
-                className="bg-bgInput"
-                border="none"
-                placeholder={t.phonePlaceholder}
-              />
-              {errors.phone && (
-                <Text color="error" className="mt-1 text-sm">
-                  {errors.phone}
-                </Text>
-              )}
-</div>
+              <div>
+                <Input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleInputChange}
+                  label={t.phone}
+                  className="bg-bgInput"
+                  border="none"
+                  placeholder={t.phonePlaceholder}
+                />
+                {errors.phone && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.phone}
+                  </Text>
+                )}
+              </div>
 
               <div className="flex flex-col">
                 <label className="font-semibold" htmlFor="gender">
@@ -311,23 +309,22 @@ function Signup() {
                   </Text>
                 )}
               </div>
-<div>
-
-              <Input
-                name="nationality"
-                value={form.nationality}
-                onChange={handleInputChange}
-                label={t.nationality}
-                className="bg-bgInput"
-                border="none"
-                placeholder={t.nationalityPlaceholder}
-              />
-              {errors.nationality && (
-                <Text color="error" className="mt-1 text-sm">
-                  {errors.nationality}
-                </Text>
-              )}
-                </div>
+              <div>
+                <Input
+                  name="nationality"
+                  value={form.nationality}
+                  onChange={handleInputChange}
+                  label={t.nationality}
+                  className="bg-bgInput"
+                  border="none"
+                  placeholder={t.nationalityPlaceholder}
+                />
+                {errors.nationality && (
+                  <Text color="error" className="mt-1 text-sm">
+                    {errors.nationality}
+                  </Text>
+                )}
+              </div>
               <div>
                 <Input
                   onChange={handleFileChange}
@@ -397,10 +394,13 @@ function Signup() {
                   </Text>
                 </label>
               </div>
-              <Button onClick={handleSubmit} className="mb-10" color="primary">
-                {
-                  isPending ? "Loading..." : t.signUp
-                }
+              <Button
+                disabled={isPending}
+                onClick={handleSubmit}
+                className="mb-10"
+                color="primary"
+              >
+                {isPending ? "Loading..." : t.signUp}
               </Button>
             </div>
           </div>

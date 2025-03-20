@@ -12,19 +12,19 @@ import NavBarMobileBottom from "~/_components/navBarMobileBottom";
 import Link from "next/link";
 import { ToastContainer } from "react-toastify";
 import { useTheme } from "next-themes";
+import ProtectedRoute from "~/_components/ProtectedRoute";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-    const { theme, setTheme } = useTheme();
-  
+
   const pathname = usePathname();
   const isAuthPage =
     pathname === "/sign-up" ||
     pathname === "/sign-in" ||
     pathname === "/forget-password" ||
     pathname === "/verify-account" ||
-    pathname === "/change-password";
+    pathname === "/reset-password";
 
   const isEditProfile = pathname.includes("/edit-profile");
   return (
@@ -66,7 +66,11 @@ export default function RootLayout({
             </>
           )}
           <TRPCReactProvider>
-            {children}
+            {isAuthPage ? (
+              children
+            ) : (
+              <ProtectedRoute>{children}</ProtectedRoute>
+            )}
             <ToastContainer
               position="top-right"
               autoClose={3000}
