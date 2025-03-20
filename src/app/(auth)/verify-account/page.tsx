@@ -3,7 +3,7 @@
 export const dynamic = "force-dynamic";
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Button from "~/_components/Button";
 import LanguageSwitcher from "~/_components/LanguageSwitcher";
 import Spinner from "~/_components/Spinner";
@@ -76,7 +76,7 @@ function VerifyAccount() {
   }
 
   return (
-    <>
+    <Suspense fallback={<div className="flex h-screen items-center justify-center"><Spinner /></div>}>
       <div
         className={`absolute ${language === "ar" ? "right-4" : "left-4"} top-4 flex w-fit justify-end bg-transparent`}
       >
@@ -142,7 +142,8 @@ function VerifyAccount() {
           />
         </div>
       </div>
-    </>
+      </Suspense>
+
   );
 }
 
