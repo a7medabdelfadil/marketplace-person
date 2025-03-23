@@ -9,30 +9,49 @@ import Spinner from "~/_components/Spinner";
 import { Text } from "~/_components/Text";
 import { useInitializeLanguage, useLanguageStore } from "~/APIs/store";
 import translations from "./translations";
-import { useForgetPassword } from "~/APIs/hooks/useAuth";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useResetPassword } from "~/APIs/hooks/useAuth";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
-function ForgetPassword() {
+function ResetPassword() {
   const router = useRouter();
+
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
-  useInitializeLanguage();
-  const isLoading = useLanguageStore((state) => state.isLoading);
+  const searchParams = useSearchParams();
 
-  const [email, setEmail] = useState("");
-  const { mutate, status } = useForgetPassword({
+  const email = searchParams.get("email") || "";
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { mutate, isPending } = useResetPassword({
     onSuccess: () => {
-      router.push(`/verify-account?email=${encodeURIComponent(email)}&redirect=reset-password`);
-      toast.success("Check your email for further instructions.");
+      toast.success("✅ Password reset successfully");
+      router.push("/sign-in");
     },
     onError: () => {
-      toast.error("An error occurred. Please try again.");
+      toast.error("❌ Failed to reset password");
     },
   });
-  
-  const isSubmitting = status === "pending";
-  
+
+  const handleSubmit = () => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "❌ Password must be at least 8 characters, include at least one letter and one number",
+      );
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("❌ Passwords do not match");
+      return;
+    }
+    mutate({ userName: email, newPassword: password });
+  };
+
+  useInitializeLanguage(); // Ensure language state is initialized
+  const isLoading = useLanguageStore((state) => state.isLoading); // Check if language is loading
 
   if (isLoading) {
     return (
@@ -64,31 +83,31 @@ function ForgetPassword() {
             <Text className="text-textSecondary">{t.description}</Text>
             <div className="space-y-8 py-8">
               <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-bgInput"
                 border="none"
-                type="email"
-                label={t.emailLabel}
-                placeholder={t.emailPlaceholder}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="password"
+                label={t.newPassword}
+                placeholder={t.newPassword}
+              />
+              <Input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="bg-bgInput"
+                border="none"
+                type="password"
+                label={t.reenterPassword}
+                placeholder={t.reenterPassword}
               />
               <Button
                 className="mb-10 py-6"
                 color="primary"
-                onClick={() => mutate({ userName: email })}
-                disabled={isSubmitting}
+                onClick={handleSubmit}
+                disabled={isPending}
               >
-                {isSubmitting ? "Loading..." : t.nextButton}
+                {isPending ? "Loading..." : t.confirm}
               </Button>
-              <div className="flex justify-center gap-2">
-                <Text>{t.rememberPassword}</Text>
-                <a
-                  href="sign-in"
-                  className="font-medium text-primary hover:underline"
-                >
-                  {t.loginLink}
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -96,7 +115,7 @@ function ForgetPassword() {
         {/* Right Section */}
         <div className="hidden bg-primary2 md:block md:w-1/2 xl:w-2/5">
           <img
-            src="/images/forgetPasswordPerson.png"
+            src="/images/changePasswordPerson.png"
             alt="Right Side"
             className="h-full w-full object-cover"
           />
@@ -106,4 +125,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default ResetPassword;

@@ -24,6 +24,8 @@ const translations = {
     browseOrDrop: "Browse or Drop",
     agreeTerms: "I agree to the Terms and Privacy Policy",
     signUp: "Sign Up",
+    countryCode: "Country Code",
+    username: "Username",
   },
   ar: {
     createAccount: "إنشاء حساب جديد",
@@ -49,6 +51,8 @@ const translations = {
     browseOrDrop: "استعرض أو أسقط الملف",
     agreeTerms: "أوافق على الشروط وسياسة الخصوصية",
     signUp: "إنشاء حساب",
+    countryCode: "رمز الدولة",
+    username: "اسم المستخدم",
   },
   fr: {
     createAccount: "Créer un nouveau compte",
@@ -75,6 +79,8 @@ const translations = {
     browseOrDrop: "Parcourir ou Déposer",
     agreeTerms: "J'accepte les termes et la politique de confidentialité",
     signUp: "S'inscrire",
+    countryCode: "Indicatif du pays",
+    username: "Nom d'utilisateur",
   },
   ru: {
     createAccount: "Создать новый аккаунт",
@@ -100,6 +106,8 @@ const translations = {
     browseOrDrop: "Загрузите или перетащите",
     agreeTerms: "Я согласен с Условиями и Политикой конфиденциальности",
     signUp: "Зарегистрироваться",
+    countryCode: "Код страны",
+    username: "Имя пользователя",
   },
 };
 

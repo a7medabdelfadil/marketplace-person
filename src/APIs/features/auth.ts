@@ -35,6 +35,11 @@ export interface ForgetPasswordPayload {
   userName: string;
 }
 
+export interface ResetPasswordPayload {
+  userName: string;
+  newPassword: string;
+}
+
 export const signup = async (formData: SignupPayload) => {
   const data = new FormData();
   Object.entries(formData).forEach(([key, value]) => {
@@ -108,4 +113,18 @@ export const forgetPassword = async (payload: ForgetPasswordPayload) => {
 export const logout = () => {
   Cookies.remove("token");
   Cookies.remove("refresh_token");
+};
+
+export const resetPassword = async (payload: ResetPasswordPayload) => {
+  const response = await axiosInstance.post(
+    "/auth-service/api/v1/auth/reset-password",
+    payload,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return response.data;
 };

@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-
 function SignIn() {
   const router = useRouter();
   const [email, setEmail] = useState("john.doe@example.com");
@@ -26,19 +25,19 @@ function SignIn() {
   const isLoadingLang = useLanguageStore((state) => state.isLoading);
 
   useInitializeLanguage();
-  
+
   const signinMutation = useSignin({
     onSuccess: (res) => {
       console.log("Signin Response:", res);
-      
+
       const token = res?.data?.access_token;
       const refreshToken = res?.data?.refresh_token;
-  
+
       if (token) {
         Cookies.set("token", token, { expires: 7 });
         Cookies.set("refresh_token", refreshToken, { expires: 7 });
       }
-  
+
       toast.success("✅ Login successful!");
       router.push("/");
     },
@@ -47,7 +46,7 @@ function SignIn() {
       toast.error(err?.response?.data?.message || "Login failed");
     },
   });
-  
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -57,7 +56,7 @@ function SignIn() {
     signinMutation.mutate({
       userName: email,
       password: password,
-    });    
+    });
   };
 
   if (isLoadingLang) {
@@ -102,7 +101,7 @@ function SignIn() {
               <Input
                 className="bg-bgInput"
                 border="none"
-                label="Email Or Username"
+                label={t.emailOrUsername}
                 placeholder={t.emailPlaceholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -151,10 +150,10 @@ function SignIn() {
                   <span className="mx-2 text-gray-700">{t.rememberMe}</span>
                 </label>
                 <a
-                  href="/forgot-password"
+                  href="/forget-password"
                   className="text-sm text-primary hover:underline"
                 >
-                  {t.forgotPassword}
+                  {t.forgetPassword}
                 </a>
               </div>
 

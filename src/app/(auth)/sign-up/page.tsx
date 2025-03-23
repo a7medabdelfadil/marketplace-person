@@ -16,6 +16,7 @@ import { useSignup } from "~/APIs/hooks/useAuth";
 import { type SignupPayload } from "~/APIs/features/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import countryCodes from "constants/CountryCodes";
 
 function Signup() {
   const router = useRouter();
@@ -26,19 +27,19 @@ function Signup() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [form, setForm] = useState<SignupPayload>({
+  const [form, setForm] = useState<SignupPayload & { countryCode: string }>({
     userName: "",
     email: "",
     firstName: "",
     lastName: "",
     phone: "",
     password: "",
-    gender: "Male", // Default value to match the type
+    gender: "Male", // default
     nationality: "",
     role: "Personal",
     rolePerson: "Student",
-    // roleOrganization: "Company",
     identityImage: null,
+    countryCode: "+1", // default
   });
 
   const validateForm = () => {
@@ -56,8 +57,12 @@ function Signup() {
     if (!form.email) {
       newErrors.email = "Email is required";
     }
-    if (!form.password || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(form.password)) {
-      newErrors.password = "Password must be at least 8 characters, include at least one letter and one number";
+    if (
+      !form.password ||
+      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(form.password)
+    ) {
+      newErrors.password =
+        "Password must be at least 8 characters, include at least one letter and one number";
     }
     if (!form.phone) {
       newErrors.phone = "Phone is required";
@@ -75,7 +80,7 @@ function Signup() {
 
   const { mutate, isPending } = useSignup({
     onSuccess: () => {
-      router.push(`/verify-account?email=${encodeURIComponent(form.email)}`);
+      router.push(`/verify-account?email=${encodeURIComponent(form.email)}&redirect=sign-in`);
       toast.success(`Code Verification is sent to ${form.email}`);
     },
     onError: (err: any) => {
@@ -102,14 +107,16 @@ function Signup() {
   const handleCheckboxChange = () => setIsChecked(!isChecked);
 
   const handleSubmit = () => {
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
     if (!isChecked) {
       toast.error("You must agree to the terms");
       return;
     }
-    mutate(form);
+    const { countryCode, ...finalPayload } = {
+      ...form,
+      phone: `${form.countryCode}${form.phone}`,
+    };
+    mutate(finalPayload);
   };
 
   useInitializeLanguage(); // Ensure language state is initialized
@@ -149,7 +156,7 @@ function Signup() {
                   {t.fullName}
                 </label>
                 <div className="mt-1 flex gap-4">
-                  <div>
+                  <div className="flex-1">
                     <Input
                       name="firstName"
                       value={form.firstName}
@@ -164,7 +171,7 @@ function Signup() {
                       </Text>
                     )}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <Input
                       name="lastName"
                       value={form.lastName}
@@ -186,17 +193,17 @@ function Signup() {
                   name="userName"
                   value={form.userName}
                   onChange={handleInputChange}
-                  label="Username"
+                  label={t.username}
                   className="bg-bgInput"
                   border="none"
-                  placeholder="username"
+                  placeholder={t.username}
                 />
                 {errors.userName && (
                   <Text color="error" className="mt-1 text-sm">
                     {errors.userName}
                   </Text>
                 )}
-                <label className="mt-6 font-semibold" htmlFor="role">
+                {/* <label className="mt-6 font-semibold" htmlFor="role">
                   {t.role}
                 </label>
                 <select
@@ -214,7 +221,7 @@ function Signup() {
                   <Text color="error" className="mt-1 text-sm">
                     {errors.role}
                   </Text>
-                )}
+                )} */}
               </div>
               <div className="flex flex-col">
                 <label className="font-semibold" htmlFor="rolePerson">
@@ -271,21 +278,38 @@ function Signup() {
                   </Text>
                 )}
               </div>
-              <div>
-                <Input
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleInputChange}
-                  label={t.phone}
-                  className="bg-bgInput"
-                  border="none"
-                  placeholder={t.phonePlaceholder}
-                />
-                {errors.phone && (
-                  <Text color="error" className="mt-1 text-sm">
-                    {errors.phone}
-                  </Text>
-                )}
+              <div className="flex gap-2">
+                <div className="w-1/3">
+                  <label className="font-semibold">{t.countryCode}</label>
+                  <select
+                    name="countryCode"
+                    value={form.countryCode}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full rounded-lg border-2 border-bgInput bg-bgInput p-3 text-sm text-textPrimary focus:outline-none"
+                  >
+                    {Object.entries(countryCodes).map(([country, dial]) => (
+                      <option key={country} value={`+${dial}`}>
+                        {country} (+{dial})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="w-2/3">
+                  <Input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleInputChange}
+                    label={t.phone}
+                    className="bg-bgInput"
+                    border="none"
+                    placeholder={t.phonePlaceholder}
+                  />
+                  {errors.phone && (
+                    <Text color="error" className="mt-1 text-sm">
+                      {errors.phone}
+                    </Text>
+                  )}
+                </div>
               </div>
 
               <div className="flex flex-col">
@@ -368,7 +392,7 @@ function Signup() {
                     checked={isChecked}
                   />
                   <div
-                    className={`min-h-6 min-w-6 rounded border-2 ${
+                    className={`min-h-6 min-w-6 ml-2 rounded border-2 ${
                       isChecked
                         ? "border-primary bg-primary"
                         : "border-gray-400"

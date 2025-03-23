@@ -17,12 +17,14 @@ import {
 import translations from "./translations";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useVerifyOtp, useResendOtp } from "~/APIs/hooks/useAuth";
+import { toast } from "react-toastify";
 
 function VerifyAccount() {
   const router = useRouter();
   const language = useLanguageStore((state) => state.language);
   const t = translations[language] || translations.en;
   const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "sign-in";
   const email = searchParams.get("email") || "User@gmail.com";
 
   const [otp, setOtp] = useState("");
@@ -30,21 +32,25 @@ function VerifyAccount() {
   // 🟢 Verify OTP API Hook
   const { mutate, isPending } = useVerifyOtp({
     onSuccess: () => {
-      alert("✅ Your email is verified successfully");
-      router.push("/sign-in");
+      if (redirect === "reset-password") {
+        router.push(`/reset-password?email=${encodeURIComponent(email)}`);
+      } else {
+        router.push(`/${redirect}`);
+      }
+      toast.success("✅ Your email is verified successfully");
     },
     onError: () => {
-      alert("❌ Invalid OTP, please try again.");
+      toast.error("❌ Invalid OTP, please try again.");
     },
   });
 
   // 🟢 Resend OTP API Hook
   const { mutate: resend, isPending: resendPending } = useResendOtp({
     onSuccess: () => {
-      alert("✅ OTP has been resent successfully!");
+      toast.success("✅ OTP has been resent successfully!");
     },
     onError: () => {
-      alert("❌ Failed to resend OTP");
+      toast.error("❌ Failed to resend OTP");
     },
   });
 
@@ -142,8 +148,7 @@ function VerifyAccount() {
           />
         </div>
       </div>
-      </>
-
+    </>
   );
 }
 

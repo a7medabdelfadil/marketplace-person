@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { forgetPassword, ForgetPasswordPayload, logout, resendOtp, ResendOtpPayload, signin, SigninPayload, signup, SignupPayload, verifyOtp, VerifyOtpPayload } from "../features/auth";
+import { forgetPassword, ForgetPasswordPayload, logout, resendOtp, ResendOtpPayload, resetPassword, ResetPasswordPayload, signin, SigninPayload, signup, SignupPayload, verifyOtp, VerifyOtpPayload } from "../features/auth";
 
 export const useSignup = (options?: {
   onSuccess?: (res: any) => void;
@@ -53,4 +53,14 @@ export const useLogout = () => {
   return () => {
     logout();
   };
+};
+
+export const useResetPassword = (options?: {
+  onSuccess?: (res: any) => void;
+  onError?: (err: any) => void;
+}) => {
+  return useMutation({
+    mutationFn: (data: ResetPasswordPayload) => resetPassword(data),
+    ...options,
+  });
 };
