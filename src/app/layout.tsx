@@ -24,7 +24,8 @@ export default function RootLayout({
     pathname === "/sign-in" ||
     pathname === "/forget-password" ||
     pathname === "/verify-account" ||
-    pathname === "/reset-password";
+    pathname === "/reset-password" ||
+    pathname === "/meeting";
 
   const isEditProfile = pathname.includes("/edit-profile");
   return (
